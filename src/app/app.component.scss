@@ -1,0 +1,28 @@
+/* app.component.scss */
+.container {
+  display: flex;
+  flex-direction: row; /* Ustawia elementy w jednym wierszu */
+  justify-content: space-between; /* Rozdziela panele równomiernie */
+  padding: 1rem; /* Opcjonalne odstępy wokół całego kontenera */
+}
+
+app-left-panel,
+app-main-timeline,
+app-right-panel {
+  padding: 1rem; /* Padding wewnętrzny dla każdego panelu */
+}
+
+app-left-panel {
+  flex: 1; /* Lewy panel zajmuje 1 część dostępnej przestrzeni */
+  max-width: 250px; /* Maksymalna szerokość lewego panelu */
+}
+
+app-main-timeline {
+  flex: 2; /* Główna oś czasu zajmuje 2 części przestrzeni */
+  margin: 0 1rem; /* Odstęp między główną osią czasu a panelami */
+}
+
+app-right-panel {
+  flex: 1; /* Prawy panel zajmuje 1 część przestrzeni */
+  max-width: 250px; /* Maksymalna szerokość prawego panelu */
+}

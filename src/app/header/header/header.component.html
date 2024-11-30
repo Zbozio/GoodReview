@@ -1,0 +1,53 @@
+<mat-toolbar color="primary" class="navbar">
+  <!-- Logo -->
+  <div class="logo">
+    <span class="title">Good<span class="highlight">Review</span></span>
+  </div>
+
+  <!-- Linki nawigacyjne (desktop) -->
+  <nav class="nav-links">
+    <a mat-button routerLink="/home">Home</a>
+    <a mat-button routerLink="/mybooks">My Books</a>
+    <button mat-button [matMenuTriggerFor]="browseMenu">Browse</button>
+    <mat-menu #browseMenu="matMenu">
+      <button mat-menu-item routerLink="/browse/books">Books</button>
+      <button mat-menu-item routerLink="/browse/authors">Authors</button>
+      <button mat-menu-item routerLink="/browse/genres">Genres</button>
+    </mat-menu>
+  </nav>
+
+  <!-- Wyszukiwarka (desktop) -->
+  <div class="search-bar">
+    <input type="text" placeholder="Search" />
+  </div>
+
+  <!-- Ikony (desktop) -->
+  <div class="navbar-icons">
+    <button mat-icon-button>
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>group</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>library_books</mat-icon>
+    </button>
+  </div>
+
+  <!-- Ikona menu mobilnego -->
+  <button mat-icon-button class="mobile-menu-icon" (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+
+<!-- Rozwijane menu dla urządzeń mobilnych -->
+<div class="mobile-menu-container" [ngClass]="{ open: isMenuOpen }">
+  <a mat-button routerLink="/home">Home</a>
+  <a mat-button routerLink="/mybooks">My Books</a>
+  <a mat-button routerLink="/browse/books">Books</a>
+  <a mat-button routerLink="/browse/authors">Authors</a>
+  <a mat-button routerLink="/browse/genres">Genres</a>
+</div>

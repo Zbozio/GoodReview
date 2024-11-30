@@ -1,0 +1,15 @@
+/* right-panel.component.scss */
+.right-panel {
+  background-color: #f1f1f1; /* Kolor tła prawego panelu */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.right-panel {
+  width: 25%;
+}
+
+@media (max-width: 768px) {
+  .right-panel {
+    display: none; /* Ukryj panel na małych ekranach */
+  }
+}

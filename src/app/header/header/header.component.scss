@@ -1,0 +1,145 @@
+/* Stylizacja nagłówka */
+.navbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  background-color: #2c3e50;
+  height: 60px;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Dodanie efektu cienia do nagłówka */
+}
+
+/* Logo */
+.logo .title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.logo .highlight {
+  color: #3498db; /* Niebieski kolor dla "Review" */
+}
+
+/* Linki nawigacyjne (desktop) */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: 2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-transform: capitalize;
+}
+
+.nav-links a:hover {
+  color: #3498db;
+}
+
+.nav-links a:focus {
+  outline: none; /* Usuwamy domyślną ramkę focus */
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.6); /* Niebieska poświata po kliknięciu */
+}
+
+.nav-links a:active {
+  color: #3498db; /* Niebieski kolor tekstu po kliknięciu */
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.6); /* Niebieska poświata po kliknięciu */
+}
+
+/* Wyszukiwarka */
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-left: 2rem;
+  flex-grow: 1;
+}
+
+.search-bar input {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+/* Ikony w navbarze */
+.navbar-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-icons button {
+  color: white;
+  position: relative; /* Dodajemy pozycjonowanie dla poświaty */
+  padding: 10px;
+  border: 2px solid transparent; /* Domyślnie brak obramówki */
+  border-radius: 50%;
+  transition: border 0.3s ease; /* Płynna animacja dla obramówki */
+}
+
+.navbar-icons button:hover {
+  color: #3498db;
+  border: 2px solid #3498db; /* Niebieska obramówka na hover */
+}
+
+.navbar-icons button:focus {
+  outline: none; /* Usuwamy domyślną ramkę focus */
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.6); /* Niebieska poświata po kliknięciu */
+}
+
+.navbar-icons button:active {
+  color: #3498db; /* Niebieski kolor tekstu po kliknięciu */
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.6); /* Niebieska poświata po kliknięciu */
+}
+
+/* Ikona menu mobilnego */
+.mobile-menu-icon {
+  display: none;
+  font-size: 30px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Rozwijane menu dla urządzeń mobilnych */
+.mobile-menu-container {
+  display: none; /* Domyślnie ukryte */
+  flex-direction: column;
+  background-color: #34495e; /* Zmieniamy kolor tła, żeby było wyraźniejsze w mobilnej wersji */
+  padding: 10px;
+  top: 60px; /* Przesunięcie poniżej nagłówka */
+  left: 0;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Dodanie cienia dla mobilnego menu */
+}
+
+.mobile-menu-container.open {
+  display: flex; /* Menu pokazuje się po kliknięciu */
+}
+
+.mobile-menu-container a {
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.mobile-menu-container a:hover {
+  background-color: #3498db; /* Niebieski kolor tła przy hoverze */
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+  .navbar .nav-links,
+  .navbar .search-bar,
+  .navbar .navbar-icons {
+    display: none; /* Ukrywamy menu na urządzeniach mobilnych */
+  }
+
+  .mobile-menu-icon {
+    display: block; /* Ikona menu mobilnego */
+  }
+}

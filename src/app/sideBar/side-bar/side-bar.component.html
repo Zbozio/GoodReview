@@ -1,0 +1,12 @@
+<!-- mobile-sidebar.component.html -->
+<mat-sidenav [(opened)]="isSidenavOpen" mode="over" class="sidenav">
+  <div class="mobile-menu">
+    <a mat-list-item routerLink="/home">Home</a>
+    <a mat-list-item routerLink="/mybooks">My Books</a>
+    <a mat-list-item routerLink="/browse">Browse</a>
+    <mat-divider></mat-divider>
+  </div>
+
+  <!-- Zamykanie menu po kliknięciu poza menu -->
+  <button mat-button (click)="closeMenu()">Close</button>
+</mat-sidenav>
