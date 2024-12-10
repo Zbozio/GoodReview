@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header/header.component';
 import { LeftPanelComponent } from './leftPanel/left-panel/left-panel.component';
 import { MainTimelineComponent } from './mainTimeline/main-timeline/main-timeline.component';
 import { RightPanelComponent } from './rightPanel/right-panel/right-panel.component';
+import { GatunekComponent } from './gatunek/gatunek/gatunek.component';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,8 @@ import { RightPanelComponent } from './rightPanel/right-panel/right-panel.compon
     LeftPanelComponent,
     MainTimelineComponent,
     RightPanelComponent,
+
+    GatunekComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
