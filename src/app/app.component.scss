@@ -21,6 +21,10 @@ app-main-timeline {
   flex: 2; /* Główna oś czasu zajmuje 2 części przestrzeni */
   margin: 0 1rem; /* Odstęp między główną osią czasu a panelami */
 }
+app-gatunek {
+  flex: 2;
+  margin: 0 1rem;
+}
 
 app-right-panel {
   flex: 1; /* Prawy panel zajmuje 1 część przestrzeni */

@@ -1,5 +1,10 @@
-<ul>
+<ul class="stylowana-lista">
   <li *ngFor="let gatunek of gatunki">
     {{ gatunek.nazwaGatunku }}
+  </li>
+</ul>
+<ul class="stylowana-lista" style="background-color: aqua">
+  <li *ngFor="let user of users">
+    {{ user.eMail }}
   </li>
 </ul>

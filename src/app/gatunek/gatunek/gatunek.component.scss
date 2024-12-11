@@ -1,0 +1,19 @@
+.stylowana-lista {
+  list-style-type: none; /* Usuwa domyślne punkty */
+  padding: 0;
+  margin: 0;
+}
+
+.stylowana-lista li {
+  background-color: #f0f0f0; /* Tło dla elementów */
+  margin: 5px 0; /* Odstępy między elementami */
+  padding: 10px; /* Wewnętrzne marginesy */
+  border-radius: 5px; /* Zaokrąglone rogi */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtelny cień */
+  transition: background-color 0.3s ease; /* Animacja zmiany koloru */
+}
+
+.stylowana-lista li:hover {
+  background-color: #e0e0e0; /* Kolor po najechaniu */
+  cursor: pointer;
+}
