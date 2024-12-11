@@ -1,0 +1,24 @@
+<div class="users-list">
+  <div class="user-profile" *ngFor="let user of users">
+    <section class="profile-header">
+      <div class="profile-avatar">
+        <img [src]="user.zdjecie" alt="User Avatar" />
+      </div>
+      <div class="profile-info">
+        <h1>{{ user.imie }}</h1>
+        <h1>{{ user.nazwisko }}</h1>
+      </div>
+    </section>
+    <section class="profile-stats">
+      <div class="stats-item">
+        <h3>{{ user.iloscOcen }}</h3>
+        <p>Przeczytane książki</p>
+      </div>
+      <div class="stats-item">
+        <h3>{{ user.iloscRecenzji }}</h3>
+        <p>Recenzje</p>
+      </div>
+    </section>
+    <button class="view-profile-btn">Zobacz profil</button>
+  </div>
+</div>

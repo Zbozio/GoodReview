@@ -8,3 +8,21 @@
     {{ user.eMail }}
   </li>
 </ul>
+<ul class="stylowana-lista" style="background-color: red">
+  <li *ngFor="let book of books">
+    {{ book.tytul }}:
+    {{ book.opis }}
+  </li>
+</ul>
+<ul class="stylowana-lista" style="background-color: green">
+  <li *ngFor="let author of authors">
+    {{ author.imie }}:
+    {{ author.nazwisko }}
+  </li>
+</ul>
+<ul class="stylowana-lista" style="background-color: orange">
+  <li *ngFor="let publisher of publishers">
+    {{ publisher.nazwa }}:
+    {{ publisher.AdresSiedziby }}
+  </li>
+</ul>

@@ -1,6 +1,6 @@
 /* app.component.scss */
 .container {
-  display: flex;
+  display: block;
   flex-direction: row; /* Ustawia elementy w jednym wierszu */
   justify-content: space-between; /* Rozdziela panele równomiernie */
   padding: 1rem; /* Opcjonalne odstępy wokół całego kontenera */
