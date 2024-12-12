@@ -6,6 +6,8 @@ import { MainTimelineComponent } from './mainTimeline/main-timeline/main-timelin
 import { RightPanelComponent } from './rightPanel/right-panel/right-panel.component';
 import { GatunekComponent } from './gatunek/gatunek/gatunek.component';
 import { ProfileComponent } from './pages/profiles/profile/profile.component';
+import { RouterModule } from '@angular/router';
+import { UserProfileComponent } from './pages/profiles/user-profile/user-profile.component';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,8 @@ import { ProfileComponent } from './pages/profiles/profile/profile.component';
     RightPanelComponent,
     ProfileComponent,
     GatunekComponent,
+    RouterModule,
+    UserProfileComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
