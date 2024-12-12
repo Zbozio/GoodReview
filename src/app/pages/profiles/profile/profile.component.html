@@ -1,5 +1,5 @@
 <div class="users-list">
-  <div class="user-profile" *ngFor="let user of users">
+  <div class="user-profile" *ngFor="let user of users$ | async">
     <section class="profile-header">
       <div class="profile-avatar">
         <img *ngIf="user.zdjecie" [src]="user.zdjecie" alt="User Avatar" />
@@ -18,7 +18,10 @@
         <p>Recenzje</p>
       </div>
     </section>
-    <button class="view-profile-btn" (click)="viewProfile(user.id)">
+    <button
+      class="view-profile-btn"
+      [routerLink]="['/profile', user.idUzytkownik]"
+    >
       Zobacz profil
     </button>
   </div>

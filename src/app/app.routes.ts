@@ -6,7 +6,7 @@ import { ProfileComponent } from './pages/profiles/profile/profile.component';
 export const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' }, // Redirect na /users
   { path: 'users', component: ProfileComponent }, // Nowa trasa /users
-  { path: 'user-profile/:id', component: UserProfileComponent }, // Trasa z dynamicznym ID
+  { path: 'profile/:id', component: UserProfileComponent }, // Trasa z dynamicznym ID
 ];
 
 // Konfiguracja routingu

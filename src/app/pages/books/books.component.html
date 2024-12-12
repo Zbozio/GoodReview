@@ -1,1 +1,25 @@
-<p>books works!</p>
+<div class="books-list">
+  <div class="book-profile" *ngFor="let book of books">
+    <section class="profile-header">
+      <div class="profile-avatar">
+        <img *ngIf="book.zdjecie" [src]="book.okladka" alt="book Avatar" />
+      </div>
+      <div class="profile-info">
+        <h2>{{ book.tytul }}</h2>
+      </div>
+    </section>
+    <section class="profile-stats">
+      <div class="stats-item">
+        <h3>{{ book.isbn }}</h3>
+        <p>Liczba ocen</p>
+      </div>
+      <div class="stats-item">
+        <h3>{{ book.iloscStron }}</h3>
+        <p>Ilosc stron</p>
+      </div>
+    </section>
+    <button class="view-profile-btn" (click)="viewProfile(book.id)">
+      Zobacz profil
+    </button>
+  </div>
+</div>

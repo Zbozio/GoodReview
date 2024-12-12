@@ -1,27 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { UserService } from '../../../services/users.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs'; // Importujemy Observable
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule], // Zaimportuj RouterModule tutaj
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  users: any[] = [];
+  users$!: Observable<any[]>; // Zmieniamy na Observable
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService // Wstrzyknięcie serwisu UserService
+  ) {}
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe((users) => (this.users = users)); // Pobieramy użytkowników przy inicjalizacji komponentu
-  }
-
-  viewProfile(userId: number) {
-    this.router.navigate(['/user-profile', userId]); // Poprawne przekierowanie na user-profile/:id
+    // Pobieramy listę użytkowników przy inicjalizacji komponentu
+    this.users$ = this.userService.getUsers();
   }
 }
