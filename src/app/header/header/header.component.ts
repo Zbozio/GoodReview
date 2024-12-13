@@ -11,6 +11,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { NgModule } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -26,6 +27,7 @@ import { CommonModule } from '@angular/common';
     MatDividerModule,
 
     CommonModule,
+    RouterModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

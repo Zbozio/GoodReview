@@ -19,8 +19,4 @@ export class BooksComponent {
   ngOnInit(): void {
     this.booksService.getBooks().subscribe((books) => (this.books = books)); // Pobieramy użytkowników przy inicjalizacji komponentu
   }
-
-  viewProfile(bookId: number) {
-    this.router.navigate(['/user-profile', bookId]); // Poprawne przekierowanie na user-profile/:id
-  }
 }

@@ -1,15 +1,42 @@
-/* right-panel.component.scss */
-.right-panel {
-  background-color: #f1f1f1; /* Kolor tła prawego panelu */
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.right-panel {
-  width: 25%;
+/* Ogólne style dla prawego panelu */
+
+/* Sekcja nagłówka z obrazkiem */
+
+.header-image img {
+  width: 200px; /* Stała szerokość obrazka */
+  height: 200px; /* Stała wysokość obrazka */
+  object-fit: contain; /* Zachowuje proporcje obrazka w ramach wyznaczonego obszaru */
+  margin-top: 20px; /* Odstęp od tekstu */
 }
 
-@media (max-width: 768px) {
-  .right-panel {
-    display: none; /* Ukryj panel na małych ekranach */
-  }
+.overlay-text h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.overlay-text p {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+/* Lista rekomendacji */
+h3 {
+  margin-top: 20px;
+  font-size: 1.5rem;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 1.1rem;
+}
+
+ul li:last-child {
+  border-bottom: none;
 }

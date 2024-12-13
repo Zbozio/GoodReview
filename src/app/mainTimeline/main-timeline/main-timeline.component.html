@@ -1,9 +1,11 @@
-<div class="main-timeline">
-  <h2>Główna oś czasu</h2>
-  <div class="timeline-item">
-    <p>Post 1</p>
+<div class="container">
+  <div class="left-panel">
+    <app-left-panel></app-left-panel>
   </div>
-  <div class="timeline-item">
-    <p>Post 2</p>
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="right-panel">
+    <app-right-panel></app-right-panel>
   </div>
 </div>
