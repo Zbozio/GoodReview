@@ -23,12 +23,8 @@
       <p>Recenzji napisanych</p>
     </div>
     <div class="stat-item">
-      <h3>{{ user.followers || 0 }}</h3>
-      <p>Obserwujących</p>
-    </div>
-    <div class="stat-item">
-      <h3>{{ user.following || 0 }}</h3>
-      <p>Obserwowanych</p>
+      <h3>{{ user.znajomi || 0 }}</h3>
+      <p>Znajomi</p>
     </div>
   </div>
 
@@ -54,97 +50,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  .user-profile {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  .profile-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  .profile-image img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 20px;
-  }
-  .profile-info h1 {
-    margin: 0;
-    font-size: 24px;
-    color: #333;
-  }
-  .profile-info .email {
-    color: #555;
-    font-size: 14px;
-  }
-  .profile-info .bio {
-    color: #777;
-    font-size: 16px;
-    margin-top: 10px;
-  }
-  .profile-stats {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-  }
-  .stat-item {
-    text-align: center;
-  }
-  .stat-item h3 {
-    font-size: 20px;
-    color: #333;
-    margin: 0;
-  }
-  .stat-item p {
-    color: #777;
-    font-size: 14px;
-  }
-  .recent-activity {
-    margin-bottom: 20px;
-  }
-  .recent-activity ul {
-    list-style: none;
-    padding: 0;
-  }
-  .recent-activity li {
-    margin-bottom: 10px;
-    padding: 10px;
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  .bookshelf {
-    margin-bottom: 20px;
-  }
-  .bookshelf-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .bookshelf-item {
-    flex: 1 1 calc(50% - 10px);
-    background: #f9f9f9;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  .bookshelf-item h3 {
-    margin: 0 0 5px;
-    font-size: 18px;
-    color: #333;
-  }
-  .bookshelf-item p {
-    margin: 0;
-    color: #555;
-    font-size: 14px;
-  }
-</style>

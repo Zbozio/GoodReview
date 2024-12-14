@@ -1,72 +1,57 @@
 .books-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  background-color: #f4f4f9;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Mniejszy odstęp między kartami */
+  justify-content: center;
+  padding: 1.5rem; /* Zmniejszenie paddingu kontenera */
 }
-.book-profile {
-  background: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+.book-card {
+  background: #1e1e1e; /* Ciemniejsze tło dla kart */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtelny cień */
+  width: 180px; /* Zmniejszona szerokość karty */
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer; /* Zmiana kursora na wskaźnik */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.book-profile:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+.book-card:hover {
+  transform: translateY(-5px); /* Subtelne przesunięcie przy najechaniu */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
-.profile-header {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
-}
-.profile-avatar img {
-  width: 60px;
-  height: 90px;
-  object-fit: cover;
-  border-radius: 5px;
-  margin-right: 15px;
-}
-.profile-info h2 {
-  font-size: 18px;
-  margin: 0;
-}
-.profile-stats {
-  display: flex;
-  justify-content: space-around;
-  padding: 15px;
-  background-color: #fafafa;
-}
-.stats-item {
+
+.card-content {
+  padding: 10px; /* Mniejszy padding */
   text-align: center;
+  background: #222; /* Ciemniejszy odcień dla tła tytułu książki */
 }
-.stats-item h3 {
-  font-size: 18px;
-  color: #333;
+
+.book-title {
+  font-size: 16px; /* Mniejszy rozmiar tekstu */
+  font-weight: bold;
+  color: #ffffff; /* Jasny tekst */
   margin: 0;
+  white-space: nowrap; /* Zapobiega łamaniu wiersza */
+  overflow: hidden; /* Ukrywa tekst poza kontenerem */
+  text-overflow: ellipsis; /* Dodaje trzy kropki, gdy tekst jest za długi */
 }
-.stats-item p {
-  font-size: 14px;
-  color: #777;
-  margin: 0;
-}
-.view-profile-btn {
-  display: block;
+
+.card-image {
   width: 100%;
-  padding: 10px;
-  background-color: #2575fc;
-  color: white;
-  font-size: 16px;
-  text-align: center;
-  border: none;
-  border-radius: 0 0 10px 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  height: 0;
+  padding-top: 150%; /* Aspect ratio 2:3 (letterbox style) */
+  position: relative;
+  background-color: #333; /* Tło, jeśli obrazek się nie załaduje */
 }
-.view-profile-btn:hover {
-  background-color: #0056b3;
+
+.card-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Obrazek wypełnia całą powierzchnię */
 }

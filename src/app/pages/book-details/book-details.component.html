@@ -1,35 +1,42 @@
-<div class="book-details-container">
-  <div class="book-header">
-    <img
-      src="assets/images/okladka.jpg"
-      alt="Okładka książki"
-      class="book-cover"
-    />
-    <div class="book-info">
-      <h1 class="book-title">Tytuł książki</h1>
-      <p class="book-author">Autor: Jan Kowalski</p>
-      <p class="book-year">Rok wydania: 2020</p>
-      <p class="book-isbn">ISBN: 1234567890123</p>
-      <p class="book-pages">Liczba stron: 350</p>
+<div *ngIf="book$ | async as book; else loading">
+  <div class="book-details-container">
+    <div class="book-header">
+      <img alt="Okładka książki" class="book-cover" [src]="book.okladka" />
+      <div class="book-info">
+        <h1 class="book-title">{{ book.tytul }}</h1>
+        <p class="book-author">Autor: {{ book.autor }}</p>
+        <p class="book-year">Rok wydania: {{ book.rokWydania }}</p>
+        <p class="book-isbn">ISBN: {{ book.isbn }}</p>
+        <p class="book-pages">Liczba stron: {{ book.iloscStron }}</p>
+      </div>
+    </div>
+
+    <div class="book-description">
+      <h2>Opis książki</h2>
+      <p>{{ book.opis }}</p>
+    </div>
+
+    <!-- Tagi książki -->
+    <!-- <div class="book-tags">
+      <h3>Tagi książki</h3>
+      <mat-chip *ngFor="let tag of book.tags">{{ tag }}</mat-chip>
+    </div> -->
+
+    <div class="book-rating">
+      <h2>Oceny</h2>
+      <p>Liczba ocen: {{ book.liczbaOcen }}</p>
+      <p>Średnia ocena: {{ book.sredniaOcena }} / 10</p>
+    </div>
+
+    <div class="back-button">
+      <button routerLink="/books" class="btn">Powrót do listy książek</button>
     </div>
   </div>
-
-  <div class="book-description">
-    <h2>Opis książki</h2>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at
-      risus vitae justo feugiat luctus. Integer sed purus non dui pharetra
-      sollicitudin eu ac ante. Donec a erat nec velit placerat fermentum.
-    </p>
-  </div>
-
-  <div class="book-rating">
-    <h2>Oceny</h2>
-    <p>Liczba ocen: 150</p>
-    <p>Średnia ocena: 4.5/5</p>
-  </div>
-
-  <div class="back-button">
-    <a href="/" class="btn">Powrót do listy książek</a>
-  </div>
 </div>
+
+<!-- Sekcja do wyświetlania "ładowania" -->
+<ng-template #loading>
+  <div class="loading-container">
+    <p>Ładowanie książki...</p>
+  </div>
+</ng-template>

@@ -1,59 +1,142 @@
-.user-profile-page {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.user-profile {
+  font-family: "Inter", sans-serif; /* Nowoczesna czcionka */
+  max-width: 900px;
+  margin: 2rem auto; /* Centrowanie profilu */
+  padding: 30px; /* Większy padding dla przestronności */
+  border-radius: 15px; /* Zaokrąglone rogi */
+  background: #1e1e1e; /* Ciemniejsze tło dla profilu */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtelny cień */
+  color: #ffffff; /* Jasny tekst */
 }
 
 .profile-header {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px; /* Większa przerwa między nagłówkiem a statystykami */
 }
 
-.profile-avatar img {
-  width: 100px;
-  height: 100px;
+.profile-image img {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
+  object-fit: cover;
   margin-right: 20px;
-}
-
-.profile-info {
-  flex: 1;
+  border: 3px solid #fff; /* Biała ramka wokół zdjęcia */
 }
 
 .profile-info h1 {
-  font-size: 24px;
-  margin: 0 0 10px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff; /* Jasny tekst */
+  margin-bottom: 10px; /* Przerwa między nazwiskiem a emailem */
 }
 
-.profile-info .last-active {
-  font-size: 14px;
-  color: #666;
-}
-
-.profile-info .user-description {
+.profile-info .email {
   font-size: 16px;
-  margin: 10px 0 0;
+  color: #bbbbbb; /* Subtelniejszy kolor dla maila */
+  margin-bottom: 10px; /* Przerwa pomiędzy mailem a bio */
+}
+
+.profile-info .bio {
+  font-size: 16px;
+  color: #999999; /* Jasny szary dla bio */
+  line-height: 1.6;
+  margin-top: 10px;
 }
 
 .profile-stats {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 30px;
 }
 
-.stats-item {
+.stat-item {
   text-align: center;
+  flex: 1;
 }
 
-.stats-item h3 {
-  font-size: 20px;
-  margin: 0;
+.stat-item h3 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff; /* Biały tekst dla liczb */
+  margin-bottom: 5px;
 }
 
-.stats-item p {
+.stat-item p {
   font-size: 14px;
-  color: #666;
+  color: #777777; /* Jaśniejszy kolor dla tekstu */
+}
+
+.recent-activity {
+  margin-bottom: 30px;
+}
+
+.recent-activity h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff; /* Jasny tekst dla nagłówka */
+  margin-bottom: 15px;
+}
+
+.recent-activity ul {
+  list-style: none;
+  padding: 0;
+}
+
+.recent-activity li {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #333333; /* Ciemniejsze tło dla aktywności */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtelny cień */
+}
+
+.recent-activity li p {
+  font-size: 14px;
+  color: #bbbbbb; /* Jaśniejszy kolor dla opisu aktywności */
+}
+
+.bookshelf {
+  margin-bottom: 30px;
+}
+
+.bookshelf h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff; /* Jasny tekst dla nagłówka */
+  margin-bottom: 15px;
+}
+
+.bookshelf-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.bookshelf-item {
+  flex: 1 1 calc(33.333% - 15px); /* Trzy elementy w rzędzie */
+  background: #333333; /* Ciemniejsze tło dla półek książek */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtelny cień */
+  color: #ffffff;
+}
+
+.bookshelf-item h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.bookshelf-item p {
+  font-size: 14px;
+  color: #bbbbbb; /* Jaśniejszy tekst dla opisu */
+}
+
+/* Responsywność: Dostosowanie półek książek do mniejszych ekranów */
+@media (max-width: 768px) {
+  .bookshelf-item {
+    flex: 1 1 100%; /* Jeden element w rzędzie na małych ekranach */
+  }
 }
