@@ -3,7 +3,7 @@
   width: 80%;
   margin: 40px auto;
   padding: 20px;
-  background-color: #2a2a2a; /* Ciemniejsze tło */
+  background: #222; /* Ciemniejszy odcień dla tła tytułu książki */
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Ciemniejszy cień */
   color: #ffffff; /* Jasny tekst */
@@ -101,18 +101,30 @@ mat-chip.disabled {
 
 /* Przycisk powrotu */
 .back-button {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0; /* Odstęp od innych elementów */
 }
 
-.btn {
-  padding: 10px 20px;
-  background-color: #0066cc; /* Niebieski przycisk */
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-size: 1rem;
+.back-button .btn {
+  background-color: #2a2a2a; /* Dopasowany ciemny kolor */
+  color: #ffffff; /* Jasny tekst */
+  border: 1px solid #444; /* Delikatny obrys */
+  border-radius: 8px; /* Zaokrąglone rogi */
+  padding: 10px 20px; /* Wygodny rozmiar przycisku */
+  font-size: 16px; /* Czytelny rozmiar tekstu */
+  font-weight: bold; /* Mocniejszy tekst */
+  cursor: pointer; /* Wskaźnik rączki */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Subtelne animacje */
 }
 
-.btn:hover {
-  background-color: #004999; /* Ciemniejszy niebieski na hover */
+.back-button .btn:hover {
+  background-color: #3a3a3a; /* Rozjaśniony kolor na hover */
+  border-color: #666; /* Subtelny efekt na obrysie */
+  transform: translateY(-3px); /* Lekki efekt unoszenia */
+}
+
+.back-button .btn:active {
+  background-color: #1e1e1e; /* Przyciemnienie na kliknięcie */
+  transform: translateY(1px); /* Wrażenie "wciśnięcia" */
 }

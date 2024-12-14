@@ -12,6 +12,7 @@ import { NgModule } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +26,7 @@ import { RouterModule } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatDividerModule,
-
+    MatAutocompleteModule,
     CommonModule,
     RouterModule,
   ],

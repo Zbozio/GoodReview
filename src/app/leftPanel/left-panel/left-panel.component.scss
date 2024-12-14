@@ -1,16 +1,1 @@
 /* left-panel.component.scss */
-.left-panel {
-  background-color: #f1f1f1; /* Kolor tła lewego panelu */
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.left-panel {
-  width: 25%;
-  background-color: #f1f1f1;
-}
-
-@media (max-width: 768px) {
-  .left-panel {
-    display: none; /* Ukryj panel na małych ekranach */
-  }
-}
