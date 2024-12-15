@@ -55,15 +55,59 @@
   align-items: center;
   margin-left: 2rem;
   flex-grow: 1;
+  position: relative; /* Konieczne do pozycjonowania autouzupełniania */
+  height: 100%; /* Wysokość dopasowana do nagłówka */
+  margin-right: 1.5rem; /* Dodatkowy margines z prawej strony, aby pole nie dotykało krawędzi */
 }
 
+/* Stylizacja dla inputa wyszukiwania */
 .search-bar input {
   width: 100%;
-  max-width: 300px;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  max-width: 250px; /* Zmniejszenie maksymalnej szerokości inputa */
+  border-radius: 20px; /* Zaokrąglone rogi */
+  background-color: #fff;
   border: 1px solid #ccc;
-  background: #fff;
+  height: 35px; /* Zmniejszenie wysokości, aby było bardziej schludne */
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Animacja dla focus */
+  margin-left: 1rem; /* Odstęp od lewej strony */
+}
+
+/* Focus na input */
+.search-bar input:focus {
+  border-color: #3498db; /* Niebieska obramówka przy fokusie */
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.6); /* Niebieska poświata przy fokusie */
+}
+
+/* Ustawienia stylu dla mat-autocomplete (przeniesione do inputa) */
+mat-autocomplete {
+  background-color: #2a2a2a;
+  border-radius: 8px; /* Zaokrąglone rogi listy */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Delikatny cień */
+  margin-top: 4px;
+  position: absolute;
+  width: 100%;
+  z-index: 999; /* Zapewnia, że autocomplete będzie na wierzchu */
+}
+
+/* Stylizacja opcji w autouzupełnianiu */
+mat-option {
+  padding: 10px 16px;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.2s ease, color 0.2s ease; /* Płynne przejścia */
+}
+
+mat-option:hover {
+  background-color: #3498db; /* Niebieskie tło na hover */
+  color: #fff; /* Biały tekst na hover */
+}
+
+/* Zmiana tła w przypadku opcji wybranej */
+mat-option.mat-active {
+  background-color: #2a2a2a;
+  color: white;
 }
 
 /* Ikony w navbarze */
@@ -130,6 +174,11 @@
 
 .mobile-menu-container a:hover {
   background-color: #3498db; /* Niebieski kolor tła przy hoverze */
+}
+
+::ng-deep #mat-autocomplete-0 {
+  background-color: #2a2a2a;
+  color: white;
 }
 
 /* Responsywność */

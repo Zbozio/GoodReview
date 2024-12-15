@@ -9,6 +9,7 @@ import { ProfileComponent } from './pages/profiles/profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { UserProfileComponent } from './pages/profiles/user-profile/user-profile.component';
 import { BooksComponent } from './pages/books/books.component';
+import { LoginComponent } from './pages/profiles/login-profile/login-profile.component';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,8 @@ import { BooksComponent } from './pages/books/books.component';
     GatunekComponent,
     RouterModule,
     UserProfileComponent,
-    BooksComponent,
+
+    LoginComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

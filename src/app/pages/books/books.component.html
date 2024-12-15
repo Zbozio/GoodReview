@@ -1,7 +1,7 @@
 <div class="books-list">
   <div
+    *ngFor="let book of books"
     class="book-card"
-    *ngFor="let book of books$ | async"
     [routerLink]="['/booksDetails', book.idKsiazka]"
   >
     <div class="card-image">

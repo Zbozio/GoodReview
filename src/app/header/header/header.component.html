@@ -1,15 +1,15 @@
 <mat-toolbar color="primary" class="navbar">
   <!-- Logo -->
   <div class="logo">
-    <span class="title" routerLink=""
-      >Good<span class="highlight">Review</span></span
-    >
+    <span class="title" routerLink="/home">
+      Good<span class="highlight">Review</span>
+    </span>
   </div>
 
   <!-- Linki nawigacyjne (desktop) -->
   <nav class="nav-links">
-    <a mat-button routerLink="">Home</a>
-    <a mat-button routerLink="/mybooks">My Books</a>
+    <a mat-button routerLink="/home">Home</a>
+    <a mat-button routerLink="/books/user/:userId">My Books</a>
     <button mat-button [matMenuTriggerFor]="browseMenu">Browse</button>
     <mat-menu #browseMenu="matMenu">
       <button mat-menu-item routerLink="/books">Books</button>
@@ -20,7 +20,21 @@
 
   <!-- Wyszukiwarka (desktop) -->
   <div class="search-bar">
-    <input type="text" placeholder="Search" />
+    <input
+      matInput
+      #searchInput
+      [formControl]="searchControl"
+      [matAutocomplete]="auto"
+      placeholder="Szukaj książek"
+    />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="onOptionSelected($event)"
+    >
+      <mat-option *ngFor="let book of filteredBooks | async" [value]="book">
+        {{ book.tytul }}
+      </mat-option>
+    </mat-autocomplete>
   </div>
 
   <!-- Ikony (desktop) -->
@@ -36,6 +50,12 @@
     </button>
     <button routerLink="/books" mat-icon-button>
       <mat-icon>library_books</mat-icon>
+    </button>
+
+    <!-- Dodany przycisk "Wyloguj" z ikoną -->
+    <button *ngIf="authService.isLoggedIn()" mat-icon-button (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <!-- Ikona wylogowania -->
     </button>
   </div>
 
