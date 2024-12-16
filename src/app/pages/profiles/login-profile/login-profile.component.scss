@@ -1,0 +1,82 @@
+/* Styl dla kontenera logowania */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #2a2a2a;
+}
+
+/* Styl dla karty logowania */
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 20px;
+}
+
+/* Nagłówek karty */
+mat-card-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+mat-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Stylowanie formularza */
+.form-group {
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-form-field .mat-form-field-wrapper {
+  padding-right: 10px;
+}
+
+/* Styl dla przycisku logowania */
+.login-actions button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.login-actions button:disabled {
+  background-color: #ccc;
+}
+
+.login-actions button:not(:disabled):hover {
+  background-color: #3f51b5;
+}
+
+/* Stylowanie komunikatów o błędach */
+mat-error {
+  font-size: 12px;
+  color: #f44336;
+}
+
+.error-message {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ffebee;
+  border-radius: 4px;
+  color: #d32f2f;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.error-message mat-icon {
+  font-size: 20px;
+}

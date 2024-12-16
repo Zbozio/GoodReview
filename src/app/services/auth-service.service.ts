@@ -1,7 +1,8 @@
-// auth-service.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import jwt_decode from 'jwt-decode'; // Import biblioteki do dekodowania JWT
+import { Observable, throwError } from 'rxjs';
+import { KsiazkaDto } from './my-books-service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,12 +19,58 @@ export class AuthService {
     }
   }
 
-  // Pobranie tokenu z localStorage
+  getBooksByUserId(userId: number): Observable<KsiazkaDto[]> {
+    console.log('Sending request to get books for user', userId);
+    if (!userId) {
+      return throwError('User ID is required'); // Jeśli brak userId, zwróć błąd
+    }
+
+    // Pobieranie tokenu z localStorage
+    const token = this.getToken();
+
+    if (!token) {
+      return throwError('User is not logged in'); // Jeśli brak tokenu, zwróć błąd
+    }
+
+    // Tworzenie nagłówków z tokenem
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<KsiazkaDto[]>(
+      `https://localhost:7272/api/KsiazkiUzytkownika/user/${userId}`,
+      {
+        headers,
+      }
+    );
+  }
+
   getToken(): string | null {
     if (typeof window !== 'undefined' && window.localStorage) {
       return localStorage.getItem('authToken'); // Pobieramy token z localStorage
     }
     return null; // Jeśli nie ma dostępu do localStorage (np. na serwerze), zwracamy null
+  }
+
+  // Zwracanie userId z tokenu
+  // AuthService - zaktualizowana metoda getUserId
+  getUserId(): number | null {
+    const token = this.getToken();
+    if (token) {
+      try {
+        const decodedToken: any = jwt_decode(token); // Dekodowanie tokenu
+        console.log('Decoded Token:', decodedToken);
+
+        // Pobieramy userId z poprawnego klucza
+        const userId =
+          decodedToken[
+            'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+          ] || null;
+        console.log('Decoded userId:', userId);
+        return userId; // Zwracamy userId
+      } catch (error) {
+        console.error('Error decoding token:', error);
+      }
+    }
+    return null; // Jeśli token jest pusty, zwróć null
   }
 
   // Sprawdzenie, czy użytkownik jest zalogowany
@@ -41,18 +88,5 @@ export class AuthService {
   // Logowanie użytkownika
   login(email: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, { email, password });
-  }
-
-  // Opcjonalnie: Zabezpieczanie żądań z tokenem (np. do chronionych zasobów)
-  getAuthHeaders(): HttpHeaders {
-    const token = this.getToken();
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  }
-
-  // Metoda do wysyłania zapytań HTTP z nagłówkami uwierzytelniającymi
-  getWithAuth(url: string): Observable<any> {
-    return this.http.get<any>(url, {
-      headers: this.getAuthHeaders(),
-    });
   }
 }

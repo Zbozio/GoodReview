@@ -40,14 +40,14 @@ export class LoginComponent {
   // Funkcja wywoływana po próbie logowania
   login() {
     this.authService.login(this.email, this.password).subscribe({
-      next: (response) => {
+      next: (response: { token: string }) => {
         // Zapisujemy token w localStorage
         this.authService.saveToken(response.token);
 
         // Po udanym logowaniu przekierowujemy użytkownika na stronę główną
         this.router.navigate(['/home']);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Błąd logowania:', err);
         this.errorMessage = 'Niepoprawny email lub hasło.';
       },

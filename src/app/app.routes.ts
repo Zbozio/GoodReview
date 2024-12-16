@@ -6,6 +6,7 @@ import { MainTimelineComponent } from './mainTimeline/main-timeline/main-timelin
 import { BookDetailsComponent } from './pages/book-details/book-details.component';
 import { AuthGuard } from './profiles/login-profile.guard';
 import { LoginComponent } from './pages/profiles/login-profile/login-profile.component';
+import { UserBooksComponent } from './pages/books/user-books/user-books.component';
 
 // Definicja tras
 export const routes: Routes = [
@@ -37,10 +38,11 @@ export const routes: Routes = [
 
   // Strona logowania (niechroniona)
   { path: 'login', component: LoginComponent },
+
   {
     path: 'books/user/:userId',
-    canActivate: [AuthGuard],
-    component: BooksComponent,
+
+    component: UserBooksComponent,
   },
 
   // Wszystkie inne trasy przekierowują na stronę logowania

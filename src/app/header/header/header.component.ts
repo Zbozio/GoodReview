@@ -22,7 +22,8 @@ import { BookService } from '../../services/books.service';
 import { startWith, map, debounceTime, switchMap } from 'rxjs/operators';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth-service.service';
-import { UserService } from '../../services/users.service';
+import { KsiazkaDto } from '../../services/my-books-service';
+
 interface Book {
   idKsiazka: number;
   tytul: string;
@@ -54,22 +55,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
   filteredBooks!: Observable<Book[]>;
   allBooks: Book[] = [];
   users$!: Observable<any[]>;
-  @ViewChild('searchInput') searchInput!: ElementRef; // Uzyskujemy dostęp do inputa
+  userId!: number; // Ustawiamy zmienną dla userId
+
+  @ViewChild('searchInput') searchInput!: ElementRef;
 
   constructor(
     private bookService: BookService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public authService: AuthService
-  ) {
-    // Nasłuchujemy na zmiany routingu
-    this.router.events.subscribe(() => {
-      this.resetSearch(); // Resetujemy searchControl przy każdej zmianie strony
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.resetSearch(); // Resetowanie przy inicjalizacji
+
+    // Pobierz userId z AuthService
+    this.userId = this.authService.getUserId()!; // Używamy getUserId(), aby pobrać userId
+
+    if (this.userId) {
+      console.log('Logged in User ID:', this.userId);
+    } else {
+      console.error('No userId found, please login!');
+    }
 
     // Pobieramy wszystkie książki
     this.bookService.getBooks().subscribe((books) => {
@@ -88,27 +95,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private resetSearch() {
-    this.searchControl.setValue(''); // Resetujemy wartość w searchControl
-    this.searchControl.updateValueAndValidity(); // Uaktualniamy validację (może być ważne, aby np. w formularzach nie powodowało to błędów)
-
-    // Usuwamy fokus z pola wyszukiwania
+    this.searchControl.setValue('');
+    this.searchControl.updateValueAndValidity();
     if (this.searchInput) {
-      this.searchInput.nativeElement.blur(); // Usuwamy fokus z inputa
+      this.searchInput.nativeElement.blur();
     }
   }
 
   private filterBooks(query: string): Observable<Book[]> {
     if (!query) {
       return new Observable<Book[]>((observer) => {
-        observer.next(this.allBooks); // Jeśli brak zapytania, zwracamy wszystkie książki
+        observer.next(this.allBooks);
         observer.complete();
       });
     }
 
     return new Observable<Book[]>((observer) => {
       observer.next(
-        this.allBooks.filter(
-          (book) => book.tytul.toLowerCase().includes(query.toLowerCase()) // Filtrujemy książki
+        this.allBooks.filter((book) =>
+          book.tytul.toLowerCase().includes(query.toLowerCase())
         )
       );
       observer.complete();
@@ -118,25 +123,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
   displayBookTitle(book: Book): string {
     return book && book.tytul ? book.tytul : '';
   }
+
   logout(): void {
-    this.authService.logout(); // Wywołaj metodę logout w AuthService
-    this.router.navigate(['/login']); // Po wylogowaniu przekieruj na stronę logowania
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-    this.resetSearch(); // Resetowanie po kliknięciu w menu
+    this.resetSearch();
   }
 
   // Metoda po wybraniu książki
   onOptionSelected(event: any): void {
-    const selectedBook = event.option.value; // Otrzymujemy wybraną książkę
+    const selectedBook = event.option.value;
 
-    // Ustawiamy timeout, aby nawigacja wykonała się przed resetowaniem formularza
     setTimeout(() => {
-      this.router.navigate([`/booksDetails/${selectedBook.idKsiazka}`]); // Przechodzimy do strony książki
-    }, 0); // Używamy 0ms timeoutu, aby nawigacja miała pierwszeństwo
+      this.router.navigate([`/booksDetails/${selectedBook.idKsiazka}`]);
+    }, 0);
 
-    // Resetujemy searchControl dopiero po nawigacji
     this.resetSearch();
   }
 }
