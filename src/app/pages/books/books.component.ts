@@ -9,11 +9,12 @@ import { catchError } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import jwt_decode from 'jwt-decode';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-books',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, MatIconModule],
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.scss'],
 })

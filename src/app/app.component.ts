@@ -23,7 +23,6 @@ import { LoginComponent } from './pages/profiles/login-profile/login-profile.com
     ProfileComponent,
     GatunekComponent,
     RouterModule,
-    UserProfileComponent,
 
     LoginComponent,
   ],
