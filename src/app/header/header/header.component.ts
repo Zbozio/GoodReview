@@ -15,9 +15,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { BookService } from '../../services/books.service';
 import { startWith, map, debounceTime, switchMap } from 'rxjs/operators';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -55,30 +55,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
   filteredBooks!: Observable<Book[]>;
   allBooks: Book[] = [];
   users$!: Observable<any[]>;
-  userId!: number; // Ustawiamy zmienną dla userId
+  userId!: number | null; // Ustawiamy zmienną dla userId
+  private authSubscription!: Subscription;
 
   @ViewChild('searchInput') searchInput!: ElementRef;
 
   constructor(
     private bookService: BookService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
     public authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.resetSearch(); // Resetowanie przy inicjalizacji
+    // Subskrybujemy zmiany w userId
+    this.authSubscription = this.authService.currentUser.subscribe((userId) => {
+      this.userId = userId;
+      if (this.userId) {
+        console.log('Logged in User ID:', this.userId);
+      } else {
+        console.error('No userId found, please login!');
+      }
+    });
 
-    // Pobierz userId z AuthService
-    this.userId = this.authService.getUserId()!; // Używamy getUserId(), aby pobrać userId
-
-    if (this.userId) {
-      console.log('Logged in User ID:', this.userId);
-    } else {
-      console.error('No userId found, please login!');
-    }
-
-    // Pobieramy wszystkie książki
+    // Pobierz wszystkie książki
     this.bookService.getBooks().subscribe((books) => {
       this.allBooks = books;
 
@@ -91,6 +90,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // Czyszczenie subskrypcji
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
     this.resetSearch(); // Resetowanie formularza przy zniszczeniu komponentu
   }
 

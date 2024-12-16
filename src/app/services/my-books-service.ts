@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AuthService } from './auth-service.service';
 
 // Interfejs do danych książki
 export interface KsiazkaDto {
@@ -15,10 +16,12 @@ export interface KsiazkaDto {
   providedIn: 'root',
 })
 export class MyBooksService {
-  // URL bazowy dla API
   private apiUrl = 'https://localhost:7272/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private authService: AuthService, // Iniekcja AuthService do pobierania tokenu
+    private http: HttpClient
+  ) {}
 
   // Pobieranie książek dla konkretnego użytkownika
   getBooksByUserId(userId: number): Observable<KsiazkaDto[]> {
@@ -40,23 +43,9 @@ export class MyBooksService {
       );
   }
 
-  // Pobieranie wszystkich książek
-  getAllBooks(): Observable<KsiazkaDto[]> {
-    return this.http
-      .get<KsiazkaDto[]>(`${this.apiUrl}/Ksiazkas`, {
-        headers: this.getAuthHeaders(),
-      })
-      .pipe(
-        catchError((error) => {
-          console.error('Error fetching all books:', error);
-          return throwError('Failed to fetch all books');
-        })
-      );
-  }
-
-  // Pobranie tokenu z localStorage (lub innego miejsca, jeśli potrzebujesz)
+  // Pobranie tokenu z AuthService
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('authToken');
+    const token = this.authService.getToken();
     console.log('Sending token:', token); // Logujemy token przed wysłaniem
 
     if (!token) {

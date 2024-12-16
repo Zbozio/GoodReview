@@ -9,7 +9,7 @@
   <!-- Linki nawigacyjne (desktop) -->
   <nav class="nav-links">
     <a mat-button routerLink="/home">Home</a>
-    <a mat-button [routerLink]="['/books/user', userId]">My Books</a>
+    <a mat-button [routerLink]="['/books', userId]">My Books</a>
     <button mat-button [matMenuTriggerFor]="browseMenu">Browse</button>
     <mat-menu #browseMenu="matMenu">
       <button mat-menu-item routerLink="/books">Books</button>
@@ -21,6 +21,7 @@
   <!-- Wyszukiwarka (desktop) -->
   <div class="search-bar">
     <input
+      *ngIf="authService.isLoggedIn()"
       matInput
       #searchInput
       [formControl]="searchControl"

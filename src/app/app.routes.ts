@@ -5,47 +5,48 @@ import { BooksComponent } from './pages/books/books.component';
 import { MainTimelineComponent } from './mainTimeline/main-timeline/main-timeline.component';
 import { BookDetailsComponent } from './pages/book-details/book-details.component';
 import { AuthGuard } from './profiles/login-profile.guard';
+import { UserIdGuard } from './profiles/user-id-guard.guard';
 import { LoginComponent } from './pages/profiles/login-profile/login-profile.component';
 import { UserBooksComponent } from './pages/books/user-books/user-books.component';
 
 // Definicja tras
 export const routes: Routes = [
-  // Strona główna przekierowuje do 'home' (chroniona)
+  // Domyślny przekierowanie
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 
-  // Strona główna, chroniona przez AuthGuard
+  // Strona główna - wymaga zalogowania
   { path: 'home', canActivate: [AuthGuard], component: MainTimelineComponent },
 
-  // Strona użytkowników, chroniona przez AuthGuard
+  // Profil użytkownika
   { path: 'users', canActivate: [AuthGuard], component: ProfileComponent },
 
-  // Profil użytkownika (id), chroniony przez AuthGuard
+  // Profil użytkownika z parametrem id
   {
     path: 'profile/:id',
     canActivate: [AuthGuard],
     component: UserProfileComponent,
   },
 
-  // Strona książek, chroniona przez AuthGuard
-  { path: 'books', canActivate: [AuthGuard], component: BooksComponent },
-
-  // Strona szczegółów książki, chroniona przez AuthGuard
+  // Główna strona książek - dostęp do wszystkich książek
   {
     path: 'booksDetails/:id',
     canActivate: [AuthGuard],
     component: BookDetailsComponent,
   },
+  { path: 'books', canActivate: [AuthGuard], component: BooksComponent },
+
+  // Strona książek użytkownika z parametrem :userId
+  {
+    path: 'books/:userId',
+    canActivate: [AuthGuard, UserIdGuard], // UserIdGuard tylko tutaj
+    component: BooksComponent,
+  },
 
   // Strona logowania (niechroniona)
   { path: 'login', component: LoginComponent },
 
-  {
-    path: 'books/user/:userId',
-
-    component: UserBooksComponent,
-  },
-
-  // Wszystkie inne trasy przekierowują na stronę logowania
+  // Strona, na którą przekierowywany jest nieznany URL
+  { path: '**', redirectTo: '/login' },
 ];
 
 // Konfiguracja routingu

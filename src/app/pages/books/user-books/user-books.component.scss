@@ -75,3 +75,48 @@
 .book-card:hover .card-title-overlay {
   opacity: 1; /* Tytuł pojawia się na hover */
 }
+
+/* Nowe style dla oceny */
+.rating {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px; /* Odstęp od tytułu */
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2); /* Półprzezroczyste tło */
+}
+
+.rating-value {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff; /* Kolor tekstu oceny */
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: #ffcc00; /* Domyślny kolor tła dla oceny */
+  transition: background-color 0.3s ease; /* Płynna zmiana koloru */
+}
+
+/* Różne kolory w zależności od oceny */
+.rating-value {
+  background-color: #ffcc00; /* Złoty - standard */
+}
+
+.rating-value[data-rating="1"] {
+  background-color: #ff3333; /* Czerwony - bardzo niska ocena */
+}
+
+.rating-value[data-rating="2"] {
+  background-color: #ff6666; /* Jasnoczerwony */
+}
+
+.rating-value[data-rating="3"] {
+  background-color: #ff9900; /* Pomarańczowy - średnia ocena */
+}
+
+.rating-value[data-rating="4"] {
+  background-color: #99cc00; /* Zielony - dobra ocena */
+}
+
+.rating-value[data-rating="5"] {
+  background-color: #00cc00; /* Zielony - bardzo dobra ocena */
+}

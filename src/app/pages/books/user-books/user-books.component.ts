@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth-service.service'; // Używamy AuthService
-import { KsiazkaDto } from '../../../services/my-books-service';
+import { MyBooksService } from '../../../services/my-books-service'; // Importujemy MyBooksService
+import { KsiazkaDto } from '../../../services/my-books-service'; // Importujemy KsiazkaDto
 import { Observable, of } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import jwt_decode from 'jwt-decode';
@@ -16,47 +17,41 @@ import jwt_decode from 'jwt-decode';
   imports: [RouterModule, CommonModule],
 })
 export class UserBooksComponent implements OnInit {
-  books$!: Observable<KsiazkaDto[]>;
+  books$!: Observable<KsiazkaDto[]>; // Zmienna do przechowywania książek użytkownika
+  isUserBooks: boolean = false; // Flaga dla książek użytkownika
 
   constructor(
-    private authService: AuthService, // Używamy AuthService
+    private authService: AuthService, // Używamy AuthService do obsługi tokenu
+    private myBooksService: MyBooksService, // Używamy MyBooksService do pobierania książek użytkownika
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    // Sprawdzamy, czy token jest pobierany poprawnie
-    const token = this.authService.getToken();
-    console.log('Token from localStorage:', token);
-
     let userId: number | null = null;
 
-    // Jeśli token jest, dekodujemy go i logujemy zawartość
+    // Sprawdzamy, czy mamy userId w URL lub tokenie
+    const token = this.authService.getToken();
     if (token) {
       try {
         const decodedToken: any = jwt_decode(token); // Dekodowanie tokenu
-        console.log('Decoded Token:', decodedToken);
-
-        // Sprawdzamy userId z tokenu
         userId = decodedToken.nameid || decodedToken.sub || null;
-        console.log('Decoded userId:', userId);
       } catch (error) {
         console.error('Error decoding token:', error);
       }
-    } else {
-      console.log('No token found in localStorage');
     }
 
-    // Jeśli userId jest dostępne z tokenu, używamy go
+    // Jeśli userId jest w URL, używamy go
     if (!userId) {
-      // Jeśli nie ma userId w tokenie, sprawdzamy, czy jest w URL
       userId = +this.route.snapshot.paramMap.get('userId')!;
-      console.log('Received userId from URL:', userId);
     }
+    this.books$.subscribe((books) => {
+      console.log(books);
+    });
 
-    // Jeśli userId jest poprawne, kontynuujemy pobieranie książek
+    // Pobieramy książki użytkownika, jeśli userId jest dostępne
     if (userId && userId > 0) {
-      this.books$ = this.authService.getBooksByUserId(userId).pipe(
+      this.books$ = this.myBooksService.getBooksByUserId(userId).pipe(
         catchError((error) => {
           console.error('Error loading books for user:', error);
           return of([]); // Zwracamy pustą tablicę w przypadku błędu
