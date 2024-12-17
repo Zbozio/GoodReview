@@ -8,6 +8,7 @@ import { AuthGuard } from './profiles/login-profile.guard';
 import { UserIdGuard } from './profiles/user-id-guard.guard';
 import { LoginComponent } from './pages/profiles/login-profile/login-profile.component';
 import { UserBooksComponent } from './pages/books/user-books/user-books.component';
+import { RegistrationProfileComponent } from './profiles/registration-profile/registration-profile.component';
 
 // Definicja tras
 export const routes: Routes = [
@@ -41,7 +42,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard, UserIdGuard], // UserIdGuard tylko tutaj
     component: BooksComponent,
   },
-
+  { path: 'register', component: RegistrationProfileComponent },
   // Strona logowania (niechroniona)
   { path: 'login', component: LoginComponent },
 

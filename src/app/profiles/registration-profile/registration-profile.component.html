@@ -1,0 +1,194 @@
+<div style="padding: 8rem">
+  <div class="register-container">
+    <mat-card class="register-card">
+      <mat-card-header>
+        <mat-card-title>Rejestracja</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form (ngSubmit)="register()">
+          <!-- Imię -->
+          <div class="form-group">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Imię</mat-label>
+              <input
+                matInput
+                type="text"
+                id="imie"
+                [(ngModel)]="imie"
+                name="imie"
+                #imieInput="ngModel"
+                required
+                placeholder="Wprowadź imię"
+              />
+              <mat-error *ngIf="imieInput.invalid && imieInput.touched">
+                Imię jest wymagane.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Nazwisko -->
+          <div class="form-group">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Nazwisko</mat-label>
+              <input
+                matInput
+                type="text"
+                id="nazwisko"
+                [(ngModel)]="nazwisko"
+                name="nazwisko"
+                #nazwiskoInput="ngModel"
+                required
+                placeholder="Wprowadź nazwisko"
+              />
+              <mat-error *ngIf="nazwiskoInput.invalid && nazwiskoInput.touched">
+                Nazwisko jest wymagane.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                type="email"
+                id="email"
+                [(ngModel)]="email"
+                name="email"
+                #emailInput="ngModel"
+                required
+                placeholder="Wprowadź email"
+              />
+              <mat-error *ngIf="emailInput.invalid && emailInput.touched">
+                Proszę wprowadzić poprawny email.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Hasło -->
+          <div class="form-group">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Hasło</mat-label>
+              <input
+                matInput
+                type="password"
+                id="haslo"
+                [(ngModel)]="haslo"
+                name="haslo"
+                #hasloInput="ngModel"
+                required
+                placeholder="Wprowadź hasło"
+              />
+              <mat-error *ngIf="hasloInput.invalid && hasloInput.touched">
+                Hasło jest wymagane.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Potwierdzenie hasła -->
+          <div class="form-group">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Potwierdź hasło</mat-label>
+              <input
+                matInput
+                type="password"
+                id="confirmHaslo"
+                [(ngModel)]="confirmHaslo"
+                name="confirmHaslo"
+                #confirmHasloInput="ngModel"
+                required
+                placeholder="Potwierdź hasło"
+              />
+              <mat-error
+                *ngIf="confirmHasloInput.invalid && confirmHasloInput.touched"
+              >
+                Hasła muszą się zgadzać.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Wybór gatunków -->
+          <div class="form-group">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Wybierz gatunki</mat-label>
+              <mat-select
+                [(ngModel)]="gatunkiIds"
+                name="gatunkiIds"
+                multiple
+                #gatunkiInput="ngModel"
+                required
+              >
+                <mat-option
+                  *ngFor="let gatunek of gatunki"
+                  [value]="gatunek.idGatunku"
+                >
+                  {{ gatunek.nazwaGatunku }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="gatunkiInput.invalid && gatunkiInput.touched">
+                Wybierz przynajmniej jeden gatunek.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Data urodzenia -->
+          <div class="form-group">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Data urodzenia</mat-label>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                [(ngModel)]="dataUrodzenia"
+                name="dataUrodzenia"
+                #dataUrodzeniaInput="ngModel"
+                required
+                placeholder="Wybierz datę urodzenia"
+              />
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error
+                *ngIf="dataUrodzeniaInput.invalid && dataUrodzeniaInput.touched"
+              >
+                Data urodzenia jest wymagana.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Przycisk rejestracji -->
+          <div class="register-actions">
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="
+                !imie ||
+                !nazwisko ||
+                !email ||
+                !haslo ||
+                haslo !== confirmHaslo ||
+                !gatunkiIds ||
+                !dataUrodzenia
+              "
+            >
+              Zarejestruj się
+            </button>
+          </div>
+
+          <!-- Komunikat o błędzie -->
+          <div *ngIf="errorMessage" class="error-message">
+            <mat-icon>error</mat-icon> {{ errorMessage }}
+          </div>
+        </form>
+
+        <!-- Link do logowania -->
+        <div class="login-link">
+          <a routerLink="/login">Masz już konto? Zaloguj się!</a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

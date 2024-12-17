@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 // Importowanie Angular Material
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,6 +29,7 @@ import { MatError } from '@angular/material/form-field';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    RouterModule,
   ],
 })
 export class LoginComponent {
