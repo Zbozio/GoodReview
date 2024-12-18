@@ -1,42 +1,107 @@
-/* Ogólne style dla prawego panelu */
-
-/* Sekcja nagłówka z obrazkiem */
-
-.header-image img {
-  width: 200px; /* Stała szerokość obrazka */
-  height: 200px; /* Stała wysokość obrazka */
-  object-fit: contain; /* Zachowuje proporcje obrazka w ramach wyznaczonego obszaru */
-  margin-top: 20px; /* Odstęp od tekstu */
+/* Kontener dla całej karuzeli */
+.books-carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 350px; /* Wysokość kontenera */
+  margin-bottom: 20px; /* Zmniejszenie marginesu poniżej karuzeli */
 }
 
-.overlay-text h2 {
-  font-size: 1.8rem;
+/* Kontener na karuzelę książek */
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+/* Strzałki do nawigacji */
+.carousel-arrow {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  position: absolute;
+  bottom: 10px; /* Strzałki znajdują się na dole */
+  transform: translateY(50%); /* Dostosowanie pozycji strzałek */
+  border-radius: 50%;
+  margin: 0 15px; /* Odstęp między strzałkami */
+}
+
+.left-arrow {
+  left: 0;
+}
+
+.right-arrow {
+  right: 0;
+}
+
+/* Karta książki */
+.book-card {
+  background: #ffffff; /* Białe tło dla kart */
+  border-radius: 12px; /* Zaokrąglone rogi */
+  width: 180px; /* Zmniejszona szerokość karty */
+  height: 250px; /* Wysokość karty */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtelny cień */
+  cursor: pointer; /* Zmiana kursora na wskaźnik */
+  transition: box-shadow 0.2s ease;
+}
+
+/* Styl obrazu w karcie */
+.card-image {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 150%; /* Proporcje 2:3 */
+  background-color: #333; /* Tło, jeśli obrazek się nie załaduje */
+  overflow: hidden;
+}
+
+.card-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Obrazek wypełnia całą powierzchnię */
+  transition: filter 0.3s ease, transform 0.3s ease; /* Animacja efektów */
+}
+
+/* Komunikat, gdy brak książek */
+.no-books {
+  font-size: 14px;
+  color: #999;
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* Nagłówek tekstu z sugestiami */
+.suggestion-text {
+  font-size: 18px;
   font-weight: bold;
-  margin: 0;
+  text-align: center;
+  margin-bottom: 10px; /* Zmniejszenie odstępu między tekstem a karuzelą */
+  color: white;
 }
+@media (max-width: 768px) {
+  /* Dostosowanie wysokości kontenera na urządzeniach mobilnych */
+  .books-carousel {
+    height: 300px;
+  }
 
-.overlay-text p {
-  font-size: 1rem;
-  margin-top: 10px;
-}
-
-/* Lista rekomendacji */
-h3 {
-  margin-top: 20px;
-  font-size: 1.5rem;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-ul li {
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
-  font-size: 1.1rem;
-}
-
-ul li:last-child {
-  border-bottom: none;
+  /* Dostosowanie rozmiaru kart na urządzeniach mobilnych */
+  .book-card {
+    width: 150px;
+    height: 200px;
+  }
 }

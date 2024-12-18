@@ -1,17 +1,40 @@
-<div class="right-panel">
-  <!-- Tło z obrazkiem -->
-  <div class="header-image">
-    <div class="overlay-text">
-      <h2>Odkryj nowe książki</h2>
-    </div>
-    <img src="assets/images/comic.jpg" alt="Kobieta czytająca komiks" />
-  </div>
+<div *ngIf="loading" class="loading-message">Ładowanie...</div>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-  <!-- Lista rekomendacji -->
-  <h3>Rekomendacje</h3>
-  <ul>
-    <li>Rekomendacja 1</li>
-    <li>Rekomendacja 2</li>
-    <li>Rekomendacja 3</li>
-  </ul>
+<h4 class="suggestion-text">You might like these books</h4>
+
+<!-- Karuzela książek -->
+<div *ngIf="allBooks.length > 0" class="books-carousel">
+  <div class="carousel-container">
+    <!-- Strzałka w lewo -->
+    <button (click)="changeImage(-1)" class="carousel-arrow left-arrow">
+      &#8592;
+    </button>
+
+    <!-- Wyświetlanie zdjęcia książki -->
+    <div class="book-display">
+      <div class="book-card">
+        <div class="card-image">
+          <img
+            *ngIf="allBooks[currentBookIndex]?.okladka"
+            [src]="allBooks[currentBookIndex]?.okladka"
+            alt="{{ allBooks[currentBookIndex]?.tytul }}"
+          />
+        </div>
+        <div class="card-title-overlay">
+          {{ allBooks[currentBookIndex]?.tytul }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Strzałka w prawo -->
+    <button (click)="changeImage(1)" class="carousel-arrow right-arrow">
+      &#8594;
+    </button>
+  </div>
+</div>
+
+<!-- Komunikat, gdy brak książek -->
+<div *ngIf="allBooks.length === 0" class="no-books">
+  Brak książek do wyświetlenia.
 </div>

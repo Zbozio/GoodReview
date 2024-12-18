@@ -90,6 +90,7 @@ export class RegistrationProfileComponent implements OnInit {
     // Wywołanie metody serwisu, aby wysłać dane do API
     this.registerService.register(userDto).subscribe({
       next: (response) => {
+        console.log('Zarejestrowano:', response);
         this.errorMessage = ''; // Resetowanie komunikatu o błędzie
         this.router.navigate(['/login']); // Po rejestracji przekierowanie do logowania
       },
