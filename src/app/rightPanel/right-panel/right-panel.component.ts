@@ -4,6 +4,8 @@ import { FavoriteGenresService } from '../../services/favorite-genres-service';
 import { GatunkowoscService } from '../../services/gatunkowosc-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { BookService } from '../../services/books.service';
 
 interface FavoriteGenre {
   idGatunku: number;
@@ -15,7 +17,7 @@ interface FavoriteGenre {
   templateUrl: './right-panel.component.html',
   styleUrls: ['./right-panel.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
 })
 export class RightPanelComponent implements OnInit {
   currentUser: any;
@@ -32,7 +34,8 @@ export class RightPanelComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private favoriteGenresService: FavoriteGenresService,
-    private gatunkowoscService: GatunkowoscService
+    private gatunkowoscService: GatunkowoscService,
+    private bookService: BookService
   ) {}
 
   ngOnInit(): void {
@@ -72,7 +75,9 @@ export class RightPanelComponent implements OnInit {
         if (data && data.books) {
           // Łączenie książek z różnych gatunków w jedną tablicę
           this.booksByGenres[genreId] = data.books;
+
           this.allBooks = [...this.allBooks, ...data.books]; // Dodajemy książki do tablicy
+          console.log('Wszystkie książki:', this.allBooks);
         }
       },
       error: (err: HttpErrorResponse) => {

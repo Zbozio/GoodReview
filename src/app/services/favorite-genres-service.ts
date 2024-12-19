@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root', // To zapewnia, że serwis będzie dostępny w całej aplikacji
+  providedIn: 'root',
 })
 export class FavoriteGenresService {
   private apiUrl = 'https://localhost:7272/api/UlubioneGatunki'; // URL do API backendu

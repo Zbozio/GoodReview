@@ -1,35 +1,37 @@
 <div *ngIf="loading" class="loading-message">Ładowanie...</div>
 <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-<h4 class="suggestion-text">You might like these books</h4>
-
 <!-- Karuzela książek -->
 <div *ngIf="allBooks.length > 0" class="books-carousel">
+  <h4 class="suggestion-text">You might like these books</h4>
   <div class="carousel-container">
     <!-- Strzałka w lewo -->
     <button (click)="changeImage(-1)" class="carousel-arrow left-arrow">
-      &#8592;
+      &#10094;
+      <!-- Kod strzałki w lewo -->
     </button>
 
     <!-- Wyświetlanie zdjęcia książki -->
-    <div class="book-display">
+    <div
+      class="book-display"
+      [routerLink]="['/booksDetails', allBooks[currentBookIndex].idKsiazka]"
+    >
       <div class="book-card">
         <div class="card-image">
           <img
             *ngIf="allBooks[currentBookIndex]?.okladka"
             [src]="allBooks[currentBookIndex]?.okladka"
-            alt="{{ allBooks[currentBookIndex]?.tytul }}"
+            [alt]="allBooks[currentBookIndex]?.tytul"
           />
         </div>
-        <div class="card-title-overlay">
-          {{ allBooks[currentBookIndex]?.tytul }}
-        </div>
+        <div class="card-title">{{ allBooks[currentBookIndex]?.tytul }}</div>
       </div>
     </div>
 
     <!-- Strzałka w prawo -->
     <button (click)="changeImage(1)" class="carousel-arrow right-arrow">
-      &#8594;
+      &#10095;
+      <!-- Kod strzałki w prawo -->
     </button>
   </div>
 </div>

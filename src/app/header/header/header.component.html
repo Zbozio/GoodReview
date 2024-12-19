@@ -7,7 +7,7 @@
   </div>
 
   <!-- Linki nawigacyjne (desktop) -->
-  <nav class="nav-links">
+  <nav *ngIf="authService.isLoggedIn()" class="nav-links">
     <a mat-button routerLink="/home">Home</a>
     <a mat-button [routerLink]="['/books', userId]">My Books</a>
     <button mat-button [matMenuTriggerFor]="browseMenu">Browse</button>
@@ -39,7 +39,7 @@
   </div>
 
   <!-- Ikony (desktop) -->
-  <div class="navbar-icons">
+  <div *ngIf="authService.isLoggedIn()" class="navbar-icons">
     <button mat-icon-button>
       <mat-icon>notifications</mat-icon>
     </button>
