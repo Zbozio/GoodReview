@@ -66,36 +66,42 @@
   margin-bottom: 30px;
 }
 
+/* Sekcja tagów (chipów) */
+.book-tags {
+  margin-bottom: 30px;
+}
+
 .book-tags h3 {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #ffffff; /* Jasny tekst */
+  color: white; /* Ciemniejszy kolor tekstu */
 }
 
-mat-chip-list {
+mat-chip-listbox {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px; /* Zmniejszenie przerwy między chipami */
 }
 
 mat-chip {
-  background-color: #444444; /* Ciemniejsze tło dla chipów */
-  color: #ffffff; /* Jasny tekst w chipach */
-  font-size: 1rem;
-  padding: 8px 16px;
-  border-radius: 20px;
-  transition: background-color 0.3s;
+  background-color: #f0f4f7; /* Jasne tło dla tagów */
+  color: #2c3e50; /* Ciemniejszy tekst */
+  font-size: 0.85rem; /* Zmniejszenie rozmiaru czcionki */
+  padding: 4px 10px; /* Zmniejszenie paddingu, aby chipy były mniejsze */
+  border-radius: 16px; /* Zaokrąglone rogi */
+  transition: background-color 0.3s, transform 0.2s; /* Animacje */
 }
 
 mat-chip:hover {
-  background-color: #0066cc; /* Niebieski hover */
+  background-color: #3498db; /* Niebieski kolor na hover */
   color: white;
+  transform: translateY(-1px); /* Subtelne unoszenie */
 }
 
 mat-chip.disabled {
-  background-color: #666666; /* Ciemniejszy szary dla nieaktywnych tagów */
-  color: #aaa;
+  background-color: #bdc3c7; /* Szary dla nieaktywnych tagów */
+  color: #95a5a6;
   cursor: not-allowed;
 }
 
@@ -127,4 +133,48 @@ mat-chip.disabled {
 .back-button .btn:active {
   background-color: #1e1e1e; /* Przyciemnienie na kliknięcie */
   transform: translateY(1px); /* Wrażenie "wciśnięcia" */
+}
+
+.loading {
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.error {
+  color: red;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.book-rating-form {
+  margin-top: 20px;
+}
+
+.book-rating-form input {
+  width: 50px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.book-rating-form button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.book-rating-form button:hover {
+  background-color: #0056b3;
+}
+.star-rating {
+  display: flex;
+  font-size: 24px;
+}
+
+.star-rating mat-icon {
+  color: #d3d3d3; // Kolor domyślny - szary
+}
+
+.star-rating mat-icon.selected {
+  color: #ffcc00; // Kolor żółty dla wybranych gwiazdek
 }

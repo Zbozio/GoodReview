@@ -2,7 +2,7 @@
   <div
     *ngFor="let book of books$ | async"
     class="book-card"
-    [routerLink]="['/booksDetails', book.idKsiazka]"
+    [routerLink]="['/bookDetails', book.idKsiazka]"
   >
     <div class="card-image">
       <img
@@ -14,8 +14,10 @@
     <div class="card-title-overlay">
       {{ book.tytul }}
     </div>
-    <div class="rating">
-      <span class="rating-value">{{ book.ocenaWartosc }}</span>
+    <div class="rating" *ngIf="book.ocenaWartosc > 1">
+      <span class="rating-value" [ngClass]="getRatingClass(book.ocenaWartosc)">
+        {{ book.ocenaWartosc }}
+      </span>
     </div>
   </div>
 </div>

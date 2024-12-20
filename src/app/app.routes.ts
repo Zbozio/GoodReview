@@ -30,7 +30,7 @@ export const routes: Routes = [
 
   // Główna strona książek - dostęp do wszystkich książek
   {
-    path: 'booksDetails/:id',
+    path: 'bookDetails/:id',
     canActivate: [AuthGuard],
     component: BookDetailsComponent,
   },

@@ -1,42 +1,78 @@
-<div *ngIf="book$ | async as book; else loading">
-  <div class="book-details-container">
-    <div class="book-header">
-      <img alt="Okładka książki" class="book-cover" [src]="book.okladka" />
-      <div class="book-info">
-        <h1 class="book-title">{{ book.tytul }}</h1>
-        <p class="book-author">Autor: {{ book.autor }}</p>
-        <p class="book-year">Rok wydania: {{ book.rokWydania }}</p>
-        <p class="book-isbn">ISBN: {{ book.isbn }}</p>
-        <p class="book-pages">Liczba stron: {{ book.iloscStron }}</p>
-      </div>
+<div *ngIf="isLoading" class="loading">Loading...</div>
+<div *ngIf="!isLoading && errorMessage" class="error">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="!isLoading && bookDetails" class="book-details-container">
+  <div class="book-header">
+    <img [src]="bookDetails.cover" alt="Cover Image" class="book-cover" />
+    <div class="book-info">
+      <h1 class="book-title">{{ bookDetails.title }}</h1>
+      <p class="book-author">
+        <strong>Author:</strong>
+        <span *ngFor="let author of bookDetails.authors; let i = index">
+          {{ author.firstName }} {{ author.lastName }}
+          <span *ngIf="i < bookDetails.authors.length - 1">, </span>
+        </span>
+      </p>
+      <p class="book-year">
+        <strong>Release Year:</strong> {{ bookDetails.releaseYear }}
+      </p>
+      <p class="book-isbn"><strong>ISBN:</strong> {{ bookDetails.isbn }}</p>
+      <p class="book-pages"><strong>Pages:</strong> {{ bookDetails.pages }}</p>
+      <p class="book-publisher">
+        <strong>Publisher:</strong>
+        {{ bookDetails.publisher?.name || "Unknown" }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Opis książki -->
+  <div class="book-description">
+    <h2>Description:</h2>
+    <p>{{ bookDetails.description }}</p>
+  </div>
+
+  <!-- Gatunki książki -->
+  <div class="book-genres">
+    <strong>Genres:</strong>
+    <ul>
+      <li *ngFor="let genre of bookDetails.genres">{{ genre.name }}</li>
+    </ul>
+  </div>
+
+  <!-- Tagi książki -->
+  <div class="book-tags">
+    <h3>Tags:</h3>
+    <mat-chip-listbox>
+      <mat-chip *ngFor="let tag of bookDetails.tags" [disabled]="false">
+        {{ tag.name }}
+      </mat-chip>
+    </mat-chip-listbox>
+  </div>
+
+  <!-- Średnia ocena i liczba ocen -->
+  <div class="book-rating">
+    <strong>Average Rating:</strong> {{ bookDetails.averageRating }}/10
+    <br />
+    <strong>Total Ratings:</strong> {{ bookDetails.totalRatings }}
+  </div>
+
+  <!-- Formularz do oceniania -->
+  <div class="book-rating">
+    <h3>Twoja ocena:</h3>
+    <div class="star-rating">
+      <mat-icon
+        *ngFor="let star of stars; let i = index"
+        [ngClass]="{ selected: i < userRating }"
+        (click)="setRating(i + 1); submitRating()"
+        >star</mat-icon
+      >
     </div>
 
-    <div class="book-description">
-      <h2>Opis książki</h2>
-      <p>{{ book.opis }}</p>
-    </div>
-
-    <!-- Tagi książki -->
-    <!-- <div class="book-tags">
-      <h3>Tagi książki</h3>
-      <mat-chip *ngFor="let tag of book.tags">{{ tag }}</mat-chip>
-    </div> -->
-
-    <div class="book-rating">
-      <h2>Oceny</h2>
-      <p>Liczba ocen: {{ book.liczbaOcen }}</p>
-      <p>Średnia ocena: {{ book.sredniaOcena }} / 10</p>
-    </div>
-
+    <!-- Przycisk powrotu -->
     <div class="back-button">
-      <button routerLink="/books" class="btn">Powrót do listy książek</button>
+      <button class="btn" (click)="goBack()">Go Back</button>
     </div>
   </div>
 </div>
-
-<!-- Sekcja do wyświetlania "ładowania" -->
-<ng-template #loading>
-  <div class="loading-container">
-    <p>Ładowanie książki...</p>
-  </div>
-</ng-template>

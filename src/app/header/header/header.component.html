@@ -53,10 +53,14 @@
       <mat-icon>library_books</mat-icon>
     </button>
 
+    <!-- Ikona panelu administracyjnego -->
+    <button mat-icon-button routerLink="/admin" aria-label="Admin Panel">
+      <mat-icon>admin_panel_settings</mat-icon>
+    </button>
+
     <!-- Dodany przycisk "Wyloguj" z ikoną -->
     <button *ngIf="authService.isLoggedIn()" mat-icon-button (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
-      <!-- Ikona wylogowania -->
     </button>
   </div>
 

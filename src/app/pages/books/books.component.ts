@@ -68,7 +68,18 @@ export class BooksComponent implements OnInit, OnDestroy {
       }
     }
   }
-
+  getRatingClass(rating: number): string {
+    if (rating <= 3) {
+      return 'low'; // Czerwony dla ocen poniżej 3
+    } else if (rating > 3 && rating <= 6) {
+      return 'medium'; // Pomarańczowy dla ocen w przedziale 4-7
+    } else if (rating >= 7 && rating < 10) {
+      return 'high'; // Zielony dla ocen powyżej 7
+    } else if (rating === 10) {
+      return 'excellent'; // Niebieski dla ocen 10
+    }
+    return ''; // Domyślnie brak klasy
+  }
   ngOnDestroy(): void {
     // Czyszczenie subskrypcji
     if (this.authSubscription) {

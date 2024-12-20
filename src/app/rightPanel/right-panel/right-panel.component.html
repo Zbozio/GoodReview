@@ -12,12 +12,12 @@
     </button>
 
     <!-- Wyświetlanie zdjęcia książki -->
-    <div
-      class="book-display"
-      [routerLink]="['/booksDetails', allBooks[currentBookIndex].idKsiazka]"
-    >
+    <div class="book-display">
       <div class="book-card">
-        <div class="card-image">
+        <div
+          class="card-image"
+          [routerLink]="['/bookDetails', allBooks[currentBookIndex].idKsiazka]"
+        >
           <img
             *ngIf="allBooks[currentBookIndex]?.okladka"
             [src]="allBooks[currentBookIndex]?.okladka"

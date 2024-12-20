@@ -142,7 +142,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const selectedBook = event.option.value;
 
     setTimeout(() => {
-      this.router.navigate([`/booksDetails/${selectedBook.idKsiazka}`]);
+      this.router.navigate([`/bookDetails/${selectedBook.idKsiazka}`]);
     }, 0);
 
     this.resetSearch();

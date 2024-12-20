@@ -34,7 +34,7 @@ export class AuthService {
   }
 
   // Pobranie userId z tokenu
-  private getUserIdFromToken(): number | null {
+  public getUserIdFromToken(): number | null {
     const token = this.getToken();
     if (token) {
       try {
