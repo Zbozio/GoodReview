@@ -9,6 +9,11 @@ import { UserIdGuard } from './profiles/user-id-guard.guard';
 import { LoginComponent } from './pages/profiles/login-profile/login-profile.component';
 import { UserBooksComponent } from './pages/books/user-books/user-books.component';
 import { RegistrationProfileComponent } from './profiles/registration-profile/registration-profile.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+// import { AddBookComponent } from './admin-panel/adding-books/adding-books.component';
+import { AuthorComponent } from './admin-panel/add-author/add-author.component';
+import { PublisherComponent } from './admin-panel/add-publisher/add-publisher.component';
+import { AddBookComponent } from './admin-panel/adding-books/adding-books.component';
 
 // Definicja tras
 export const routes: Routes = [
@@ -27,7 +32,31 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     component: UserProfileComponent,
   },
-
+  {
+    path: 'admin',
+    canActivate: [AuthGuard],
+    component: AdminPanelComponent,
+  },
+  {
+    path: 'adminAddingBooks',
+    canActivate: [AuthGuard],
+    component: AddBookComponent,
+  },
+  {
+    path: 'addPublisher',
+    canActivate: [AuthGuard],
+    component: PublisherComponent,
+  },
+  {
+    path: 'addAuthor',
+    canActivate: [AuthGuard],
+    component: AuthorComponent,
+  },
+  // {
+  //   path: 'adminAddingBooks',
+  //   canActivate: [AuthGuard],
+  //   component: AddBookComponent,
+  // },
   // Główna strona książek - dostęp do wszystkich książek
   {
     path: 'bookDetails/:id',

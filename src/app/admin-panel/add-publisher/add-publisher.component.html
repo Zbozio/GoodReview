@@ -1,0 +1,35 @@
+<!-- add-publisher.component.html -->
+<div>
+  <h2>Dodaj Wydawnictwo</h2>
+  <form (ngSubmit)="onAddPublisher()">
+    <div>
+      <label for="nazwa">Nazwa:</label>
+      <input
+        type="text"
+        id="nazwa"
+        [(ngModel)]="newPublisher.nazwa"
+        name="nazwa"
+        required
+      />
+    </div>
+    <div>
+      <label for="adresSiedziby">Adres siedziby:</label>
+      <input
+        type="text"
+        id="adresSiedziby"
+        [(ngModel)]="newPublisher.adresSiedziby"
+        name="adresSiedziby"
+      />
+    </div>
+    <div>
+      <label for="stronaInternetowa">Strona internetowa:</label>
+      <input
+        type="text"
+        id="stronaInternetowa"
+        [(ngModel)]="newPublisher.stronaInternetowa"
+        name="stronaInternetowa"
+      />
+    </div>
+    <button type="submit">Dodaj</button>
+  </form>
+</div>

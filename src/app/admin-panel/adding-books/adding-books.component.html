@@ -1,0 +1,183 @@
+<div class="container">
+  <h2 class="title">Add a New Book</h2>
+  <form (ngSubmit)="onSubmit()" #bookForm="ngForm" class="book-form">
+    <!-- Title -->
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input
+        type="text"
+        id="title"
+        class="form-control"
+        [(ngModel)]="book.title"
+        name="title"
+        required
+        placeholder="Enter book title"
+      />
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        class="form-control"
+        [(ngModel)]="book.description"
+        name="description"
+        rows="3"
+        required
+        placeholder="Enter a brief description"
+      ></textarea>
+    </div>
+
+    <!-- Release Year (zmienione na date) -->
+    <div class="form-group">
+      <label for="releaseYear">Release Year</label>
+      <input
+        type="date"
+        id="releaseYear"
+        class="form-control"
+        [(ngModel)]="book.releaseYear"
+        name="releaseYear"
+        required
+        placeholder="Enter release date"
+      />
+    </div>
+
+    <!-- Pages -->
+    <div class="form-group">
+      <label for="pages">Pages</label>
+      <input
+        type="number"
+        id="pages"
+        class="form-control"
+        [(ngModel)]="book.pages"
+        name="pages"
+        required
+        placeholder="Enter number of pages"
+      />
+    </div>
+
+    <!-- ISBN -->
+    <div class="form-group">
+      <label for="isbn">ISBN</label>
+      <input
+        type="text"
+        id="isbn"
+        class="form-control"
+        [(ngModel)]="book.isbn"
+        name="isbn"
+        required
+        placeholder="Enter ISBN"
+      />
+    </div>
+
+    <!-- Cover -->
+    <div class="form-group">
+      <label for="cover">Cover Image URL</label>
+      <input
+        type="text"
+        id="cover"
+        class="form-control"
+        [(ngModel)]="book.cover"
+        name="cover"
+        placeholder="Enter cover image URL (optional)"
+      />
+    </div>
+
+    <!-- Publisher -->
+    <div class="form-group">
+      <label for="publisherId">Publisher</label>
+      <select
+        id="publisherId"
+        class="form-control"
+        [(ngModel)]="book.publisherId"
+        name="publisherId"
+        required
+      >
+        <option
+          *ngFor="let publisher of publishers"
+          [value]="publisher.idWydawnictwa"
+        >
+          {{ publisher.nazwa }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Genres -->
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Wybierz gatunki</mat-label>
+        <mat-select
+          [(ngModel)]="book.genreIds"
+          name="genreIds"
+          multiple
+          required
+        >
+          <mat-option
+            *ngFor="let gatunek of gatunki"
+            [value]="gatunek.idGatunku"
+          >
+            {{ gatunek.nazwaGatunku }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Authors -->
+    <div class="form-group">
+      <div class="author-selection">
+        <!-- Wybór autora -->
+        <label for="authorId">Select Author</label>
+        <select
+          id="authorId"
+          class="form-control"
+          [(ngModel)]="selectedAuthorId"
+          name="selectedAuthorId"
+        >
+          <option *ngFor="let author of authors" [value]="author.idAutora">
+            {{ author.imieAutora }} {{ author.nazwiskoAutora }}
+          </option>
+        </select>
+
+        <!-- Wybór typu autorstwa -->
+        <label for="authorshipTypeId">Select Authorship Type</label>
+        <select
+          id="authorshipTypeId"
+          class="form-control"
+          [(ngModel)]="selectedAuthorshipTypeId"
+          name="selectedAuthorshipTypeId"
+        >
+          <option *ngFor="let type of typesOfAuthor" [value]="type.idTypu">
+            {{ type.nazwaTypu }}
+          </option>
+        </select>
+
+        <button type="button" class="btn btn-primary" (click)="addAuthor()">
+          Add Author
+        </button>
+      </div>
+
+      <!-- Displaying added authors -->
+      <div
+        *ngFor="let author of book.authors; let i = index"
+        class="author-list"
+      >
+        <span>
+          {{ author.firstName }} {{ author.lastName }} -
+          {{ getAuthorshipTypeName(+author.authorshipTypeId) }}
+        </span>
+        <button class="btn btn-danger" (click)="removeAuthor(i)">
+          Remove Author
+        </button>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="!bookForm.form.valid"
+    >
+      Add Book
+    </button>
+  </form>
+</div>

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-// Model wydawcy (możesz dostosować do swojej aplikacji)
+// src/app/models/publisher.model.ts
 export interface Publisher {
-  id: number;
-  name: string;
-  address?: string;
+  idWydawnictwa: number;
+  nazwa?: string;
+  adresSiedziby?: string;
+  stronaInternetowa?: string;
 }
 
 @Injectable({
