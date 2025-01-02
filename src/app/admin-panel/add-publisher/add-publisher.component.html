@@ -1,35 +1,47 @@
-<!-- add-publisher.component.html -->
-<div>
-  <h2>Dodaj Wydawnictwo</h2>
-  <form (ngSubmit)="onAddPublisher()">
-    <div>
+<div class="container">
+  <h2 class="title">Dodaj Wydawnictwo</h2>
+  <form (ngSubmit)="onAddPublisher()" class="form">
+    <!-- Nazwa -->
+    <div class="form-group">
       <label for="nazwa">Nazwa:</label>
       <input
         type="text"
         id="nazwa"
+        class="form-control"
         [(ngModel)]="newPublisher.nazwa"
         name="nazwa"
         required
+        placeholder="Wprowadź nazwę wydawnictwa"
       />
     </div>
-    <div>
+
+    <!-- Adres Siedziby -->
+    <div class="form-group">
       <label for="adresSiedziby">Adres siedziby:</label>
       <input
         type="text"
         id="adresSiedziby"
+        class="form-control"
         [(ngModel)]="newPublisher.adresSiedziby"
         name="adresSiedziby"
+        placeholder="Wprowadź adres siedziby"
       />
     </div>
-    <div>
+
+    <!-- Strona Internetowa -->
+    <div class="form-group">
       <label for="stronaInternetowa">Strona internetowa:</label>
       <input
         type="text"
         id="stronaInternetowa"
+        class="form-control"
         [(ngModel)]="newPublisher.stronaInternetowa"
         name="stronaInternetowa"
+        placeholder="Wprowadź adres strony internetowej"
       />
     </div>
-    <button type="submit">Dodaj</button>
+
+    <!-- Submit -->
+    <button type="submit" class="btn btn-success">Dodaj</button>
   </form>
 </div>

@@ -8,10 +8,12 @@
     <img [src]="bookDetails.cover" alt="Cover Image" class="book-cover" />
     <div class="book-info">
       <h1 class="book-title">{{ bookDetails.title }}</h1>
-      <p class="book-author">
+      <p class="book-author" *ngIf="bookDetails.publisher">
         <strong>Author:</strong>
         <span *ngFor="let author of bookDetails.authors; let i = index">
-          {{ author.firstName }} {{ author.lastName }}
+          <p [routerLink]="['/authorProfile', author.id]">
+            {{ author.firstName }} {{ author.lastName }}
+          </p>
           <span *ngIf="i < bookDetails.authors.length - 1">, </span>
         </span>
       </p>
@@ -20,9 +22,13 @@
       </p>
       <p class="book-isbn"><strong>ISBN:</strong> {{ bookDetails.isbn }}</p>
       <p class="book-pages"><strong>Pages:</strong> {{ bookDetails.pages }}</p>
-      <p class="book-publisher">
+      <p
+        class="book-publisher"
+        *ngIf="bookDetails.publisher"
+        [routerLink]="['/publisherPage', bookDetails.publisher.id]"
+      >
         <strong>Publisher:</strong>
-        {{ bookDetails.publisher?.name || "Unknown" }}
+        {{ bookDetails.publisher.name || "Unknown" }}
       </p>
     </div>
   </div>

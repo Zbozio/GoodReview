@@ -1,0 +1,49 @@
+<div class="author-profile">
+  <div class="profile-header">
+    <div class="profile-image">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2NIXc73ZgxZfbifJP3Bsv35sekQyklo-9JA&s"
+        alt="Autor's Image"
+      />
+    </div>
+    <div class="profile-info">
+      <h1>{{ author.imieAutora }} {{ author.nazwiskoAutora }}</h1>
+      <div class="bio">{{ author.opis }}</div>
+    </div>
+  </div>
+
+  <div class="profile-details">
+    <div class="detail-item">
+      <strong>Wiek:</strong>
+      <p>{{ author.wiek }} lat</p>
+    </div>
+    <div class="detail-item">
+      <strong>Data urodzenia:</strong>
+      <p>{{ author.dataUrodzenia | date : "longDate" }}</p>
+    </div>
+    <div class="detail-item" *ngIf="author.dataSmierci">
+      <strong>Data śmierci:</strong>
+      <p>{{ author.dataSmierci | date : "longDate" }}</p>
+    </div>
+  </div>
+
+  <div class="author-bio">
+    <h2>Opis autora</h2>
+    <p>{{ author.opis }}</p>
+  </div>
+
+  <div class="author-books">
+    <h2>Udział w książkach</h2>
+    <div *ngIf="author.udzials.length > 0; else noBooks">
+      <div class="books-list">
+        <div class="book-item" *ngFor="let book of author.udzials">
+          <h3>{{ book.title }}</h3>
+          <p>{{ book.year }}</p>
+        </div>
+      </div>
+    </div>
+    <ng-template #noBooks>
+      <p class="noBooks">Brak książek w tym katalogu.</p>
+    </ng-template>
+  </div>
+</div>

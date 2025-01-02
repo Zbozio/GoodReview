@@ -1,7 +1,8 @@
+<!-- Wyświetlanie użytkowników z odpowiednią ikoną statusu -->
 <div class="users-list">
   <div
     class="user-profile"
-    *ngFor="let user of users$ | async"
+    *ngFor="let user of users"
     [routerLink]="['/profile', user.idUzytkownik]"
   >
     <section class="profile-header">
@@ -26,5 +27,21 @@
       <h3>{{ user.ostaniaAktywnosc | date : "dd MMMM yyyy" }}</h3>
       <p>Ostatnia aktywność</p>
     </div>
+
+    <!-- Ikona wysyłania zaproszenia, zmieniająca się w zależności od statusu -->
+    <button
+      mat-icon-button
+      *ngIf="user.status !== 'accepted'"
+      (click)="sendFriendRequest(user.idUzytkownik)"
+    >
+      <mat-icon>{{
+        user.status === "sent" ? "pending" : "person_add"
+      }}</mat-icon>
+    </button>
+
+    <!-- Ikona oznaczająca, że są znajomymi -->
+    <button mat-icon-button *ngIf="user.status === 'accepted'">
+      <mat-icon>check_circle</mat-icon>
+    </button>
   </div>
 </div>

@@ -43,10 +43,23 @@
     <button mat-icon-button>
       <mat-icon>notifications</mat-icon>
     </button>
-    <button routerLink="/users" mat-icon-button>
-      <mat-icon>group</mat-icon>
-    </button>
-    <button mat-icon-button>
+    <!-- Ikona znajomych z rozwijanym menu -->
+    <div *ngIf="authService.isLoggedIn()" class="navbar-icons">
+      <button mat-icon-button [matMenuTriggerFor]="friendsMenu">
+        <mat-icon>people</mat-icon>
+        <!-- Ikona dla znajomych -->
+      </button>
+      <mat-menu #friendsMenu="matMenu">
+        <button mat-menu-item routerLink="/accept-friend-requests">
+          Akceptuj zaproszenia
+        </button>
+        <button mat-menu-item routerLink="/friends">Znajomi</button>
+        <button mat-menu-item routerLink="/users">Wszyscy użytkownicy</button>
+      </mat-menu>
+    </div>
+
+    <!-- Nowa ikona do akceptacji zaproszeń -->
+    <button mat-icon-button [routerLink]="['/loggenUserProfile', userId]">
       <mat-icon>account_circle</mat-icon>
     </button>
     <button routerLink="/books" mat-icon-button>

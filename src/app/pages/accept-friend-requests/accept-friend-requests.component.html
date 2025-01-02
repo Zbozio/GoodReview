@@ -1,0 +1,40 @@
+<div class="friend-requests">
+  <div *ngIf="friendRequests.length === 0" class="no-requests">
+    <p>Nie masz żadnych zaproszeń do zaakceptowania.</p>
+  </div>
+
+  <div *ngFor="let request of friendRequests" class="request-item">
+    <div class="request-sender">
+      <img
+        *ngIf="request.senderDetails.zdjecie"
+        [src]="request.senderDetails.zdjecie"
+        alt="Avatar"
+      />
+      <div class="sender-info">
+        <h3>
+          {{ request.senderDetails.imie }} {{ request.senderDetails.nazwisko }}
+        </h3>
+        <p>
+          Zaproszenie wysłano:
+          {{ "Oczekuje na akceptację" }}
+        </p>
+      </div>
+    </div>
+    <div class="request-actions">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="acceptRequest(request.requestId)"
+      >
+        Zaakceptuj
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="rejectRequest(request.requestId)"
+      >
+        Odrzuć
+      </button>
+    </div>
+  </div>
+</div>

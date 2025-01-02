@@ -1,0 +1,20 @@
+<div class="publisher-profile">
+  <div *ngIf="publisher; else errorTemplate">
+    <h1>{{ publisher.nazwa }}</h1>
+    <p><strong>Adres:</strong> {{ publisher.adresSiedziby }}</p>
+    <p>
+      <strong>Strona internetowa:</strong>
+      <a
+        style="color: royalblue"
+        [href]="publisher.stronaInternetowa"
+        target="_blank"
+      >
+        {{ publisher.stronaInternetowa }}
+      </a>
+    </p>
+  </div>
+
+  <ng-template #errorTemplate>
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+  </ng-template>
+</div>

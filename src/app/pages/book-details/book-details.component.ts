@@ -10,13 +10,20 @@ import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon'; // Import MatIcon
 import { AuthService } from '../../services/auth-service.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
   styleUrls: ['./book-details.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatChipsModule, FormsModule, MatIconModule],
+  imports: [
+    CommonModule,
+    MatChipsModule,
+    FormsModule,
+    MatIconModule,
+    RouterModule,
+  ],
 })
 export class BookDetailsComponent implements OnInit {
   bookId: number | undefined;

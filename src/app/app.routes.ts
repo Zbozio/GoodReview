@@ -14,7 +14,12 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AuthorComponent } from './admin-panel/add-author/add-author.component';
 import { PublisherComponent } from './admin-panel/add-publisher/add-publisher.component';
 import { AddBookComponent } from './admin-panel/adding-books/adding-books.component';
-
+import { AcceptFriendRequestsComponent } from './pages/accept-friend-requests/accept-friend-requests.component';
+import { profile } from 'console';
+import { FriendsComponent } from './pages/friends/friends.component';
+import { LoggenUserProfileComponent } from './profiles/loggen-user-profile/loggen-user-profile.component';
+import { PublisherProfileComponent } from './profiles/publisher-profile/publisher-profile.component';
+import { AuthorProfileComponent } from './profiles/author-profile/author-profile.component';
 // Definicja tras
 export const routes: Routes = [
   // Domyślny przekierowanie
@@ -24,7 +29,37 @@ export const routes: Routes = [
   { path: 'home', canActivate: [AuthGuard], component: MainTimelineComponent },
 
   // Profil użytkownika
-  { path: 'users', canActivate: [AuthGuard], component: ProfileComponent },
+  {
+    path: 'accept-friend-requests',
+    canActivate: [AuthGuard],
+    component: AcceptFriendRequestsComponent,
+  },
+  {
+    path: 'publisherPage/:id',
+    canActivate: [AuthGuard],
+    component: PublisherProfileComponent,
+  },
+  {
+    path: 'authorProfile/:id',
+    canActivate: [AuthGuard],
+    component: AuthorProfileComponent,
+  },
+  // Profil użytkownika
+  {
+    path: 'users',
+    canActivate: [AuthGuard],
+    component: ProfileComponent,
+  },
+  {
+    path: 'loggenUserProfile/:id',
+    canActivate: [AuthGuard],
+    component: LoggenUserProfileComponent,
+  },
+  {
+    path: 'friends',
+    canActivate: [AuthGuard],
+    component: FriendsComponent,
+  },
 
   // Profil użytkownika z parametrem id
   {
