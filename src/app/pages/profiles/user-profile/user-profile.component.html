@@ -46,17 +46,17 @@
     </div>
   </div>
 
-  <!-- Półki z książkami -->
-  <div *ngIf="user.bookshelves?.length" class="bookshelf">
-    <h2>Półki z książkami</h2>
-    <div class="bookshelf-container">
-      <div *ngFor="let shelf of user.bookshelves" class="bookshelf-item">
-        <h3>{{ shelf.name }}</h3>
-        <p>{{ shelf.bookCount }} książek</p>
+  <div *ngIf="lists.length" class="user-lists">
+    <h2>Listy użytkownika</h2>
+    <div class="list-container">
+      <div *ngFor="let list of lists" class="list-item">
+        <a [routerLink]="['/list', list.idListy]">
+          <h3>{{ list.nazwaListy }}</h3>
+        </a>
       </div>
     </div>
   </div>
-  <div *ngIf="!user.bookshelves?.length" class="no-bookshelves">
-    <p>Użytkownik nie posiada jeszcze żadnych półek z książkami.</p>
+  <div *ngIf="!lists.length" class="no-lists">
+    <p>Użytkownik nie posiada żadnych list.</p>
   </div>
 </div>

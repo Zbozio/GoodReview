@@ -12,7 +12,7 @@ import { RegistrationProfileComponent } from './profiles/registration-profile/re
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 // import { AddBookComponent } from './admin-panel/adding-books/adding-books.component';
 import { AuthorComponent } from './admin-panel/add-author/add-author.component';
-import { PublisherComponent } from './admin-panel/add-publisher/add-publisher.component';
+import { PublisherComponent } from './adminPanel/add-publisher/add-publisher.component';
 import { AddBookComponent } from './admin-panel/adding-books/adding-books.component';
 import { AcceptFriendRequestsComponent } from './pages/accept-friend-requests/accept-friend-requests.component';
 import { profile } from 'console';
@@ -20,6 +20,9 @@ import { FriendsComponent } from './pages/friends/friends.component';
 import { LoggenUserProfileComponent } from './profiles/loggen-user-profile/loggen-user-profile.component';
 import { PublisherProfileComponent } from './profiles/publisher-profile/publisher-profile.component';
 import { AuthorProfileComponent } from './profiles/author-profile/author-profile.component';
+// import { ListOfBooksComponent } from './pages/books/list-of-books-component/list-of-books-component.component';
+import { ListsComponent } from './pages/books/lists/lists.component';
+import { ListOfBooksComponent } from './pages/books/list-of-books-component/list-of-books-component.component';
 // Definicja tras
 export const routes: Routes = [
   // Domyślny przekierowanie
@@ -38,6 +41,17 @@ export const routes: Routes = [
     path: 'publisherPage/:id',
     canActivate: [AuthGuard],
     component: PublisherProfileComponent,
+  },
+
+  {
+    path: 'list/:id',
+    canActivate: [AuthGuard],
+    component: ListOfBooksComponent,
+  },
+  {
+    path: 'lists',
+    canActivate: [AuthGuard],
+    component: ListsComponent,
   },
   {
     path: 'authorProfile/:id',

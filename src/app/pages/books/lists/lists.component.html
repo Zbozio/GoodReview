@@ -1,0 +1,44 @@
+<div class="user-lists">
+  <h2>Twoje listy</h2>
+
+  <!-- Formularz dodawania/edycji listy -->
+  <form
+    [formGroup]="newListForm"
+    (ngSubmit)="isEditing ? editList() : createList()"
+  >
+    <mat-form-field appearance="outline">
+      <mat-label>Nazwa listy</mat-label>
+      <input class="name" matInput formControlName="nazwaListy" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">
+      {{ isEditing ? "Zapisz zmiany" : "Dodaj listę" }}
+    </button>
+    <button
+      *ngIf="isEditing"
+      mat-raised-button
+      color="warn"
+      type="button"
+      (click)="resetEditing()"
+    >
+      Anuluj
+    </button>
+  </form>
+
+  <!-- Lista użytkownika -->
+  <div class="lists-container">
+    <div *ngFor="let list of lists" class="list-item">
+      <div class="list-content">
+        <!-- Dodaj kliknięcie na nazwę listy -->
+        <span (click)="viewListDetails(list)">{{ list.nazwaListy }}</span>
+      </div>
+      <div class="list-actions">
+        <button mat-icon-button color="primary" (click)="startEditList(list)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteList(list.idListy)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

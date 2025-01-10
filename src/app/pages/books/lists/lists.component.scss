@@ -1,0 +1,52 @@
+.user-lists {
+  max-width: 600px;
+  margin: auto;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .lists-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 16px;
+      background: #f7f7f7;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+      .list-content {
+        flex: 1;
+        color: black;
+
+        span {
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+
+      .list-actions {
+        display: flex;
+        gap: 8px;
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

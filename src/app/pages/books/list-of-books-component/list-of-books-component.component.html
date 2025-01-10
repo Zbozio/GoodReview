@@ -1,0 +1,38 @@
+<div class="list-details">
+  <h2 class="list-title">Lista: {{ listName }}</h2>
+
+  <!-- Pasek wyszukiwania książek -->
+  <div *ngIf="canEditList" class="search-bar">
+    <input
+      matInput
+      [formControl]="searchControl"
+      [matAutocomplete]="auto"
+      placeholder="Szukaj książek do dodania"
+    />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="addBookToList($event.option.value)"
+    >
+      <mat-option *ngFor="let book of filteredBooks | async" [value]="book">
+        {{ book.tytul || "Brak tytułu" }}
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+
+  <h3 class="added-books-title">Dodane książki:</h3>
+  <div class="books-list">
+    <div *ngFor="let book of booksInList" class="book-card">
+      <div class="book-title">{{ book.tytul || "Brak tytułu" }}</div>
+
+      <!-- Przycisk usuwania książki (widoczny tylko, jeśli użytkownik jest właścicielem) -->
+      <button
+        *ngIf="canEditList"
+        mat-button
+        color="warn"
+        (click)="removeBookFromList(book)"
+      >
+        Usuń
+      </button>
+    </div>
+  </div>
+</div>
