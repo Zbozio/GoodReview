@@ -23,6 +23,8 @@ import { AuthorProfileComponent } from './profiles/author-profile/author-profile
 // import { ListOfBooksComponent } from './pages/books/list-of-books-component/list-of-books-component.component';
 import { ListsComponent } from './pages/books/lists/lists.component';
 import { ListOfBooksComponent } from './pages/books/list-of-books-component/list-of-books-component.component';
+import { AddTagsComponent } from './adminPanel/add-tags/add-tags.component';
+import { AddTagsForBooksComponent } from './adminPanel/add-tags-for-books/add-tags-for-books.component';
 // Definicja tras
 export const routes: Routes = [
   // Domyślny przekierowanie
@@ -36,6 +38,16 @@ export const routes: Routes = [
     path: 'accept-friend-requests',
     canActivate: [AuthGuard],
     component: AcceptFriendRequestsComponent,
+  },
+  {
+    path: 'addTags',
+    canActivate: [AuthGuard],
+    component: AddTagsComponent,
+  },
+  {
+    path: 'addTagsForBooks',
+    canActivate: [AuthGuard],
+    component: AddTagsForBooksComponent,
   },
   {
     path: 'publisherPage/:id',

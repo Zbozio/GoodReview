@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon'; // Import MatIcon
 import { AuthService } from '../../services/auth-service.service';
 import { RouterModule } from '@angular/router';
+import { Review, ReviewService } from '../../services/review.service';
 
 @Component({
   selector: 'app-book-details',
@@ -32,12 +33,16 @@ export class BookDetailsComponent implements OnInit {
   errorMessage: string = '';
   userRating: number = 0; // Ocena użytkownika
   stars: number[] = Array(10).fill(0); // Tablica do reprezentowania 10 gwiazdek
+  reviews: Review[] = [];
+  isReviewsLoading: boolean = true;
+  newReviewText: string = ''; // Przechowuje treść nowej recenzji
 
   constructor(
     private route: ActivatedRoute,
     private bookDetailsService: BookDetailsService,
     private ratingService: RatingService,
-    private authService: AuthService // Wstrzykujemy AuthService
+    private authService: AuthService, // Wstrzykujemy AuthService
+    private reviewService: ReviewService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +50,7 @@ export class BookDetailsComponent implements OnInit {
       this.bookId = +params['id']; // Parsowanie ID książki z URL
       this.loadBookDetails();
       this.loadUserRating(); // Ładowanie oceny użytkownika
+      this.loadReviews();
     });
   }
 
@@ -64,6 +70,77 @@ export class BookDetailsComponent implements OnInit {
     } else {
       this.errorMessage = 'Invalid book ID.';
       this.isLoading = false;
+    }
+  }
+  loadReviews(): void {
+    if (this.bookId !== undefined) {
+      const userId = this.authService.getUserIdFromToken(); // Pobierz ID użytkownika
+      console.log('User ID:', userId); // Dodaj logowanie ID użytkownika
+
+      this.reviewService.getReviewsByBook(this.bookId).subscribe({
+        next: (reviews) => {
+          // Mapowanie recenzji i dodanie pola 'isUserReview'
+          this.reviews = reviews.map((review) => {
+            console.log('Review:', review); // Sprawdź dane recenzji
+            console.log(
+              'Comparing User ID with Review User ID:',
+              review.idUzytkownik === userId
+            ); // Sprawdź wynik porównania
+
+            return {
+              ...review,
+              isUserReview: !!userId && review.idUzytkownik === Number(userId),
+            };
+          });
+
+          // Sortowanie recenzji, aby recenzja użytkownika była pierwsza
+          this.reviews.sort((a, b) => {
+            if (a.isUserReview) {
+              return -1; // Użytkownikowa recenzja powinna być na pierwszym miejscu
+            }
+            if (b.isUserReview) {
+              return 1; // Przesuwamy inne recenzje niż użytkownikowe
+            }
+            return 0; // Pozostawienie pozostałych recenzji bez zmian
+          });
+
+          this.isReviewsLoading = false;
+          console.log('Reviews:', this.reviews); // Wyświetl zaktualizowaną listę recenzji
+        },
+        error: () => {
+          this.isReviewsLoading = false;
+        },
+      });
+    }
+  }
+
+  submitReview(): void {
+    if (this.bookId !== undefined) {
+      const userId = this.authService.getUserIdFromToken(); // Pobierz ID użytkownika
+      if (userId && this.newReviewText.trim()) {
+        const newReview: Review = {
+          idKsiazka: this.bookId,
+          idUzytkownik: userId,
+          trescRecenzji: this.newReviewText.trim(),
+          dataRecenzji: new Date().toISOString(),
+          polubieniaRecenzji: 0, // Początkowa liczba polubień
+        };
+
+        this.reviewService.addReview(newReview).subscribe({
+          next: (review) => {
+            this.reviews.push(review); // Dodaj nową recenzję do listy
+            this.newReviewText = ''; // Wyczyść pole tekstowe
+            alert('Review added successfully.');
+            this.loadReviews();
+          },
+          error: (err) => {
+            console.error('Error adding review:', err);
+            alert('Failed to add review.');
+          },
+        });
+      } else {
+        alert('Please log in to submit a review or enter a valid review.');
+      }
     }
   }
 

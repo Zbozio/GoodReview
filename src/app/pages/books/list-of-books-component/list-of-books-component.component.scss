@@ -1,33 +1,112 @@
 .list-details {
   padding: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #f5f5f5;
+  margin-top: 1rem;
+
+  .list-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    text-align: center;
+    color: #2196f3; // Neutralny, klasyczny niebieski
+  }
 
   .search-bar {
+    display: flex;
+    align-items: center;
     margin-bottom: 16px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #2b2b2b;
+
+    input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      background: transparent;
+      color: #f5f5f5;
+      margin-right: 8px;
+    }
+
+    input::placeholder {
+      color: #9e9e9e;
+    }
+
+    mat-autocomplete {
+      background-color: #2b2b2b;
+    }
+
+    mat-option {
+      color: #f5f5f5;
+
+      &:hover {
+        background-color: #2196f3; // Akcentowy niebieski
+        color: #fff;
+      }
+    }
+  }
+
+  .added-books-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 8px;
+    color: #f5f5f5;
   }
 
   .books-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
 
     .book-card {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background: #f9f9f9;
-      width: 100%;
+      width: calc(100% - 8px);
+      max-width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background-color: #2b2b2b;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
 
       .book-title {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: bold;
-        color: black;
+        color: #2196f3; // Klasyczny niebieski
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
 
       button {
         margin-left: auto;
+        padding: 6px 12px;
+        font-size: 14px;
+        color: #fff;
+        background-color: #d32f2f;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #b71c1c;
+        }
       }
     }
   }

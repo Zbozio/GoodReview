@@ -62,11 +62,84 @@
 }
 
 /* Sekcja tagów (chipów) */
-.book-tags {
+/* Sekcja gatunków książki */
+.book-genres {
   margin-bottom: 30px;
 }
 
-/* Sekcja tagów (chipów) */
+.book-genres strong {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white; /* Kolor nagłówka */
+}
+
+mat-chip-listbox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+mat-chip {
+  border-radius: 16px;
+  font-size: 1rem; /* Rozmiar czcionki dla chipów */
+  padding: 6px 12px; /* Padding dla chipów */
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Styl dla chipów gatunków */
+.genre-chip {
+  background-color: #3498db; /* Niebieskie tło dla gatunków */
+  color: white; /* Biały tekst */
+}
+.add-review {
+  margin-top: 20px;
+}
+
+textarea.form-control {
+  width: 98%;
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+button.btn {
+  margin-top: 10px;
+}
+/* Stylizacja przycisku w formularzu recenzji */
+button.btn {
+  background-color: #28a745; /* Zielony kolor */
+  color: #fff; /* Biały tekst */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: block;
+  width: 100%; /* Rozciągnięcie na całą szerokość */
+  text-align: center;
+}
+
+button.btn:hover {
+  background-color: #218838; /* Ciemniejszy zielony na hover */
+  transform: scale(1.02); /* Lekki efekt powiększenia */
+}
+
+button.btn:disabled {
+  background-color: #626060; /* Szary dla nieaktywnego przycisku */
+  cursor: not-allowed;
+  transform: none; /* Wyłączenie efektu hover */
+}
+
+.genre-chip:hover {
+  background-color: #2980b9; /* Ciemniejszy niebieski przy najechaniu */
+  transform: translateY(-2px); /* Subtelne unoszenie */
+}
+
+/* Sekcja tagów książki */
 .book-tags {
   margin-bottom: 30px;
 }
@@ -75,32 +148,26 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 10px;
-  color: white; /* Ciemniejszy kolor tekstu */
+  color: white; /* Kolor nagłówka */
 }
 
-mat-chip-listbox {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px; /* Zmniejszenie przerwy między chipami */
-}
-
-mat-chip {
+/* Styl dla chipów tagów */
+.tag-chip {
   background-color: #f0f4f7; /* Jasne tło dla tagów */
-  color: #2c3e50; /* Ciemniejszy tekst */
-  font-size: 0.85rem; /* Zmniejszenie rozmiaru czcionki */
-  padding: 4px 10px; /* Zmniejszenie paddingu, aby chipy były mniejsze */
-  border-radius: 16px; /* Zaokrąglone rogi */
-  transition: background-color 0.3s, transform 0.2s; /* Animacje */
+  color: #2c3e50; /* Ciemniejszy tekst dla tagów */
+  font-size: 0.85rem; /* Mniejszy rozmiar czcionki dla tagów */
+  padding: 4px 10px; /* Mniejszy padding */
 }
 
-mat-chip:hover {
-  background-color: #3498db; /* Niebieski kolor na hover */
+.tag-chip:hover {
+  background-color: #3498db; /* Niebieski kolor przy najechaniu */
   color: white;
   transform: translateY(-1px); /* Subtelne unoszenie */
 }
 
+/* Styl dla wyłączonych chipów */
 mat-chip.disabled {
-  background-color: #bdc3c7; /* Szary dla nieaktywnych tagów */
+  background-color: #bdc3c7; /* Szary dla nieaktywnych chipów */
   color: #95a5a6;
   cursor: not-allowed;
 }
@@ -177,4 +244,62 @@ mat-chip.disabled {
 
 .star-rating mat-icon.selected {
   color: #ffcc00; // Kolor żółty dla wybranych gwiazdek
+}
+.book-reviews {
+  margin-top: 30px;
+
+  h2 {
+    font-size: 1.5rem;
+    color: white;
+  }
+
+  .review {
+    background: #333;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    color: #ddd;
+
+    p {
+      margin: 5px 0;
+    }
+
+    strong {
+      color: #ffcc00;
+    }
+
+    em {
+      color: #aaaaaa;
+    }
+  }
+}
+.review-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.user-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.review {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.user-review {
+  background-color: #f0f8ff; /* Lekko niebieskie tło */
+  border-left: 5px solid #007bff; /* Pasek wyróżnienia */
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.highlight {
+  color: #007bff;
+  font-weight: bold;
 }

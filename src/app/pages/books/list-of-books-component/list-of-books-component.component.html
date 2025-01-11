@@ -22,7 +22,9 @@
   <h3 class="added-books-title">Dodane książki:</h3>
   <div class="books-list">
     <div *ngFor="let book of booksInList" class="book-card">
-      <div class="book-title">{{ book.tytul || "Brak tytułu" }}</div>
+      <div [routerLink]="['/bookDetails', book.idKsiazka]" class="book-title">
+        {{ book.tytul || "Brak tytułu" }}
+      </div>
 
       <!-- Przycisk usuwania książki (widoczny tylko, jeśli użytkownik jest właścicielem) -->
       <button

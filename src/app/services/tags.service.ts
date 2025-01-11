@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TagService {
-  private apiUrl = 'https://localhost:7272/api/Tags'; // URL do API backendu dla tagów
+  private apiUrl = 'https://localhost:7272/api/Tagis'; // URL do API backendu dla tagów
 
   constructor(private http: HttpClient) {}
 
@@ -33,5 +33,17 @@ export class TagService {
   // Usuwanie tagu
   deleteTag(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
+
+  // Przypisywanie tagów do książki
+  assignTagsToBook(bookId: number, tagIds: number[]): Observable<any> {
+    const url = `${this.apiUrl}/${bookId}/assign-tags`;
+    return this.http.post<any>(url, tagIds); // Przesyłamy tylko tablicę tagIds
+  }
+
+  // Pobieranie tagów przypisanych do książki
+  getTagsForBook(bookId: number): Observable<any> {
+    const url = `${this.apiUrl}/${bookId}/Tags`;
+    return this.http.get<any>(url);
   }
 }

@@ -20,6 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../services/auth-service.service';
 import { ListService } from '../../../services/list.service';
 
+import { RouterLink } from '@angular/router';
+
 interface Book {
   idKsiazka: number;
   tytul: string;
@@ -43,6 +45,8 @@ interface Book {
     MatAutocompleteModule,
     FormsModule,
     ReactiveFormsModule,
+
+    RouterLink,
   ],
 })
 export class ListOfBooksComponent implements OnInit {

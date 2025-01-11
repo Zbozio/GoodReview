@@ -1,0 +1,21 @@
+<div class="container">
+  <h2 class="title">Dodaj Tag</h2>
+  <form (ngSubmit)="onAddTag()" class="form">
+    <!-- Nazwa Tagu -->
+    <div class="form-group">
+      <label for="nazwaTagu">Nazwa tagu:</label>
+      <input
+        type="text"
+        id="nazwaTagu"
+        class="form-control"
+        [(ngModel)]="newTag.NazwaTagu"
+        name="nazwaTagu"
+        required
+        placeholder="Wprowadź nazwę tagu"
+      />
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" class="btn btn-success">Dodaj</button>
+  </form>
+</div>

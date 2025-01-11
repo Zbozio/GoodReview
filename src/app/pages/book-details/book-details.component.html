@@ -33,38 +33,35 @@
     </div>
   </div>
 
-  <!-- Opis książki -->
   <div class="book-description">
     <h2>Description:</h2>
     <p>{{ bookDetails.description }}</p>
   </div>
 
-  <!-- Gatunki książki -->
   <div class="book-genres">
     <strong>Genres:</strong>
-    <ul>
-      <li *ngFor="let genre of bookDetails.genres">{{ genre.name }}</li>
-    </ul>
+    <mat-chip-listbox>
+      <mat-chip *ngFor="let genre of bookDetails.genres" class="genre-chip">
+        {{ genre.name }}
+      </mat-chip>
+    </mat-chip-listbox>
   </div>
 
-  <!-- Tagi książki -->
   <div class="book-tags">
     <h3>Tags:</h3>
     <mat-chip-listbox>
-      <mat-chip *ngFor="let tag of bookDetails.tags" [disabled]="false">
+      <mat-chip *ngFor="let tag of bookDetails.tags" class="tag-chip">
         {{ tag.name }}
       </mat-chip>
     </mat-chip-listbox>
   </div>
 
-  <!-- Średnia ocena i liczba ocen -->
   <div class="book-rating">
     <strong>Average Rating:</strong> {{ bookDetails.averageRating }}/10
     <br />
     <strong>Total Ratings:</strong> {{ bookDetails.totalRatings }}
   </div>
 
-  <!-- Formularz do oceniania -->
   <div class="book-rating">
     <h3>Twoja ocena:</h3>
     <div class="star-rating">
@@ -75,10 +72,64 @@
         >star</mat-icon
       >
     </div>
-
-    <!-- Przycisk powrotu -->
     <div class="back-button">
       <button class="btn" (click)="goBack()">Go Back</button>
+    </div>
+  </div>
+
+  <div class="add-review">
+    <h3>Write a Review:</h3>
+    <form (ngSubmit)="submitReview()" #reviewForm="ngForm">
+      <textarea
+        name="reviewText"
+        [(ngModel)]="newReviewText"
+        required
+        rows="5"
+        placeholder="Write your review here..."
+        class="form-control"
+      ></textarea>
+      <button
+        type="submit"
+        [disabled]="reviewForm.invalid"
+        class="btn btn-success"
+      >
+        Submit Review
+      </button>
+    </form>
+  </div>
+
+  <div class="book-reviews">
+    <h2>Reviews:</h2>
+    <div *ngIf="isReviewsLoading">Loading reviews...</div>
+    <div *ngIf="!isReviewsLoading && reviews.length === 0">
+      No reviews found.
+    </div>
+    <div *ngIf="!isReviewsLoading && reviews.length > 0">
+      <div
+        *ngFor="let review of reviews"
+        class="review"
+        [ngClass]="{ 'user-review': review.isUserReview }"
+      >
+        <div class="review-user">
+          <img
+            [src]="review.uzytkownikZdjecie || 'default-user.png'"
+            alt="User Image"
+            class="user-photo"
+          />
+          <strong>
+            {{ review.uzytkownikImie }} {{ review.uzytkownikNazwisko }}
+          </strong>
+          <span *ngIf="review.isUserReview" class="highlight"
+            >(Your review)</span
+          >
+        </div>
+
+        <p>{{ review.trescRecenzji }}</p>
+        <p>
+          <em>Date: {{ review.dataRecenzji }}</em>
+        </p>
+        <p><strong>Likes:</strong> {{ review.polubieniaRecenzji }}</p>
+      </div>
     </div>
   </div>
 </div>

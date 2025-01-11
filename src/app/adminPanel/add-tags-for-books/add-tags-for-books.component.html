@@ -1,0 +1,32 @@
+<div class="container">
+  <h2 class="title">Dodaj Tagi do Książki</h2>
+  <label for="books">Wybierz książkę:</label>
+  <select id="books" [(ngModel)]="selectedBookId" (change)="onBookSelect()">
+    <option *ngFor="let book of books" [value]="book.idKsiazka">
+      {{ book.tytul }}
+    </option>
+  </select>
+
+  <!-- Wybór tagów -->
+  <div class="form-group">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Wybierz tagi</mat-label>
+      <mat-select
+        [(ngModel)]="selectedTagIds"
+        name="selectedTagIds"
+        multiple
+        #tagsInput="ngModel"
+        required
+      >
+        <mat-option *ngFor="let tag of tags" [value]="tag.idOceny5">
+          {{ tag.nazwaTagu }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="tagsInput.invalid && tagsInput.touched">
+        Wybierz przynajmniej jeden tag.
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <button (click)="onAddTagsToBook()">Zapisz tagi</button>
+</div>

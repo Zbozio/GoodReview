@@ -33,4 +33,17 @@ export class RatingService {
     const url = `${this.apiUrl}/${bookId}/${userId}`;
     return this.http.get(url);
   }
+
+  // Metoda do pobierania wszystkich ocen książek dla użytkownika
+  getRatingsForUser(userId: number): Observable<any> {
+    // Nowy endpoint GET, który pobiera wszystkie oceny dla użytkownika
+    const url = `https://localhost:7272/api/Ocenas/UserRatings/${userId}`;
+    return this.http.get(url);
+  }
+
+  // Metoda do pobierania znajomych użytkownika
+  getUserFriends(userId: number): Observable<any> {
+    const url = `https://localhost:7272/api/Znajomis/UserFriends/${userId}`;
+    return this.http.get(url);
+  }
 }
