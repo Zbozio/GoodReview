@@ -1,6 +1,4 @@
 <!-- Dodatkowe informacje -->
-
-<!-- Półki z książkami -->
 <div *ngIf="user" class="user-profile">
   <!-- Informacje o użytkowniku -->
   <div class="profile-header">
@@ -17,30 +15,72 @@
     </div>
   </div>
 
+  <!-- Przycisk edycji profilu -->
+  <button class="edit-profile-button" (click)="toggleEditProfile()">
+    Edytuj profil
+  </button>
+
+  <!-- Sekcja edycji profilu -->
+  <div *ngIf="isEditing" class="edit-profile-modal">
+    <div class="edit-profile-content">
+      <h2>Edytuj Profil</h2>
+      <div class="form-group">
+        <label for="profilePicture">Zmiana zdjęcia profilowego</label>
+        <input
+          type="file"
+          id="profilePicture"
+          (change)="onImageChange($event)"
+          accept="image/*"
+        />
+        <img
+          *ngIf="updatedProfile.zdjecie"
+          [src]="updatedProfile.zdjecie"
+          alt="Nowe zdjęcie profilowe"
+          class="preview-image"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="bio">Opis</label>
+        <textarea
+          id="bio"
+          [(ngModel)]="updatedProfile.opis"
+          rows="4"
+          placeholder="Opisz siebie..."
+        ></textarea>
+      </div>
+
+      <button (click)="updateProfile()" class="update-button">
+        Zaktualizuj Profil
+      </button>
+      <button (click)="toggleEditProfile()" class="close-button">
+        Zamknij
+      </button>
+    </div>
+  </div>
+
   <!-- Statystyki użytkownika -->
   <div class="profile-stats">
     <div class="stat-item">
-      <h3>{{ user.iloscOcen || 0 }}</h3>
-      <p>Książek przeczytanych</p>
+      <h3>{{ user.iloscOcenionychKsiazek || 0 }}</h3>
+      <p>Ocenionych książek</p>
     </div>
     <div class="stat-item">
       <h3>{{ user.iloscRecenzji || 0 }}</h3>
-      <p>Recenzji napisanych</p>
+      <p>Napisanych recenzji</p>
     </div>
     <div class="stat-item">
-      <h3>{{ user.znajomi || 0 }}</h3>
+      <h3>{{ user.iloscZnajomych || 0 }}</h3>
       <p>Znajomi</p>
     </div>
   </div>
+
   <div class="additional-info">
     <div>
       <h2>Data rejestracji</h2>
       <p>{{ user.dataRejestracji | date : "dd MMMM yyyy" }}</p>
     </div>
-    <div>
-      <h2>Ostatnia aktywność</h2>
-      <p>{{ user.ostaniaAktywnosc | date : "dd MMMM yyyy" }}</p>
-    </div>
+
     <div>
       <h2>Data urodzenia</h2>
       <p>{{ user.dataUrodzenia | date : "dd MMMM yyyy" }}</p>

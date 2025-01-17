@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-friends',
   standalone: true, // Komponent jest samodzielny
-  imports: [CommonModule, MatIcon, RouterModule], // Importujemy CommonModule, aby używać pipe async
+  imports: [CommonModule, RouterModule], // Importujemy CommonModule, aby używać pipe async
   templateUrl: './friends.component.html',
   styleUrls: ['./friends.component.scss'],
 })

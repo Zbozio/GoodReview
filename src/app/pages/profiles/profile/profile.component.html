@@ -15,18 +15,14 @@
     </section>
     <section class="profile-stats">
       <div class="stats-item">
-        <h3>{{ user.iloscOcen }}</h3>
-        <p>Przeczytane książki</p>
+        <h3>{{ user.iloscOcenionychKsiazek }}</h3>
+        <p>Ocenione książki</p>
       </div>
       <div class="stats-item">
         <h3>{{ user.iloscRecenzji }}</h3>
         <p>Recenzje</p>
       </div>
     </section>
-    <div class="stats-item">
-      <h3>{{ user.ostaniaAktywnosc | date : "dd MMMM yyyy" }}</h3>
-      <p>Ostatnia aktywność</p>
-    </div>
 
     <!-- Ikona wysyłania zaproszenia, zmieniająca się w zależności od statusu -->
     <button

@@ -8,27 +8,33 @@
     <img [src]="bookDetails.cover" alt="Cover Image" class="book-cover" />
     <div class="book-info">
       <h1 class="book-title">{{ bookDetails.title }}</h1>
-      <p class="book-author" *ngIf="bookDetails.publisher">
-        <strong>Author:</strong>
-        <span *ngFor="let author of bookDetails.authors; let i = index">
-          <p [routerLink]="['/authorProfile', author.id]">
-            {{ author.firstName }} {{ author.lastName }}
-          </p>
-          <span *ngIf="i < bookDetails.authors.length - 1">, </span>
+      <p
+        class="book-author"
+        *ngIf="bookDetails.authors && bookDetails.authors.length > 0"
+      >
+        <strong>Authors:</strong>
+        <span>
+          <span *ngFor="let author of bookDetails.authors; let i = index">
+            <a [routerLink]="['/authorProfile', author.id]">
+              {{ author.firstName }} {{ author.lastName }}
+            </a>
+            <span *ngIf="i < bookDetails.authors.length - 1">, </span>
+          </span>
         </span>
       </p>
+
       <p class="book-year">
         <strong>Release Year:</strong> {{ bookDetails.releaseYear }}
       </p>
       <p class="book-isbn"><strong>ISBN:</strong> {{ bookDetails.isbn }}</p>
       <p class="book-pages"><strong>Pages:</strong> {{ bookDetails.pages }}</p>
-      <p
-        class="book-publisher"
-        *ngIf="bookDetails.publisher"
-        [routerLink]="['/publisherPage', bookDetails.publisher.id]"
-      >
+      <p class="book-publisher" *ngIf="bookDetails.publisher">
         <strong>Publisher:</strong>
-        {{ bookDetails.publisher.name || "Unknown" }}
+        <span>
+          <a [routerLink]="['/publisherPage', bookDetails.publisher.id]">
+            {{ bookDetails.publisher.name || "Unknown" }}
+          </a>
+        </span>
       </p>
     </div>
   </div>
@@ -128,7 +134,6 @@
         <p>
           <em>Date: {{ review.dataRecenzji }}</em>
         </p>
-        <p><strong>Likes:</strong> {{ review.polubieniaRecenzji }}</p>
       </div>
     </div>
   </div>

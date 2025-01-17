@@ -298,6 +298,31 @@ mat-chip.disabled {
   padding: 10px;
   margin-bottom: 10px;
 }
+.book-author a {
+  text-decoration: none;
+  color: #cccccc;
+}
+.book-author,
+.book-publisher {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #cccccc;
+}
+
+.book-author a,
+.book-publisher a {
+  text-decoration: none;
+  color: #cccccc;
+}
+
+.book-author a:hover,
+.book-publisher a:hover {
+  text-decoration: underline;
+}
+
+.book-author span {
+  margin-right: 5px;
+}
 
 .highlight {
   color: #007bff;

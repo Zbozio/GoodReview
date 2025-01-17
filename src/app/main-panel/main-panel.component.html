@@ -1,57 +1,105 @@
-<div *ngFor="let event of timeline" class="timeline-event">
+<div *ngFor="let event of timeline; let i = index" class="timeline-event">
   <!-- Wyświetlanie oceny -->
-  <div *ngIf="event.type === 'rating'" class="event-header rating">
-    <div class="event-header-left">
-      <img
-        [routerLink]="['/profile', event.friendId]"
-        [src]="event.friendImage"
-        alt="Friend Image"
-        class="friend-avatar"
-      />
-      <div class="event-details-rating">
-        <h3>{{ event.friendName }}</h3>
-        <p><strong>Książka:</strong> {{ event.bookName }}</p>
-        <p><strong>Ocena:</strong> {{ event.ratingValue }}/10</p>
-        <p><strong>Data oceny:</strong> {{ event.ratingDate }}</p>
+  <div *ngIf="event.type === 'rating'" class="event-content rating">
+    <div class="event-header">
+      <div class="event-header-left">
+        <img
+          [routerLink]="['/profile', event.friendId]"
+          [src]="event.friendImage"
+          alt="Friend Image"
+          class="friend-avatar"
+        />
+        <div class="event-details">
+          <p><strong>Książka:</strong> {{ event.bookName }}</p>
+          <p><strong>Ocena:</strong> {{ event.ratingValue }}/10</p>
+          <p><strong>Data oceny:</strong> {{ event.ratingDate }}</p>
+        </div>
+      </div>
+      <div *ngIf="event.bookCover" class="book-cover-container">
+        <img
+          [routerLink]="['/bookDetails', event.IdKsiazka]"
+          [src]="event.bookCover"
+          alt="Book Cover"
+          class="book-cover"
+        />
       </div>
     </div>
-    <div *ngIf="event.bookCover" class="book-cover-container">
-      <img
-        [routerLink]="['/bookDetails', event.IdKsiazka]"
-        [src]="event.bookCover"
-        alt="Book Cover"
-        class="book-cover"
-      />
+    <!-- Dodatkowe imię użytkownika -->
+    <div class="posted-by">
+      <p>
+        <strong>{{ event.friendName }} {{ event.friendSurname }}</strong>
+        dodał ocenę
+      </p>
     </div>
   </div>
 
   <!-- Wyświetlanie recenzji -->
-  <div *ngIf="event.type === 'review'" class="event-header review">
-    <div class="event-header-left">
-      <img
-        [routerLink]="['/profile', event.friendId]"
-        [src]="event.friendImage"
-        alt="Friend Image"
-        class="friend-avatar"
-      />
-      <div class="event-details-review">
-        <h3>{{ event.friendName }}</h3>
-        <p><strong>Książka:</strong> {{ event.bookName }}</p>
-        <p><strong>Recenzja:</strong> {{ event.reviewText }}</p>
-        <p *ngIf="event.reviewDate">
-          <strong>Data recenzji:</strong> {{ event.reviewDate }}
-        </p>
+  <div *ngIf="event.type === 'review'" class="event-content review">
+    <div class="event-header">
+      <div class="event-header-left">
+        <img
+          [routerLink]="['/profile', event.friendId]"
+          [src]="event.friendImage"
+          alt="Friend Image"
+          class="friend-avatar"
+        />
+        <div class="event-details">
+          <p><strong>Książka:</strong> {{ event.bookName }}</p>
+          <p><strong>Recenzja:</strong> {{ event.reviewText }}</p>
+          <p *ngIf="event.reviewDate">
+            <strong>Data recenzji:</strong> {{ event.reviewDate }}
+          </p>
+        </div>
+      </div>
+      <div *ngIf="event.bookCover" class="book-cover-container">
+        <img
+          [routerLink]="['/bookDetails', event.IdKsiazka]"
+          [src]="event.bookCover"
+          alt="Book Cover"
+          class="book-cover"
+        />
       </div>
     </div>
-    <div *ngIf="event.bookCover" class="book-cover-container">
-      <img
-        [routerLink]="['/bookDetails', event.IdKsiazka]"
-        [src]="event.bookCover"
-        alt="Book Cover"
-        class="book-cover"
-      />
+    <!-- Dodatkowe imię użytkownika -->
+    <div class="posted-by">
+      <p>
+        <strong>{{ event.friendName }} {{ event.friendSurname }}</strong> dodał
+        recenzję
+      </p>
+    </div>
+
+    <!-- Sekcja komentarzy POD treścią recenzji -->
+    <div class="comments-section">
+      <!-- Wyświetlanie listy komentarzy -->
+      <div *ngFor="let komentarz of event.komentarze" class="comment">
+        <div class="comment-header">
+          <img
+            [routerLink]="['/profile', komentarz.idUzytkownik]"
+            [src]="komentarz.userZdjecie"
+            alt="Commenter Image"
+            class="friend-avatar"
+          />
+          <div class="comment-details">
+            <p>
+              <strong
+                >{{ komentarz.userImie }} {{ komentarz.userNazwisko }}</strong
+              >
+              napisał:
+            </p>
+            <p>{{ komentarz.trescKomentarza }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel do dodawania nowego komentarza -->
+      <div class="comment-input-section">
+        <textarea
+          [(ngModel)]="newCommentText"
+          placeholder="Napisz komentarz..."
+          rows="3"
+        ></textarea>
+        <button (click)="addComment(event.idRecenzji)">Dodaj komentarz</button>
+      </div>
     </div>
   </div>
-
-  <div class="event-line"></div>
 </div>

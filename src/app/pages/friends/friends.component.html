@@ -20,19 +20,13 @@
     </section>
     <section class="profile-stats">
       <div class="stats-item">
-        <h3>{{ friend.friendDetails.iloscOcen || 0 }}</h3>
-        <p>Przeczytane książki</p>
+        <h3>{{ friend.friendDetails.iloscOcenionychKsiazek || 0 }}</h3>
+        <p>Ocenione książki</p>
       </div>
       <div class="stats-item">
         <h3>{{ friend.friendDetails.iloscRecenzji || 0 }}</h3>
         <p>Recenzje</p>
       </div>
     </section>
-    <div class="stats-item">
-      <h3>
-        {{ friend.friendDetails.ostaniaAktywnosc | date : "dd MMMM yyyy" }}
-      </h3>
-      <p>Ostatnia aktywność</p>
-    </div>
   </div>
 </div>

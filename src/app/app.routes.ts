@@ -25,6 +25,7 @@ import { ListsComponent } from './pages/books/lists/lists.component';
 import { ListOfBooksComponent } from './pages/books/list-of-books-component/list-of-books-component.component';
 import { AddTagsComponent } from './adminPanel/add-tags/add-tags.component';
 import { AddTagsForBooksComponent } from './adminPanel/add-tags-for-books/add-tags-for-books.component';
+import { AdminGuard } from './profiles/registration-profile/admin-guard.guard';
 // Definicja tras
 export const routes: Routes = [
   // Domyślny przekierowanie
@@ -86,8 +87,12 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     component: FriendsComponent,
   },
+  {
+    path: 'admin',
+    component: AdminPanelComponent,
+    canActivate: [AdminGuard],
+  },
 
-  // Profil użytkownika z parametrem id
   {
     path: 'profile/:id',
     canActivate: [AuthGuard],

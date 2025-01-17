@@ -35,4 +35,12 @@ export class UserService {
   deleteUser(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
+  updateUserProfile(userId: number, updateData: any): Observable<any> {
+    const url = `${this.apiUrl}/updateProfile/${userId}`;
+    return this.http.put(url, updateData);
+  }
+  // Pobieranie statystyk użytkownika
+  getUserStatistics(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}/statistics`);
+  }
 }

@@ -1,26 +1,43 @@
 <div class="left-panel">
-  <h3>Aktualności</h3>
-  <ul>
-    <li>Aktualność 1</li>
-    <li>Aktualność 2</li>
-    <li>Aktualność 3</li>
-    <p>
-      Suspendisse potenti. Fusce risus nisl, viverra et, tempor et, pretium in,
-      sapien. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque
-      malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget,
-      consequat quis, neque. Nulla facilisi. Nulla mauris augue, auctor nec,
-      euismod sit amet, gravida non, neque. Suspendisse sollicitudin velit sed
-      leo. Ut pharetra augue nec augue. Nam elit magna, hendrerit sit amet,
-      tincidunt ac, viverra sed, nulla.
-    </p>
-    <p>
-      Suspendisse potenti. Fusce risus nisl, viverra et, tempor et, pretium in,
-      sapien. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque
-      malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget,
-      consequat quis, neque. Nulla facilisi. Nulla mauris augue, auctor nec,
-      euismod sit amet, gravida non, neque. Suspendisse sollicitudin velit sed
-      leo. Ut pharetra augue nec augue. Nam elit magna, hendrerit sit amet,
-      tincidunt ac, viverra sed, nulla.
-    </p>
-  </ul>
+  <h3>Twoje statystyki</h3>
+  <div *ngIf="userStatistics; else loading">
+    <div class="stat">
+      <p>
+        <strong>Ocenione książki:</strong>
+        {{ userStatistics.iloscOcenionychKsiazek }}
+      </p>
+      <p><strong>Recenzje:</strong> {{ userStatistics.iloscRecenzji }}</p>
+      <p>
+        <strong>Średnia ocena:</strong>
+        {{ userStatistics.sredniaOcena | number : "1.1-1" }}
+      </p>
+      <p>
+        <strong>Ulubiony gatunek:</strong> {{ userStatistics.ulubionyGatunek }}
+      </p>
+      <p>
+        <strong>Ocenione książki w gatunku:</strong>
+        {{ userStatistics.liczbaKsiazekWGatunku }}
+      </p>
+    </div>
+  </div>
+  <ng-template #loading>
+    <p>Ładowanie statystyk...</p>
+  </ng-template>
+
+  <div class="recent-rated-books">
+    <h4>Ostatnio ocenione książki</h4>
+    <div class="books">
+      <div
+        class="book"
+        *ngFor="let book of recentRatedBooks"
+        [title]="book.tytul"
+      >
+        <img
+          [src]="book.okladka || 'assets/placeholder.png'"
+          [alt]="book.tytul"
+          class="book-cover"
+        />
+      </div>
+    </div>
+  </div>
 </div>

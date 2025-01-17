@@ -1,19 +1,19 @@
+/* Ogólne style */
 .timeline-event {
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
   padding: 20px;
-  background-color: #343a40;
+  background-color: #1e293b; /* Ciemnoniebieski */
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  color: #f5f5f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  color: #e2e8f0; /* Jasny tekst */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
 }
 
 .timeline-event:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .event-header {
@@ -34,13 +34,12 @@
   border-radius: 50%;
   margin-right: 15px;
   object-fit: cover;
-  border: 2px solid #2196f3;
+  border: 2px solid #2563eb; /* Intensywny niebieski */
 }
 
 .event-details {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 }
 
 h3 {
@@ -56,7 +55,7 @@ p {
 }
 
 p strong {
-  color: #f5f5f5;
+  color: #93c5fd; /* Jasny niebieski akcent */
 }
 
 .book-cover-container {
@@ -71,43 +70,89 @@ p strong {
   height: 150px;
   object-fit: cover;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Ocena - domyślne kolory */
-.event-header.rating {
-  background-color: #343a40; /* Tło dla ocen */
+/* Wyróżnienie dla ocen */
+
+.event-content.rating h3 {
+  color: #2563eb; /* Intensywny niebieski */
 }
 
-.event-header-left.rating {
-  color: #2196f3; /* Kolor tekstu dla ocen */
+.event-content.review h3 {
+  color: #0ea5e9; /* Błękitny akcent */
 }
 
-/* Recenzja - wyróżnione kolory */
-.event-header.review {
-  padding: 15px 20px;
-  border-left: 5px solid #ffb74d; /* Wyróżnienie recenzji */
+/* Komentarze */
+.comments-section {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #4b5563; /* Neutralny szary */
 }
 
-.event-header-left.review {
-  color: #ffb74d; /* Kolor tekstu dla recenzji */
+.comment {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #1f2937; /* Ciemnogranatowy */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.event-details-review p strong {
-  color: #ffb74d; /* Akcenty w recenzji */
-}
-.event-details-book p strong {
-  color: white; /* Akcenty w recenzji */
-}
-.event-header-left.review h3 {
-  font-size: 22px; /* Większy rozmiar nagłówka dla recenzji */
+.comment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-.timeline {
-  margin-top: 50px;
+.comment-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+  border: 2px solid #0ea5e9; /* Błękitny */
 }
 
-.event-line {
-  border-top: 1px solid #555;
-  margin-top: 20px;
+.comment-details p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #cbd5e1; /* Jasny szary tekst */
+}
+
+.comment-details p strong {
+  color: #0ea5e9; /* Błękitny akcent */
+}
+
+.comment-input-section {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-input-section textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #4b5563;
+  background-color: #1e293b;
+  color: #e2e8f0;
+  resize: none;
+}
+
+.comment-input-section button {
+  align-self: flex-end;
+  padding: 8px 16px;
+  background-color: #2563eb;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.comment-input-section button:hover {
+  background-color: #1d4ed8; /* Ciemniejszy niebieski */
 }

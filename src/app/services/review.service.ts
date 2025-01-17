@@ -12,6 +12,7 @@ export interface Review {
   uzytkownikZdjecie?: string; // URL zdjęcia użytkownika
   uzytkownikImie?: string; // Połączone imię i nazwisko użytkownika
   uzytkownikNazwisko?: string;
+  komentarze?: Review[]; // Lista komentarzy do recenzji
   isUserReview?: boolean; // Flaga oznaczająca recenzję użytkownika
 }
 

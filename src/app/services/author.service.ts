@@ -12,6 +12,7 @@ export interface Author {
   dataUrodzenia?: Date | null;
   dataSmierci?: Date | null;
   opis?: string;
+  ksiazki?: any[]; // Lista książek autora
 }
 
 @Injectable({

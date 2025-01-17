@@ -33,12 +33,24 @@
   </div>
 
   <div class="author-books">
-    <h2>Udział w książkach</h2>
-    <div *ngIf="author.udzials.length > 0; else noBooks">
+    <h2>Książki</h2>
+    <div *ngIf="books.length > 0; else noBooks">
       <div class="books-list">
-        <div class="book-item" *ngFor="let book of author.udzials">
-          <h3>{{ book.title }}</h3>
-          <p>{{ book.year }}</p>
+        <div
+          *ngFor="let book of books"
+          class="book-card"
+          [routerLink]="['/bookDetails', book.idKsiazka]"
+        >
+          <div class="card-image">
+            <img
+              *ngIf="book.okladka"
+              [src]="book.okladka"
+              alt="{{ book.tytul }} cover"
+            />
+          </div>
+          <div class="card-title-overlay">
+            {{ book.tytul }}
+          </div>
         </div>
       </div>
     </div>
