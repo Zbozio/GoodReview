@@ -1,0 +1,148 @@
+.recommendation-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  color: #fff;
+  background: #2c2c2c;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 1rem;
+}
+
+.method-selector {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 1.5rem;
+
+  label {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    input {
+      accent-color: #4caf50;
+    }
+  }
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ccc;
+}
+
+/* Lista książek */
+.books-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.book-card {
+  background: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.card-image {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 150%;
+  background-color: #333;
+  overflow: hidden;
+}
+
+.card-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.book-card:hover .card-image img {
+  filter: blur(8px);
+  transform: scale(1.1);
+}
+
+.card-title-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.book-card:hover .card-title-overlay {
+  opacity: 1;
+}
+
+.rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.rating-value {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #4caf50; /* Domyślny kolor (zielony) */
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.rating-value.low {
+  background-color: #f44336; /* Czerwony dla niskich ocen */
+}
+
+.rating-value.medium {
+  background-color: #ff9800; /* Pomarańczowy dla średnich ocen */
+}
+
+.rating-value.high {
+  background-color: #4caf50; /* Zielony dla wysokich ocen */
+}
+
+.rating-value.excellent {
+  background-color: #2196f3; /* Niebieski dla doskonałych ocen */
+}

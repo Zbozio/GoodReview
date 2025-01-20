@@ -1,0 +1,50 @@
+<div class="recommendation-container">
+  <h1>Rekomendacje książek</h1>
+
+  <!-- Wybór metody -->
+  <div class="method-selector">
+    <label>
+      <input
+        type="radio"
+        name="method"
+        value="normal"
+        [(ngModel)]="selectedMethod"
+        (change)="loadRecommendations()"
+      />
+      Rekomendacje standardowe
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="method"
+        value="matrix"
+        [(ngModel)]="selectedMethod"
+        (change)="loadRecommendations()"
+      />
+      Rekomendacje na podstawie macierzy
+    </label>
+  </div>
+
+  <!-- Sekcja ładowania -->
+  <div *ngIf="loading" class="loading">Ładowanie rekomendacji...</div>
+
+  <!-- Lista rekomendacji -->
+  <div class="books-list" *ngIf="!loading">
+    <div
+      *ngFor="let rec of getCurrentRecommendations()"
+      class="book-card"
+      [routerLink]="['/bookDetails', rec.bookId]"
+    >
+      <div class="card-image">
+        <img
+          *ngIf="rec.okladka"
+          [src]="rec.okladka"
+          alt="{{ rec.title }} cover"
+        />
+      </div>
+      <div class="card-title-overlay">
+        {{ rec.title }}
+      </div>
+    </div>
+  </div>
+</div>

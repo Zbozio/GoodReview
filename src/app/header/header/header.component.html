@@ -61,6 +61,7 @@
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item routerLink="/recommend">Odkryj książkę</button>
       <button mat-menu-item [routerLink]="['/loggenUserProfile', userId]">
         Mój profil
       </button>
