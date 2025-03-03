@@ -56,43 +56,39 @@ export class ListOfBooksComponent implements OnInit {
   listId!: number;
   userId!: number;
   booksInList: Book[] = [];
-  isOwner: boolean = false; // Flaga, czy użytkownik jest właścicielem listy
-  listName: string = ''; // Nazwa listy
-  canEditList: boolean = false; // Flaga do kontrolowania edytowalności listy
+  isOwner: boolean = false;
+  listName: string = '';
+  canEditList: boolean = false;
 
   constructor(
     private bookService: BookService,
-    private listOfBookService: ListOfBooksService, // Serwis dla książek w liście
+    private listOfBookService: ListOfBooksService,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private listService: ListService // Serwis dla list
+    private listService: ListService
   ) {}
 
   ngOnInit(): void {
-    // Pobieramy ID listy z routingu
     this.listId = Number(this.route.snapshot.paramMap.get('id'));
 
-    // Pobieramy ID użytkownika zalogowanego z tokenu
     const userId = this.authService.getUserId();
     if (userId === null) {
       return;
     }
     this.userId = userId;
 
-    // Pobieramy szczegóły listy z serwera
     this.listService.getListById(this.listId).subscribe(
       (list) => {
         this.listName = list.nazwaListy;
-        this.isOwner = list.idUzytkownik === Number(this.userId); // Sprawdzamy, czy użytkownik jest właścicielem listy
-        this.canEditList = this.isOwner; // Jeżeli użytkownik jest właścicielem, może edytować listę
-        this.loadBooksInList(); // Ładujemy książki w liście
+        this.isOwner = list.idUzytkownik === Number(this.userId);
+        this.canEditList = this.isOwner;
+        this.loadBooksInList();
       },
       (error) => {
         console.error('Błąd podczas pobierania szczegółów listy:', error);
       }
     );
 
-    // Pobieramy wszystkie książki do wyszukiwania
     this.bookService.getBooks().subscribe(
       (books) => {
         this.allBooks = books;
@@ -113,7 +109,7 @@ export class ListOfBooksComponent implements OnInit {
     this.listOfBookService.getBooksByListId(this.listId).subscribe(
       (response) => {
         console.log('Odpowiedź z API:', response);
-        this.booksInList = response.books || []; // Załaduj książki z odpowiedzi API
+        this.booksInList = response.books || [];
       },
       (error) => {
         console.error('Błąd podczas pobierania książek z listy:', error);

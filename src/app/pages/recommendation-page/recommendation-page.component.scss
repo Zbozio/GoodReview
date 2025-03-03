@@ -56,6 +56,9 @@ h1 {
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
+  flex-basis: 33%;
+  max-width: 215px;
+
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
 }
@@ -124,7 +127,7 @@ h1 {
 .rating-value {
   padding: 5px 10px;
   border-radius: 5px;
-  background-color: #4caf50; /* Domyślny kolor (zielony) */
+  background-color: #4caf50;
   color: white;
   text-align: center;
   font-size: 16px;
@@ -132,17 +135,17 @@ h1 {
 }
 
 .rating-value.low {
-  background-color: #f44336; /* Czerwony dla niskich ocen */
+  background-color: #f44336;
 }
 
 .rating-value.medium {
-  background-color: #ff9800; /* Pomarańczowy dla średnich ocen */
+  background-color: #ff9800;
 }
 
 .rating-value.high {
-  background-color: #4caf50; /* Zielony dla wysokich ocen */
+  background-color: #4caf50;
 }
 
 .rating-value.excellent {
-  background-color: #2196f3; /* Niebieski dla doskonałych ocen */
+  background-color: #2196f3;
 }

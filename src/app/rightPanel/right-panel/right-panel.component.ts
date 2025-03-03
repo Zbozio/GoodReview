@@ -23,12 +23,11 @@ export class RightPanelComponent implements OnInit {
   currentUser: any;
   userId: number | null = null;
   favoriteGenres: FavoriteGenre[] = [];
-  booksByGenres: { [key: number]: any[] } = {}; // Obiekt książek wg gatunków
-  allBooks: any[] = []; // Tablica wszystkich książek
+  booksByGenres: { [key: number]: any[] } = {};
+  allBooks: any[] = [];
   loading: boolean = true;
   errorMessage: string = '';
 
-  // Indeks bieżącej książki
   currentBookIndex: number = 0;
 
   constructor(
@@ -49,14 +48,12 @@ export class RightPanelComponent implements OnInit {
     }
   }
 
-  // Ładowanie ulubionych gatunków
   loadFavoriteGenres(userId: number): void {
     this.favoriteGenresService.getFavoriteGenres(userId).subscribe({
       next: (data: FavoriteGenre[]) => {
         this.favoriteGenres = data;
         this.loading = false;
 
-        // Po załadowaniu ulubionych gatunków, pobieramy książki
         this.favoriteGenres.forEach((genre) => {
           this.loadBooksForGenre(genre.idGatunku);
         });
@@ -68,15 +65,13 @@ export class RightPanelComponent implements OnInit {
     });
   }
 
-  // Pobieranie książek dla danego gatunku
   loadBooksForGenre(genreId: number): void {
     this.gatunkowoscService.getBooksForGenre(genreId).subscribe({
       next: (data: any) => {
         if (data && data.books) {
-          // Łączenie książek z różnych gatunków w jedną tablicę
           this.booksByGenres[genreId] = data.books;
 
-          this.allBooks = [...this.allBooks, ...data.books]; // Dodajemy książki do tablicy
+          this.allBooks = [...this.allBooks, ...data.books];
           console.log('Wszystkie książki:', this.allBooks);
         }
       },
@@ -86,25 +81,20 @@ export class RightPanelComponent implements OnInit {
     });
   }
 
-  // Metoda do zmiany książki w sliderze
   changeImage(direction: number): void {
     if (this.allBooks.length === 0) return;
 
-    // Obliczamy nowy indeks
     let newIndex = this.currentBookIndex + direction;
 
-    // Jeśli nowy indeks jest poza zakresem, przechodzimy do końca lub na początek
     if (newIndex < 0) {
       newIndex = this.allBooks.length - 1;
     } else if (newIndex >= this.allBooks.length) {
       newIndex = 0;
     }
 
-    // Ustawiamy nowy indeks
     this.currentBookIndex = newIndex;
   }
 
-  // Obsługa błędów
   handleError(err: HttpErrorResponse): void {
     if (err.error instanceof ErrorEvent) {
       this.errorMessage = `Błąd: ${err.error.message}`;

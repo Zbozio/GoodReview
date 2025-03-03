@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// Model autora (możesz dostosować do swojej aplikacji)
 export interface Author {
   idAutora: number;
   imieAutora?: string;
@@ -12,14 +11,14 @@ export interface Author {
   dataUrodzenia?: Date | null;
   dataSmierci?: Date | null;
   opis?: string;
-  ksiazki?: any[]; // Lista książek autora
+  ksiazki?: any[];
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthorService {
-  private apiUrl = 'https://localhost:7272/api/Autors'; // Twój adres API
+  private apiUrl = 'https://localhost:7272/api/Autors';
 
   constructor(private http: HttpClient) {}
 
@@ -43,9 +42,8 @@ export class AuthorService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  // Dodanie metody wyszukiwania autorów
   searchAuthors(query: string): Observable<Author[]> {
-    const searchUrl = `${this.apiUrl}/search?query=${query}`; // Musisz mieć endpoint na serwerze, który obsługuje takie zapytanie
+    const searchUrl = `${this.apiUrl}/search?query=${query}`;
     return this.http.get<Author[]>(searchUrl);
   }
 }

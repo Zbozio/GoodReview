@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth-service.service';
   styleUrl: './accept-friend-requests.component.scss',
 })
 export class AcceptFriendRequestsComponent implements OnInit {
-  friendRequests: any[] = []; // Lista zaproszeń do zaakceptowania
+  friendRequests: any[] = [];
 
   constructor(
     private friendsService: FriendsService,
@@ -22,23 +22,20 @@ export class AcceptFriendRequestsComponent implements OnInit {
     this.loadPendingFriendRequests();
   }
 
-  // Ładowanie zaproszeń oczekujących na akceptację
   loadPendingFriendRequests(): void {
     this.friendsService.getPendingFriendRequests().subscribe((requests) => {
-      this.friendRequests = requests; // Pobieramy zaproszenia oczekujące na akceptację
+      this.friendRequests = requests;
     });
   }
 
-  // Akceptowanie zaproszenia
   acceptRequest(requestId: number): void {
     this.friendsService.respondToRequest(requestId, true).subscribe(
       (response) => {
         console.log('Zaproszenie zaakceptowane:', response);
-        this.loadPendingFriendRequests(); // Odśwież listę zaproszeń
+        this.loadPendingFriendRequests();
       },
       (error) => {
         console.error('Błąd przy akceptowaniu zaproszenia', error);
-        // Możesz dodać więcej logów, aby dokładniej zobaczyć, co zwraca serwer
         if (error.status === 200) {
           console.log('Serwer zwrócił 200 OK, ale wystąpił błąd aplikacji');
         } else {
@@ -48,12 +45,11 @@ export class AcceptFriendRequestsComponent implements OnInit {
     );
   }
 
-  // Odrzucanie zaproszenia
   rejectRequest(requestId: number): void {
     this.friendsService.respondToRequest(requestId, false).subscribe(
       (response) => {
         console.log('Zaproszenie odrzucone:', response);
-        this.loadPendingFriendRequests(); // Odśwież listę zaproszeń
+        this.loadPendingFriendRequests();
       },
       (error) => {
         console.error('Błąd przy odrzucaniu zaproszenia', error);

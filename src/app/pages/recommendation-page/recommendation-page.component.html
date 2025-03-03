@@ -1,7 +1,5 @@
 <div class="recommendation-container">
   <h1>Rekomendacje książek</h1>
-
-  <!-- Wybór metody -->
   <div class="method-selector">
     <label>
       <input
@@ -21,14 +19,12 @@
         [(ngModel)]="selectedMethod"
         (change)="loadRecommendations()"
       />
-      Rekomendacje na podstawie macierzy
+      Rekomendacje na podstawie wektora cech
     </label>
   </div>
 
-  <!-- Sekcja ładowania -->
   <div *ngIf="loading" class="loading">Ładowanie rekomendacji...</div>
 
-  <!-- Lista rekomendacji -->
   <div class="books-list" *ngIf="!loading">
     <div
       *ngFor="let rec of getCurrentRecommendations()"

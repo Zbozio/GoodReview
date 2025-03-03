@@ -12,9 +12,9 @@ import { AuthService } from '../../services/auth-service.service';
   imports: [CommonModule],
 })
 export class LeftPanelComponent implements OnInit {
-  userId: number | null = null; // ID użytkownika
+  userId: number | null = null; 
   userStatistics: any;
-  recentRatedBooks: any[] = []; // Ostatnio ocenione książki
+  recentRatedBooks: any[] = []; 
 
   constructor(
     private userService: UserService,
@@ -23,11 +23,10 @@ export class LeftPanelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Pobranie userId z AuthService
+    
     this.userId = this.authService.getUserId();
 
     if (this.userId) {
-      // Wywołanie funkcji z dynamicznie pobranym userId
       this.getUserStatistics(this.userId);
       this.getRecentRatedBooks(this.userId);
     } else {

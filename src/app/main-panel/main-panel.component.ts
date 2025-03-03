@@ -17,10 +17,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class MainPanelComponent implements OnInit {
   userId: number | null = null;
-  timeline: any[] = []; // Tablica na ocenione książki i recenzje znajomych
+  timeline: any[] = [];
   showComments: boolean[] = [];
-  newCommentText: string = ''; // Tekst nowego komentarza
-  // Tablica do kontrolowania widoczności komentarzy
+  newCommentText: string = '';
 
   constructor(
     private ratingService: RatingService,
@@ -45,7 +44,6 @@ export class MainPanelComponent implements OnInit {
     console.log('Loading timeline...');
 
     if (this.userId !== null) {
-      // Pobierz listę znajomych
       this.ratingService.getUserFriends(this.userId).subscribe(
         (friendsData) => {
           console.log('Fetched user friends:', friendsData);
@@ -54,10 +52,9 @@ export class MainPanelComponent implements OnInit {
             console.log('No friends found for user.');
           }
 
-          // Załaduj oceny i recenzje dla każdego znajomego
           friendsData.forEach((friend: any) => {
-            this.loadFriendRatings(friend.friendId, friend.dataZnajomosci); // Załadowanie ocen
-            this.loadFriendReviews(friend.friendId, friend.dataZnajomosci); // Załadowanie recenzji
+            this.loadFriendRatings(friend.friendId, friend.dataZnajomosci);
+            this.loadFriendReviews(friend.friendId, friend.dataZnajomosci);
           });
         },
         (error) => {
@@ -69,7 +66,7 @@ export class MainPanelComponent implements OnInit {
   addComment(reviewId: number) {
     if (this.newCommentText.trim() !== '') {
       const newComment: Comment = {
-        idOceny3: 0, // Serwer ustawi idOceny3, kiedy komentarz zostanie zapisany
+        idOceny3: 0,
         trescKomentarza: this.newCommentText,
         idRecenzji: reviewId,
         idUzytkownik: this.userId!,
@@ -78,13 +75,12 @@ export class MainPanelComponent implements OnInit {
       this.commentsService.addComment(newComment).subscribe(
         (comment) => {
           console.log('Comment added:', comment);
-          this.newCommentText = ''; // Czyścimy pole tekstowe
-          this.loadTimeline(); // Odświeżenie danych
+          this.newCommentText = '';
+          this.loadTimeline();
 
-          // Opcjonalne pełne odświeżenie komponentu:
           setTimeout(() => {
-            window.location.reload(); // Odświeżenie strony
-          }, 500); // Drobne opóźnienie, aby upewnić się, że dane zostały zaktualizowane
+            window.location.reload();
+          }, 500);
         },
         (error) => {
           console.error('Error adding comment:', error);
@@ -93,7 +89,6 @@ export class MainPanelComponent implements OnInit {
     }
   }
 
-  // Funkcja do ładowania ocen
   loadFriendRatings(friendId: number, friendSince: string) {
     this.ratingService.getRatingsForUser(friendId).subscribe(
       (ratingsData) => {
@@ -117,7 +112,6 @@ export class MainPanelComponent implements OnInit {
           });
         });
 
-        // Po załadowaniu ocen, posortuj timeline
         this.sortTimeline();
       },
       (error) => {
@@ -126,15 +120,11 @@ export class MainPanelComponent implements OnInit {
     );
   }
 
-  // Funkcja do ładowania recenzji
   loadFriendReviews(friendId: number, friendSince: string) {
     this.reviewService.getReviewsByUser(friendId).subscribe(
       (reviewsData) => {
         if (reviewsData.length === 0) {
         }
-        // reviewsData.forEach((review: any) => {
-        //   getCommentsForReview(review.idRecenzja).subscribe((comments) => {
-        //   this.timeline.push()})
 
         reviewsData.forEach((review: any) => {
           this.timeline.push({
@@ -154,7 +144,6 @@ export class MainPanelComponent implements OnInit {
           });
         });
 
-        // Po załadowaniu recenzji, posortuj timeline
         this.sortTimeline();
       },
       (error) => {
@@ -164,26 +153,21 @@ export class MainPanelComponent implements OnInit {
   }
 
   toggleComments(index: number) {
-    // Przełącz widoczność komentarzy dla danej recenzji
     this.showComments[index] = !this.showComments[index];
   }
-  // Funkcja do sortowania timeline na podstawie daty
   sortTimeline() {
-    // Sortuj timeline po dacie oceny lub recenzji
     this.timeline.sort((a, b) => {
       const dateA = new Date(a.ratingDate || a.reviewDate);
       const dateB = new Date(b.ratingDate || b.reviewDate);
 
-      return dateB.getTime() - dateA.getTime(); // Sortowanie od najnowszych
+      return dateB.getTime() - dateA.getTime();
     });
 
-    // Zaktualizowanie timeline
     this.timeline = [...this.timeline];
   }
 
-  // Funkcja do formatowania daty na format "yyyy-MM-dd"
   formatDate(date: string): string {
     const formattedDate = new Date(date);
-    return formattedDate.toISOString().split('T')[0]; // Format 'yyyy-MM-dd'
+    return formattedDate.toISOString().split('T')[0];
   }
 }

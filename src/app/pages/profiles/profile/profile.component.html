@@ -1,4 +1,3 @@
-<!-- Wyświetlanie użytkowników z odpowiednią ikoną statusu -->
 <div class="users-list">
   <div
     class="user-profile"
@@ -24,7 +23,6 @@
       </div>
     </section>
 
-    <!-- Ikona wysyłania zaproszenia, zmieniająca się w zależności od statusu -->
     <button
       mat-icon-button
       *ngIf="user.status !== 'accepted'"
@@ -35,7 +33,6 @@
       }}</mat-icon>
     </button>
 
-    <!-- Ikona oznaczająca, że są znajomymi -->
     <button mat-icon-button *ngIf="user.status === 'accepted'">
       <mat-icon>check_circle</mat-icon>
     </button>

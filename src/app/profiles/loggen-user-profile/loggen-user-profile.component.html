@@ -1,6 +1,4 @@
-<!-- Dodatkowe informacje -->
 <div *ngIf="user" class="user-profile">
-  <!-- Informacje o użytkowniku -->
   <div class="profile-header">
     <div class="profile-image">
       <img
@@ -10,17 +8,14 @@
     </div>
     <div class="profile-info">
       <h1>{{ user.imie }} {{ user.nazwisko }}</h1>
-      <p class="email">{{ user.eMail }}</p>
       <p class="bio">{{ user.opis || "Użytkownik nie dodał opisu." }}</p>
     </div>
   </div>
 
-  <!-- Przycisk edycji profilu -->
   <button class="edit-profile-button" (click)="toggleEditProfile()">
     Edytuj profil
   </button>
 
-  <!-- Sekcja edycji profilu -->
   <div *ngIf="isEditing" class="edit-profile-modal">
     <div class="edit-profile-content">
       <h2>Edytuj Profil</h2>
@@ -59,7 +54,6 @@
     </div>
   </div>
 
-  <!-- Statystyki użytkownika -->
   <div class="profile-stats">
     <div class="stat-item">
       <h3>{{ user.iloscOcenionychKsiazek || 0 }}</h3>

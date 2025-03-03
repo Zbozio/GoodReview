@@ -19,24 +19,24 @@
       .profile-name {
         font-size: 28px;
         font-weight: bold;
-        color: #f8f9fa; // Jasny kolor tekstu
+        color: #f8f9fa;
         margin-bottom: 10px;
       }
 
       .profile-address,
       .profile-website {
         font-size: 18px;
-        color: #ced4da; // Jasnoszary kolor tekstu
+        color: #ced4da;
         margin: 8px 0;
 
         a {
-          color: #00d1ff; // Jasny niebieski dla linków
+          color: #00d1ff;
           text-decoration: none;
           font-weight: bold;
 
           &:hover {
             text-decoration: underline;
-            color: #00ffff; // Jaśniejszy kolor na hover
+            color: #00ffff;
           }
         }
       }
@@ -44,7 +44,7 @@
   }
 
   .error-message {
-    color: #ff6b6b; // Jasny czerwony kolor błędu
+    color: #ff6b6b;
     font-size: 18px;
     font-weight: bold;
     text-align: center;

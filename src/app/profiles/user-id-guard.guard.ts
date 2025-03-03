@@ -18,17 +18,14 @@ export class UserIdGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    // Pobieramy userId z URL
-    const userIdFromUrl = +route.paramMap.get('userId')!; // Odczytujemy ID użytkownika z URL
-    const userIdFromToken = +this.authService.getUserId()!; // ID użytkownika z tokenu
+    const userIdFromUrl = +route.paramMap.get('userId')!;
+    const userIdFromToken = +this.authService.getUserId()!;
 
-    // Jeśli userId w URL jest inne niż zalogowany użytkownik, przekierowujemy
     if (userIdFromUrl !== userIdFromToken) {
-      // Użytkownik nie ma dostępu do tego profilu, więc przekierowujemy go
       this.router.navigate(['/home']);
-      return false; // Blokujemy dostęp
+      return false;
     }
 
-    return true; // Użytkownik ma dostęp do swojego profilu
+    return true;
   }
 }

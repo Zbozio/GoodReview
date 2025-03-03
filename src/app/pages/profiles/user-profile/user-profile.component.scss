@@ -1,4 +1,3 @@
-/* Ogólne style dla profilu użytkownika */
 .user-profile {
   display: flex;
   flex-direction: column;
@@ -11,7 +10,6 @@
   max-width: 1200px;
   margin: 0 auto;
 
-  /* Tło gradientowe dla całości */
   background: linear-gradient(to bottom, #141414, #1b1b1b);
 
   .profile-header {
@@ -104,7 +102,6 @@
     }
   }
 
-  /* Style dla list użytkownika */
   .user-lists {
     h2 {
       font-size: 22px;

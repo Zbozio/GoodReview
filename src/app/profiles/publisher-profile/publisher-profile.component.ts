@@ -11,8 +11,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./publisher-profile.component.scss'],
 })
 export class PublisherProfileComponent implements OnInit {
-  publisher: Publisher | null = null; // Przechowuje dane o wydawnictwie
-  errorMessage: string | null = null; // Obsługa błędów
+  publisher: Publisher | null = null;
+  errorMessage: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,7 +20,6 @@ export class PublisherProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Pobierz ID wydawnictwa z parametrów URL
     const publisherId = +this.route.snapshot.paramMap.get('id')!;
     if (!isNaN(publisherId)) {
       this.loadPublisher(publisherId);
@@ -32,8 +31,8 @@ export class PublisherProfileComponent implements OnInit {
   loadPublisher(id: number): void {
     this.publisherService.getPublisherById(id).subscribe({
       next: (data) => {
-        this.publisher = data; // Zapisz dane wydawnictwa
-        this.errorMessage = null; // Wyczyść komunikaty błędów
+        this.publisher = data;
+        this.errorMessage = null;
       },
       error: (err) => {
         console.error(err);

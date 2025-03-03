@@ -1,70 +1,66 @@
 .users-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 25px; /* Większy odstęp między kartami */
-  justify-content: center; /* Wyśrodkowanie kart */
-  padding: 30px; /* Większy padding kontenera */
+  gap: 25px;
+  justify-content: center;
+  padding: 30px;
 }
 
 .user-profile {
-  background: linear-gradient(135deg, #2c2c2c, #3a3a3a); /* Subtelny gradient */
-  color: #ffffff; /* Jasny tekst */
-  border: 1px solid #444; /* Wyraźna ramka */
-  border-radius: 12px; /* Większe zaokrąglenie */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Mocniejszy cień */
-  width: 280px; /* Szersza karta */
-  padding: 20px; /* Większy padding wewnętrzny */
+  background: linear-gradient(135deg, #2c2c2c, #3a3a3a);
+  color: #ffffff;
+  border: 1px solid #444;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  width: 280px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  cursor: pointer; /* Wskaźnik rączki */
-  text-decoration: none; /* Usuń podkreślenia linków */
+  cursor: pointer;
+  text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .user-profile:hover {
-  transform: translateY(-8px); /* Większe unoszenie */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Pogłębiony cień */
-  background: linear-gradient(
-    135deg,
-    #3d3d3d,
-    #515151
-  ); /* Jaśniejszy gradient */
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, #3d3d3d, #515151);
 }
 
 .profile-header {
   display: flex;
   align-items: center;
-  margin-bottom: 20px; /* Większy odstęp między nagłówkiem a statystykami */
+  margin-bottom: 20px;
 }
 
 .profile-avatar {
   flex-shrink: 0;
-  width: 70px; /* Większy rozmiar awatara */
+  width: 70px;
   height: 70px;
-  border-radius: 50%; /* Okrągły awatar */
-  overflow: hidden; /* Ukrycie nadmiarowego obrazu */
-  border: 2px solid #555; /* Neutralny szary kolor obramowania */
-  margin-right: 20px; /* Odstęp między awatarem a informacjami */
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #555;
+  margin-right: 20px;
 }
 
 .profile-avatar img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Dopasowanie obrazu */
+  object-fit: cover;
 }
 
 .profile-info h2 {
-  font-size: 20px; /* Większy rozmiar nagłówka */
+  font-size: 20px;
   margin: 0;
-  color: #e3e3e3; /* Lekko jaśniejszy tekst */
+  color: #e3e3e3;
 }
 
 .profile-stats {
   display: flex;
   justify-content: space-around;
-  margin-top: 10px; /* Odstęp od nagłówka */
-  padding: 10px 0; /* Większa przestrzeń między statystykami */
-  border-top: 1px solid #444; /* Subtelna linia oddzielająca */
+  margin-top: 10px;
+  padding: 10px 0;
+  border-top: 1px solid #444;
 }
 
 .stats-item {
@@ -72,13 +68,13 @@
 }
 
 .stats-item h3 {
-  font-size: 22px; /* Większy rozmiar liczb */
+  font-size: 22px;
   margin: 0;
-  color: #f1f1f1; /* Neutralny jasny kolor */
+  color: #f1f1f1;
 }
 
 .stats-item p {
-  font-size: 14px; /* Rozmiar tekstu */
-  color: #aaa; /* Jaśniejszy kolor dla opisu */
+  font-size: 14px;
+  color: #aaa;
   margin-top: 5px;
 }

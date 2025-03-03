@@ -10,7 +10,6 @@ import { LoginComponent } from './pages/profiles/login-profile/login-profile.com
 import { UserBooksComponent } from './pages/books/user-books/user-books.component';
 import { RegistrationProfileComponent } from './profiles/registration-profile/registration-profile.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-// import { AddBookComponent } from './admin-panel/adding-books/adding-books.component';
 import { AuthorComponent } from './admin-panel/add-author/add-author.component';
 import { PublisherComponent } from './adminPanel/add-publisher/add-publisher.component';
 import { AddBookComponent } from './admin-panel/adding-books/adding-books.component';
@@ -20,22 +19,17 @@ import { FriendsComponent } from './pages/friends/friends.component';
 import { LoggenUserProfileComponent } from './profiles/loggen-user-profile/loggen-user-profile.component';
 import { PublisherProfileComponent } from './profiles/publisher-profile/publisher-profile.component';
 import { AuthorProfileComponent } from './profiles/author-profile/author-profile.component';
-// import { ListOfBooksComponent } from './pages/books/list-of-books-component/list-of-books-component.component';
 import { ListsComponent } from './pages/books/lists/lists.component';
 import { ListOfBooksComponent } from './pages/books/list-of-books-component/list-of-books-component.component';
 import { AddTagsComponent } from './adminPanel/add-tags/add-tags.component';
 import { AddTagsForBooksComponent } from './adminPanel/add-tags-for-books/add-tags-for-books.component';
 import { AdminGuard } from './profiles/registration-profile/admin-guard.guard';
 import { RecommendationPageComponent } from './pages/recommendation-page/recommendation-page.component';
-// Definicja tras
 export const routes: Routes = [
-  // Domyślny przekierowanie
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 
-  // Strona główna - wymaga zalogowania
   { path: 'home', canActivate: [AuthGuard], component: MainTimelineComponent },
 
-  // Profil użytkownika
   {
     path: 'accept-friend-requests',
     canActivate: [AuthGuard],
@@ -77,7 +71,6 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     component: AuthorProfileComponent,
   },
-  // Profil użytkownika
   {
     path: 'users',
     canActivate: [AuthGuard],
@@ -124,12 +117,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     component: AuthorComponent,
   },
-  // {
-  //   path: 'adminAddingBooks',
-  //   canActivate: [AuthGuard],
-  //   component: AddBookComponent,
-  // },
-  // Główna strona książek - dostęp do wszystkich książek
+
   {
     path: 'bookDetails/:id',
     canActivate: [AuthGuard],
@@ -137,19 +125,15 @@ export const routes: Routes = [
   },
   { path: 'books', canActivate: [AuthGuard], component: BooksComponent },
 
-  // Strona książek użytkownika z parametrem :userId
   {
     path: 'books/:userId',
-    canActivate: [AuthGuard, UserIdGuard], // UserIdGuard tylko tutaj
+    canActivate: [AuthGuard, UserIdGuard],
     component: BooksComponent,
   },
   { path: 'register', component: RegistrationProfileComponent },
-  // Strona logowania (niechroniona)
   { path: 'login', component: LoginComponent },
 
-  // Strona, na którą przekierowywany jest nieznany URL
   { path: '**', redirectTo: '/login' },
 ];
 
-// Konfiguracja routingu
 export const AppRoutingModule = RouterModule.forRoot(routes);

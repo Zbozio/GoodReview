@@ -7,13 +7,12 @@ import { AuthService } from './services/auth-service.service';
   providedIn: 'root',
 })
 export class FriendsService {
-  private apiUrl = 'https://localhost:7272/api/Znajomis'; // Backend URL
+  private apiUrl = 'https://localhost:7272/api/Znajomis';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  // Wysyłanie zaproszenia do znajomego
   sendFriendRequest(recipientId: number): Observable<string> {
-    const senderId = this.authService.getUserId(); // Pobranie userId z tokena
+    const senderId = this.authService.getUserId();
 
     if (senderId === null) {
       throw new Error('User not logged in');
@@ -25,18 +24,19 @@ export class FriendsService {
 
     return this.http.post<string>(`${this.apiUrl}/SendRequest`, null, {
       params,
-      responseType: 'text' as 'json', // Tutaj zmieniamy na tekst
+      responseType: 'text' as 'json',
     });
   }
-
+  removeFriend(requestId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/RemoveFriend/${requestId}`);
+  }
   respondToRequest(requestId: number, isAccepted: boolean): Observable<any> {
     const url = `${this.apiUrl}/RespondToRequest?requestId=${requestId}&isAccepted=${isAccepted}`;
-    return this.http.post(url, {}, { responseType: 'text' }); // Zmieniamy responseType na text
+    return this.http.post(url, {}, { responseType: 'text' });
   }
 
-  // Pobieranie zaproszeń oczekujących na akceptację
   getPendingFriendRequests(): Observable<any[]> {
-    const userId = this.authService.getUserId(); // Pobranie userId z tokena
+    const userId = this.authService.getUserId();
 
     if (userId === null) {
       throw new Error('User not logged in');
@@ -45,9 +45,8 @@ export class FriendsService {
     return this.http.get<any[]>(`${this.apiUrl}/PendingRequests/${userId}`);
   }
 
-  // Pobieranie listy znajomych użytkownika
   getUserFriends(): Observable<any[]> {
-    const userId = this.authService.getUserId(); // Pobieranie userId z tokena
+    const userId = this.authService.getUserId();
 
     if (userId === null) {
       throw new Error('User not logged in');
@@ -57,7 +56,6 @@ export class FriendsService {
   }
 }
 
-// Typ dla zaproszeń
 export interface FriendRequest {
   requestId: number;
   senderId: number;

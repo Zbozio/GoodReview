@@ -14,53 +14,50 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule],
 })
 export class UserProfileComponent implements OnInit {
-  user: any = null; // Dane użytkownika
-  lists: List[] = []; // Listy użytkownika
+  user: any = null;
+  lists: List[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private listService: ListService // Dodajemy serwis ListService
+    private listService: ListService
   ) {}
 
   ngOnInit(): void {
-    // Obserwujemy zmiany w parametrach routingu
     this.route.paramMap
       .pipe(
         switchMap((params) => {
-          const userId = +params.get('id')!; // Pobieramy id użytkownika z parametru routingu
-          console.log('User ID from route:', userId); // Dodaj log
-          return this.userService.getUser(userId); // Pobieramy dane użytkownika
+          const userId = +params.get('id')!;
+          console.log('User ID from route:', userId);
+          return this.userService.getUser(userId);
         })
       )
       .subscribe(
         (user) => {
           this.user = user;
-          console.log('User data:', this.user); // Dodaj log
-          this.loadUserLists(); // Ładujemy listy użytkownika po pobraniu danych użytkownika
+          console.log('User data:', this.user);
+          this.loadUserLists();
         },
         (error) => {
-          console.error('Error loading user data:', error); // Dodaj log błędu
+          console.error('Error loading user data:', error);
         }
       );
   }
 
-  // Metoda do ładowania list użytkownika
   loadUserLists(): void {
     if (this.user && this.user.idUzytkownik) {
-      // Używamy idUzytkownik, a nie id
-      console.log('Loading lists for user with ID:', this.user.idUzytkownik); // Dodaj log
+      console.log('Loading lists for user with ID:', this.user.idUzytkownik);
       this.listService.getListsForFriend(this.user.idUzytkownik).subscribe(
         (lists) => {
-          console.log('Received lists:', lists); // Dodaj log
-          this.lists = lists; // Przypisujemy pobrane listy użytkownika
+          console.log('Received lists:', lists);
+          this.lists = lists;
         },
         (error) => {
           console.error('Błąd podczas ładowania list użytkownika:', error);
         }
       );
     } else {
-      console.error('User ID is missing or invalid'); // Log, jeśli brak ID użytkownika
+      console.error('User ID is missing or invalid');
     }
   }
 }

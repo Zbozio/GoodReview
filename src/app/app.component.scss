@@ -3,9 +3,8 @@
   flex-direction: column;
   margin: 0;
 
-  /* Ciemniejsze tło niż poprzednio */
-  color: #ffffff; /* Jasny tekst na ciemnym tle */
-  box-shadow: none; /* Brak cienia */
+  color: #ffffff;
+  box-shadow: none;
 }
 
 .container h1,
@@ -13,38 +12,38 @@
 .container p {
   margin: 0;
   padding: 0 0 10px;
-  font-family: "Inter", sans-serif; /* Nowoczesna czcionka */
+  font-family: "Inter", sans-serif;
 }
 
 .container h1 {
   font-size: 28px;
-  color: #ffcc00; /* Akcentowany kolor dla nagłówków */
+  color: #ffcc00;
 }
 
 .container p {
   font-size: 16px;
-  color: #cccccc; /* Lżejszy kolor dla zwykłego tekstu */
+  color: #cccccc;
 }
 ::ng-deep {
   ::-webkit-scrollbar {
-    width: 8px; /* Węższy scrollbar */
-    height: 8px; /* Wysokość poziomego scrollbara */
+    width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #1e1e1e; /* Tło toru scrollbara */
+    background: #1e1e1e;
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #444444; /* Kolor suwaka */
-    border-radius: 10px; /* Zaokrąglone rogi */
-    border: 2px solid #333333; /* Dodatkowy obrys */
+    background-color: #444444;
+    border-radius: 10px;
+    border: 2px solid #333333;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #666666; /* Zmiana koloru przy najechaniu */
+    background-color: #666666;
   }
 
-  scrollbar-width: thin; /* Wąski scrollbar */
-  scrollbar-color: #444444 #1e1e1e; /* Kolor suwaka i tła */
+  scrollbar-width: thin;
+  scrollbar-color: #444444 #1e1e1e;
 }

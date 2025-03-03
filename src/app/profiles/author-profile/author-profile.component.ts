@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 })
 export class AuthorProfileComponent implements OnInit {
   author: any = null;
-  books: any[] = []; // Lista książek autora
+  books: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +26,7 @@ export class AuthorProfileComponent implements OnInit {
     if (authorId) {
       this.authorService.getAuthorById(+authorId).subscribe((data) => {
         this.author = data;
-        this.books = data.ksiazki || []; // Pobranie książek autora
+        this.books = data.ksiazki || [];
       });
     }
   }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../services/auth-service.service'; // Import usługi AuthService
+import { AuthService } from '../../../services/auth-service.service';
 
 import { NgModule } from '@angular/core';
 
@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-// Importowanie Angular Material
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -39,14 +38,11 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  // Funkcja wywoływana po próbie logowania
   login() {
     this.authService.login(this.email, this.password).subscribe({
       next: (response: { token: string }) => {
-        // Zapisujemy token w localStorage
         this.authService.saveToken(response.token);
 
-        // Po udanym logowaniu przekierowujemy użytkownika na stronę główną
         this.router.navigate(['/home']);
       },
       error: (err: any) => {

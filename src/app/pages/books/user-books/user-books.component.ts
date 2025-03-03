@@ -17,12 +17,12 @@ import jwt_decode from 'jwt-decode';
   imports: [RouterModule, CommonModule],
 })
 export class UserBooksComponent implements OnInit {
-  books$!: Observable<KsiazkaDto[]>; // Zmienna do przechowywania książek użytkownika
-  isUserBooks: boolean = false; // Flaga dla książek użytkownika
+  books$!: Observable<KsiazkaDto[]>;
+  isUserBooks: boolean = false;
 
   constructor(
-    private authService: AuthService, // Używamy AuthService do obsługi tokenu
-    private myBooksService: MyBooksService, // Używamy MyBooksService do pobierania książek użytkownika
+    private authService: AuthService,
+    private myBooksService: MyBooksService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -30,18 +30,16 @@ export class UserBooksComponent implements OnInit {
   ngOnInit(): void {
     let userId: number | null = null;
 
-    // Sprawdzamy, czy mamy userId w URL lub tokenie
     const token = this.authService.getToken();
     if (token) {
       try {
-        const decodedToken: any = jwt_decode(token); // Dekodowanie tokenu
+        const decodedToken: any = jwt_decode(token);
         userId = decodedToken.nameid || decodedToken.sub || null;
       } catch (error) {
         console.error('Error decoding token:', error);
       }
     }
 
-    // Jeśli userId jest w URL, używamy go
     if (!userId) {
       userId = +this.route.snapshot.paramMap.get('userId')!;
     }
@@ -49,29 +47,28 @@ export class UserBooksComponent implements OnInit {
       console.log(books);
     });
 
-    // Pobieramy książki użytkownika, jeśli userId jest dostępne
     if (userId && userId > 0) {
       this.books$ = this.myBooksService.getBooksByUserId(userId).pipe(
         catchError((error) => {
           console.error('Error loading books for user:', error);
-          return of([]); // Zwracamy pustą tablicę w przypadku błędu
+          return of([]);
         })
       );
     } else {
       console.error('Invalid userId');
-      this.router.navigate(['/home']); // Możesz przekierować na stronę główną lub stronę błędu
+      this.router.navigate(['/home']);
     }
   }
   getRatingClass(rating: number): string {
     if (rating <= 3) {
-      return 'low'; // Czerwony dla ocen poniżej 3
+      return 'low';
     } else if (rating > 3 && rating <= 7) {
-      return 'medium'; // Pomarańczowy dla ocen w przedziale 4-7
+      return 'medium';
     } else if (rating > 7 && rating < 10) {
-      return 'high'; // Zielony dla ocen powyżej 7
+      return 'high';
     } else if (rating === 10) {
-      return 'excellent'; // Niebieski dla ocen 10
+      return 'excellent';
     }
-    return ''; // Domyślnie brak klasy
+    return '';
   }
 }

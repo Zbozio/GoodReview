@@ -11,7 +11,6 @@ import { UserProfileComponent } from './pages/profiles/user-profile/user-profile
 import { BooksComponent } from './pages/books/books.component';
 import { LoginComponent } from './pages/profiles/login-profile/login-profile.component';
 
-// Importowanie wymaganych modułów Angular Material
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
@@ -32,11 +31,10 @@ import { MatSelectModule } from '@angular/material/select';
     RouterModule,
     LoginComponent,
 
-    // Importowanie odpowiednich modułów Angular Material
-    MatDatepickerModule, // Moduł dla MatDatepicker
-    MatNativeDateModule, // Adapter daty
-    MatInputModule, // Wymagane dla matInput
-    MatFormFieldModule, // Wymagane dla mat-form-field
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatFormFieldModule,
     MatSelectModule,
   ],
   templateUrl: './app.component.html',

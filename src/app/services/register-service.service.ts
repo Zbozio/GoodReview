@@ -7,11 +7,10 @@ import { UzytkownikDTO } from '../models/UzytkownikDTO';
   providedIn: 'root',
 })
 export class RegisterService {
-  private apiUrl: string = `https://localhost:7272/api/Register`; // API URL - zakładając, że masz środowiskową zmienną apiUrl
+  private apiUrl: string = `https://localhost:7272/api/Register`;
 
   constructor(private http: HttpClient) {}
 
-  // Metoda rejestracji
   register(userDto: UzytkownikDTO): Observable<any> {
     return this.http.post<any>(this.apiUrl, userDto, {
       headers: new HttpHeaders({

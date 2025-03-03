@@ -1,17 +1,13 @@
 <div *ngIf="loading" class="loading-message">Ładowanie...</div>
 <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-<!-- Karuzela książek -->
 <div *ngIf="allBooks.length > 0" class="books-carousel">
-  <h4 class="suggestion-text">You might like these books</h4>
+  <h4 class="suggestion-text">Może ci się spodobać</h4>
   <div class="carousel-container">
-    <!-- Strzałka w lewo -->
     <button (click)="changeImage(-1)" class="carousel-arrow left-arrow">
       &#10094;
-      <!-- Kod strzałki w lewo -->
     </button>
 
-    <!-- Wyświetlanie zdjęcia książki -->
     <div class="book-display">
       <div class="book-card">
         <div
@@ -28,15 +24,12 @@
       </div>
     </div>
 
-    <!-- Strzałka w prawo -->
     <button (click)="changeImage(1)" class="carousel-arrow right-arrow">
       &#10095;
-      <!-- Kod strzałki w prawo -->
     </button>
   </div>
 </div>
 
-<!-- Komunikat, gdy brak książek -->
 <div *ngIf="allBooks.length === 0" class="no-books">
   Brak książek do wyświetlenia.
 </div>

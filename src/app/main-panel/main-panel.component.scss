@@ -1,13 +1,12 @@
-/* Ogólne style */
 .timeline-event {
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
   padding: 20px;
-  background-color: #1e293b; /* Ciemnoniebieski */
+  background-color: #1e293b;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  color: #e2e8f0; /* Jasny tekst */
+  color: #e2e8f0;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -34,7 +33,7 @@
   border-radius: 50%;
   margin-right: 15px;
   object-fit: cover;
-  border: 2px solid #2563eb; /* Intensywny niebieski */
+  border: 2px solid #2563eb;
 }
 
 .event-details {
@@ -55,7 +54,7 @@ p {
 }
 
 p strong {
-  color: #93c5fd; /* Jasny niebieski akcent */
+  color: #93c5fd;
 }
 
 .book-cover-container {
@@ -73,21 +72,18 @@ p strong {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Wyróżnienie dla ocen */
-
 .event-content.rating h3 {
-  color: #2563eb; /* Intensywny niebieski */
+  color: #2563eb;
 }
 
 .event-content.review h3 {
-  color: #0ea5e9; /* Błękitny akcent */
+  color: #0ea5e9;
 }
 
-/* Komentarze */
 .comments-section {
   margin-top: 15px;
   padding-top: 10px;
-  border-top: 1px solid #4b5563; /* Neutralny szary */
+  border-top: 1px solid #4b5563;
 }
 
 .comment {
@@ -95,7 +91,7 @@ p strong {
   flex-direction: column;
   margin-bottom: 15px;
   padding: 10px;
-  background-color: #1f2937; /* Ciemnogranatowy */
+  background-color: #1f2937;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -112,17 +108,17 @@ p strong {
   border-radius: 50%;
   margin-right: 10px;
   object-fit: cover;
-  border: 2px solid #0ea5e9; /* Błękitny */
+  border: 2px solid #0ea5e9;
 }
 
 .comment-details p {
   margin: 5px 0;
   font-size: 14px;
-  color: #cbd5e1; /* Jasny szary tekst */
+  color: #cbd5e1;
 }
 
 .comment-details p strong {
-  color: #0ea5e9; /* Błękitny akcent */
+  color: #0ea5e9;
 }
 
 .comment-input-section {
@@ -154,5 +150,5 @@ p strong {
 }
 
 .comment-input-section button:hover {
-  background-color: #1d4ed8; /* Ciemniejszy niebieski */
+  background-color: #1d4ed8;
 }

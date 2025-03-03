@@ -1,32 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { FriendsService } from '../../friends.service'; // Importujemy serwis FriendsService
-import { AuthService } from '../../services/auth-service.service'; // Importujemy serwis AuthService
-import { Observable } from 'rxjs'; // Importujemy Observable do asynchronicznego pobierania danych
-import { CommonModule } from '@angular/common'; // Importujemy CommonModule
+import { FriendsService } from '../../friends.service';
+import { AuthService } from '../../services/auth-service.service';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-friends',
-  standalone: true, // Komponent jest samodzielny
-  imports: [CommonModule, RouterModule], // Importujemy CommonModule, aby używać pipe async
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './friends.component.html',
   styleUrls: ['./friends.component.scss'],
 })
 export class FriendsComponent implements OnInit {
-  friends$!: Observable<any[]>; // Obserwujemy listę znajomych
+  friends$!: Observable<any[]>;
 
   constructor(
-    private friendsService: FriendsService, // Wstrzykujemy serwis FriendsService
-    private authService: AuthService // Wstrzykujemy serwis AuthService, by uzyskać userId
+    private friendsService: FriendsService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.loadFriends(); // Ładujemy znajomych po załadowaniu komponentu
+    this.loadFriends();
+  }
+  removeFriend(requestId: number): void {
+    this.friendsService.removeFriend(requestId).subscribe(() => {
+      this.loadFriends();
+    });
   }
 
-  // Funkcja do pobierania listy znajomych
   loadFriends(): void {
-    this.friends$ = this.friendsService.getUserFriends(); // Pobieramy listę znajomych z serwisu
+    this.friends$ = this.friendsService.getUserFriends();
+    this.friends$.subscribe((friends) => {
+      console.log(
+        'Friends:',
+        friends.map((friend) => friend.idZnajomosci)
+      );
+    });
   }
 }

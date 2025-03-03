@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// Definiowanie struktury danych książki
 export interface BookDetails {
   id: number;
   title: string;
@@ -31,11 +30,10 @@ export interface BookDetails {
   providedIn: 'root',
 })
 export class BookDetailsService {
-  private apiUrl = 'https://localhost:7272/api/BookDetails'; // Adres API (zmień na odpowiedni URL)
+  private apiUrl = 'https://localhost:7272/api/BookDetails';
 
   constructor(private http: HttpClient) {}
 
-  // Metoda pobierająca szczegóły książki
   getBookDetails(id: number): Observable<BookDetails> {
     return this.http.get<BookDetails>(`${this.apiUrl}/${id}`);
   }

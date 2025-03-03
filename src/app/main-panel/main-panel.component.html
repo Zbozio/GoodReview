@@ -24,7 +24,6 @@
         />
       </div>
     </div>
-    <!-- Dodatkowe imię użytkownika -->
     <div class="posted-by">
       <p>
         <strong>{{ event.friendName }} {{ event.friendSurname }}</strong>
@@ -33,7 +32,6 @@
     </div>
   </div>
 
-  <!-- Wyświetlanie recenzji -->
   <div *ngIf="event.type === 'review'" class="event-content review">
     <div class="event-header">
       <div class="event-header-left">
@@ -60,7 +58,6 @@
         />
       </div>
     </div>
-    <!-- Dodatkowe imię użytkownika -->
     <div class="posted-by">
       <p>
         <strong>{{ event.friendName }} {{ event.friendSurname }}</strong> dodał
@@ -68,9 +65,7 @@
       </p>
     </div>
 
-    <!-- Sekcja komentarzy POD treścią recenzji -->
     <div class="comments-section">
-      <!-- Wyświetlanie listy komentarzy -->
       <div *ngFor="let komentarz of event.komentarze" class="comment">
         <div class="comment-header">
           <img
@@ -91,7 +86,6 @@
         </div>
       </div>
 
-      <!-- Panel do dodawania nowego komentarza -->
       <div class="comment-input-section">
         <textarea
           [(ngModel)]="newCommentText"

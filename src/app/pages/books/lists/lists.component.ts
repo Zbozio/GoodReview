@@ -45,10 +45,7 @@ export class ListsComponent implements OnInit {
   isEditing: boolean = false;
   editingListId: number | null = null;
 
-  constructor(
-    private listService: ListService,
-    private router: Router // Dodanie Routera
-  ) {
+  constructor(private listService: ListService, private router: Router) {
     this.newListForm = new FormGroup({
       nazwaListy: new FormControl('', [
         Validators.required,
@@ -103,9 +100,8 @@ export class ListsComponent implements OnInit {
     }
   }
 
-  // Obsługa kliknięcia na listę
   viewListDetails(list: List): void {
-    this.router.navigate([`/list/${list.idListy}`]); // Nawigowanie do szczegółów listy
+    this.router.navigate([`/list/${list.idListy}`]);
   }
 
   startEditList(list: List): void {

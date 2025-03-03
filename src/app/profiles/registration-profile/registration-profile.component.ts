@@ -3,13 +3,13 @@ import { Router } from '@angular/router';
 import { RegisterService } from '../../services/register-service.service';
 import { GatunekService } from '../../services/gatunek.service';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms'; // Do obsługi ngModel
-import { MatCardModule } from '@angular/material/card'; // Do kart
-import { MatInputModule } from '@angular/material/input'; // Do pól tekstowych
-import { MatButtonModule } from '@angular/material/button'; // Do przycisków
-import { MatFormFieldModule } from '@angular/material/form-field'; // Do form field
-import { MatIconModule } from '@angular/material/icon'; // Do ikon
-import { MatError } from '@angular/material/form-field'; // Do obsługi błędów
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatError } from '@angular/material/form-field';
 import { UzytkownikDTO } from '../../models/UzytkownikDTO';
 import { CommonModule } from '@angular/common';
 import { MatOption } from '@angular/material/core';
@@ -25,12 +25,12 @@ import { MatSelectModule } from '@angular/material/select';
   standalone: true,
   imports: [
     RouterModule,
-    FormsModule, // Importowanie FormsModule
-    MatCardModule, // Importowanie MatCardModule
-    MatInputModule, // Importowanie MatInputModule
-    MatButtonModule, // Importowanie MatButtonModule
-    MatFormFieldModule, // Importowanie MatFormFieldModule
-    MatIconModule, // Importowanie MatIconModule
+    FormsModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
     MatError,
     MatDatepickerModule,
     CommonModule,
@@ -45,24 +45,23 @@ export class RegistrationProfileComponent implements OnInit {
   email: string = '';
   haslo: string = '';
   confirmHaslo: string = '';
-  gatunkiIds: number[] = []; // Wybór gatunków
-  dataUrodzenia: string = ''; // Data urodzenia
+  gatunkiIds: number[] = [];
+  dataUrodzenia: string = '';
 
   errorMessage: string = '';
-  gatunki: any[] = []; // Lista gatunków
+  gatunki: any[] = [];
 
   constructor(
     private registerService: RegisterService,
-    private gatunekService: GatunekService, // Serwis gatunków
+    private gatunekService: GatunekService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    // Pobranie gatunków przy inicjalizacji komponentu
     this.gatunekService.getGatuneks().subscribe({
       next: (response) => {
-        this.gatunki = response; // Przypisanie pobranych gatunków
-        console.log('Pobrane gatunki:', response); // Logowanie odpowiedzi
+        this.gatunki = response;
+        console.log('Pobrane gatunki:', response);
       },
       error: (err) => {
         this.errorMessage = 'Nie udało się pobrać gatunków. Spróbuj ponownie.';
@@ -71,13 +70,11 @@ export class RegistrationProfileComponent implements OnInit {
   }
 
   register() {
-    // Sprawdzamy, czy hasła są zgodne
     if (this.haslo !== this.confirmHaslo) {
       this.errorMessage = 'Hasła muszą się zgadzać';
       return;
     }
 
-    // Tworzymy obiekt DTO na podstawie danych w formularzu
     const userDto: UzytkownikDTO = {
       imie: this.imie,
       nazwisko: this.nazwisko,
@@ -87,12 +84,11 @@ export class RegistrationProfileComponent implements OnInit {
       dataUrodzenia: this.dataUrodzenia,
     };
 
-    // Wywołanie metody serwisu, aby wysłać dane do API
     this.registerService.register(userDto).subscribe({
       next: (response) => {
         console.log('Zarejestrowano:', response);
-        this.errorMessage = ''; // Resetowanie komunikatu o błędzie
-        this.router.navigate(['/login']); // Po rejestracji przekierowanie do logowania
+        this.errorMessage = '';
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         this.errorMessage =

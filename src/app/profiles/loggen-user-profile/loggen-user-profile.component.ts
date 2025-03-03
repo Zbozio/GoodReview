@@ -15,18 +15,18 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, RouterModule, FormsModule],
 })
 export class LoggenUserProfileComponent implements OnInit {
-  user: any = null; // Dane użytkownika
-  lists: List[] = []; // Listy użytkownika
+  user: any = null;
+  lists: List[] = [];
   updatedProfile: any = {
     zdjecie: '',
     opis: '',
   };
-  isEditing: boolean = false; // Zmienna do kontrolowania widoczności formularza
+  isEditing: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private listService: ListService // Import serwisu list
+    private listService: ListService
   ) {}
 
   ngOnInit(): void {
@@ -43,21 +43,20 @@ export class LoggenUserProfileComponent implements OnInit {
           zdjecie: this.user.zdjecie,
           opis: this.user.opis,
         };
-        this.loadUserLists(); // Ładujemy listy użytkownika
+        this.loadUserLists();
       });
   }
 
   loadUserLists(): void {
     this.listService.getUserLists().subscribe(
       (lists) => {
-        this.lists = lists; // Przypisujemy pobrane listy
+        this.lists = lists;
       },
       (error) =>
         console.error('Błąd podczas ładowania list użytkownika:', error)
     );
   }
 
-  // Metoda do obsługi zmiany zdjęcia
   onImageChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
@@ -65,28 +64,24 @@ export class LoggenUserProfileComponent implements OnInit {
       reader.onload = () => {
         this.updatedProfile.zdjecie = reader.result as string;
       };
-      reader.readAsDataURL(file); // Przekonwertowanie obrazu do base64
+      reader.readAsDataURL(file);
     }
   }
 
-  // Metoda do zmiany profilu (aktualizacja opisu i zdjęcia)
   updateProfile(): void {
     const userId = this.user.idUzytkownik;
 
-    // Przygotowanie danych do wysłania
     const updateData = {
       zdjecie: this.updatedProfile.zdjecie,
       opis: this.updatedProfile.opis,
     };
 
-    // Wysyłanie tylko zdjęcia i opisu do dedykowanego endpointa
     this.userService.updateUserProfile(userId, updateData).subscribe(
       (response) => {
         alert('Profil został zaktualizowany!');
-        // Zaktualizowanie lokalnego obrazu i opisu
         this.user.zdjecie = this.updatedProfile.zdjecie;
         this.user.opis = this.updatedProfile.opis;
-        this.toggleEditProfile(); // Zamknięcie formularza
+        this.toggleEditProfile();
       },
       (error) => {
         console.error('Błąd podczas aktualizacji profilu:', error);
@@ -95,7 +90,6 @@ export class LoggenUserProfileComponent implements OnInit {
     );
   }
 
-  // Funkcja do pokazania lub ukrycia formularza edycji
   toggleEditProfile(): void {
     this.isEditing = !this.isEditing;
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RatingService } from '../../services/rating.service';
-import { AuthService } from '../../services/auth-service.service'; // Import AuthService
+import { AuthService } from '../../services/auth-service.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -13,19 +13,19 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./recommendation-page.component.scss'],
 })
 export class RecommendationPageComponent implements OnInit {
-  userId: number | null = null; // ID użytkownika wyciągnięte z AuthService
+  userId: number | null = null;
   recommendations: any[] = [];
   matrixRecommendations: any[] = [];
-  selectedMethod: string = 'normal'; // Domyślna metoda rekomendacji ('normal' lub 'matrix')
-  loading = false; // Flaga ładowania
+  selectedMethod: string = 'normal';
+  loading = false;
 
   constructor(
     private ratingService: RatingService,
-    private authService: AuthService // Dodano AuthService jako zależność
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.userId = this.authService.getUserIdFromToken(); // Pobierz userId z AuthService
+    this.userId = this.authService.getUserIdFromToken();
     if (!this.userId) {
       console.error('User ID not found in token.');
       return;
@@ -33,7 +33,6 @@ export class RecommendationPageComponent implements OnInit {
     this.loadRecommendations();
   }
 
-  // Funkcja do ładowania rekomendacji w zależności od wybranej metody
   loadRecommendations(): void {
     if (!this.userId) {
       console.error('User ID not available. Cannot load recommendations.');
@@ -66,7 +65,6 @@ export class RecommendationPageComponent implements OnInit {
     }
   }
 
-  // Pobierz rekomendacje w zależności od metody
   getCurrentRecommendations(): any[] {
     return this.selectedMethod === 'normal'
       ? this.recommendations

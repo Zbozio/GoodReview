@@ -17,18 +17,14 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    const token = this.authService.getToken(); // Pobieramy token z AuthService
-
-    // Sprawdzamy, czy token istnieje
+    const token = this.authService.getToken();
     if (token) {
-      // Jeśli token jest dostępny, użytkownik jest zalogowany, więc pozwól na dostęp
       return true;
     } else {
-      // Jeśli brak tokenu, przekieruj na stronę logowania
       this.router.navigate(['/login'], {
-        queryParams: { returnUrl: state.url }, // Przechowujemy URL, na który użytkownik próbował wejść
+        queryParams: { returnUrl: state.url },
       });
-      return false; // Zablokuj dostęp
+      return false;
     }
   }
 }

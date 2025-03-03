@@ -6,7 +6,6 @@
       </mat-card-header>
       <mat-card-content>
         <form (ngSubmit)="register()">
-          <!-- Imię -->
           <div class="form-group">
             <mat-form-field appearance="fill" class="full-width">
               <mat-label>Imię</mat-label>
@@ -26,7 +25,6 @@
             </mat-form-field>
           </div>
 
-          <!-- Nazwisko -->
           <div class="form-group">
             <mat-form-field appearance="fill" class="full-width">
               <mat-label>Nazwisko</mat-label>
@@ -46,7 +44,6 @@
             </mat-form-field>
           </div>
 
-          <!-- Email -->
           <div class="form-group">
             <mat-form-field appearance="fill" class="full-width">
               <mat-label>Email</mat-label>
@@ -66,7 +63,6 @@
             </mat-form-field>
           </div>
 
-          <!-- Hasło -->
           <div class="form-group">
             <mat-form-field appearance="fill" class="full-width">
               <mat-label>Hasło</mat-label>
@@ -86,7 +82,6 @@
             </mat-form-field>
           </div>
 
-          <!-- Potwierdzenie hasła -->
           <div class="form-group">
             <mat-form-field appearance="fill" class="full-width">
               <mat-label>Potwierdź hasło</mat-label>
@@ -108,10 +103,9 @@
             </mat-form-field>
           </div>
 
-          <!-- Wybór gatunków -->
           <div class="form-group">
             <mat-form-field appearance="fill" class="full-width">
-              <mat-label>Wybierz gatunki</mat-label>
+              <mat-label>Wybierz ulubione gatunki</mat-label>
               <mat-select
                 [(ngModel)]="gatunkiIds"
                 name="gatunkiIds"
@@ -132,7 +126,6 @@
             </mat-form-field>
           </div>
 
-          <!-- Data urodzenia -->
           <div class="form-group">
             <mat-form-field appearance="fill" class="full-width">
               <mat-label>Data urodzenia</mat-label>
@@ -158,7 +151,6 @@
             </mat-form-field>
           </div>
 
-          <!-- Przycisk rejestracji -->
           <div class="register-actions">
             <button
               mat-raised-button
@@ -178,13 +170,11 @@
             </button>
           </div>
 
-          <!-- Komunikat o błędzie -->
           <div *ngIf="errorMessage" class="error-message">
             <mat-icon>error</mat-icon> {{ errorMessage }}
           </div>
         </form>
 
-        <!-- Link do logowania -->
         <div class="login-link">
           <a routerLink="/login">Masz już konto? Zaloguj się!</a>
         </div>

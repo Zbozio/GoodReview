@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// Interfejs BookDto powinien odpowiadać strukturze C#
 export interface BookDto {
   title: string;
   description: string;

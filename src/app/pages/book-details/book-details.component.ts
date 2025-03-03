@@ -31,30 +31,29 @@ export class BookDetailsComponent implements OnInit {
   bookDetails: BookDetails | null = null;
   isLoading: boolean = true;
   errorMessage: string = '';
-  userRating: number = 0; // Ocena użytkownika
-  stars: number[] = Array(10).fill(0); // Tablica do reprezentowania 10 gwiazdek
+  userRating: number = 0;
+  stars: number[] = Array(10).fill(0);
   reviews: Review[] = [];
   isReviewsLoading: boolean = true;
-  newReviewText: string = ''; // Przechowuje treść nowej recenzji
+  newReviewText: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private bookDetailsService: BookDetailsService,
     private ratingService: RatingService,
-    private authService: AuthService, // Wstrzykujemy AuthService
+    private authService: AuthService,
     private reviewService: ReviewService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.bookId = +params['id']; // Parsowanie ID książki z URL
+      this.bookId = +params['id'];
       this.loadBookDetails();
-      this.loadUserRating(); // Ładowanie oceny użytkownika
+      this.loadUserRating();
       this.loadReviews();
     });
   }
 
-  // Ładowanie szczegółów książki
   loadBookDetails(): void {
     if (this.bookId !== undefined) {
       this.bookDetailsService.getBookDetails(this.bookId).subscribe({
@@ -74,18 +73,17 @@ export class BookDetailsComponent implements OnInit {
   }
   loadReviews(): void {
     if (this.bookId !== undefined) {
-      const userId = this.authService.getUserIdFromToken(); // Pobierz ID użytkownika
-      console.log('User ID:', userId); // Dodaj logowanie ID użytkownika
+      const userId = this.authService.getUserIdFromToken();
+      console.log('User ID:', userId);
 
       this.reviewService.getReviewsByBook(this.bookId).subscribe({
         next: (reviews) => {
-          // Mapowanie recenzji i dodanie pola 'isUserReview'
           this.reviews = reviews.map((review) => {
-            console.log('Review:', review); // Sprawdź dane recenzji
+            console.log('Review:', review);
             console.log(
               'Comparing User ID with Review User ID:',
               review.idUzytkownik === userId
-            ); // Sprawdź wynik porównania
+            );
 
             return {
               ...review,
@@ -93,19 +91,18 @@ export class BookDetailsComponent implements OnInit {
             };
           });
 
-          // Sortowanie recenzji, aby recenzja użytkownika była pierwsza
           this.reviews.sort((a, b) => {
             if (a.isUserReview) {
-              return -1; // Użytkownikowa recenzja powinna być na pierwszym miejscu
+              return -1;
             }
             if (b.isUserReview) {
-              return 1; // Przesuwamy inne recenzje niż użytkownikowe
+              return 1;
             }
-            return 0; // Pozostawienie pozostałych recenzji bez zmian
+            return 0;
           });
 
           this.isReviewsLoading = false;
-          console.log('Reviews:', this.reviews); // Wyświetl zaktualizowaną listę recenzji
+          console.log('Reviews:', this.reviews);
         },
         error: () => {
           this.isReviewsLoading = false;
@@ -116,20 +113,20 @@ export class BookDetailsComponent implements OnInit {
 
   submitReview(): void {
     if (this.bookId !== undefined) {
-      const userId = this.authService.getUserIdFromToken(); // Pobierz ID użytkownika
+      const userId = this.authService.getUserIdFromToken();
       if (userId && this.newReviewText.trim()) {
         const newReview: Review = {
           idKsiazka: this.bookId,
           idUzytkownik: userId,
           trescRecenzji: this.newReviewText.trim(),
           dataRecenzji: new Date().toISOString(),
-          polubieniaRecenzji: 0, // Początkowa liczba polubień
+          polubieniaRecenzji: 0,
         };
 
         this.reviewService.addReview(newReview).subscribe({
           next: (review) => {
-            this.reviews.push(review); // Dodaj nową recenzję do listy
-            this.newReviewText = ''; // Wyczyść pole tekstowe
+            this.reviews.push(review);
+            this.newReviewText = '';
             alert('Review added successfully.');
             this.loadReviews();
           },
@@ -144,18 +141,17 @@ export class BookDetailsComponent implements OnInit {
     }
   }
 
-  // Ładowanie oceny użytkownika dla danej książki
   loadUserRating(): void {
     if (this.bookId !== undefined) {
-      const userId = this.authService.getUserIdFromToken(); // Pobieramy ID użytkownika z tokenu
+      const userId = this.authService.getUserIdFromToken();
       if (userId) {
         this.ratingService.getRatingForBook(this.bookId, userId).subscribe({
           next: (rating) => {
-            console.log('Received rating:', rating); // Sprawdzanie otrzymanych danych
+            console.log('Received rating:', rating);
             if (rating && rating.wartoscOceny !== undefined) {
-              this.userRating = rating.wartoscOceny; // Przypisanie oceny użytkownika
-              console.log('User rating set to:', this.userRating); // Sprawdzenie wartości
-              this.updateStars(); // Aktualizacja gwiazdek
+              this.userRating = rating.wartoscOceny;
+              console.log('User rating set to:', this.userRating);
+              this.updateStars();
             }
           },
           error: (err) => {
@@ -168,24 +164,21 @@ export class BookDetailsComponent implements OnInit {
     }
   }
 
-  // Uaktualnianie gwiazdek na podstawie oceny użytkownika
   updateStars(): void {
-    this.stars = Array(10).fill(0); // Resetujemy gwiazdki
+    this.stars = Array(10).fill(0);
     for (let i = 0; i < this.userRating; i++) {
-      this.stars[i] = 1; // Wypełniamy odpowiednią liczbę gwiazdek
+      this.stars[i] = 1;
     }
   }
 
-  // Ustawianie oceny przez użytkownika
   setRating(rating: number): void {
     this.userRating = rating;
-    this.updateStars(); // Uaktualnienie gwiazdek na podstawie nowej oceny
+    this.updateStars();
   }
 
-  // Przesyłanie oceny do backendu
   submitRating(): void {
     if (this.bookId !== undefined) {
-      const userId = this.authService.getUserIdFromToken(); // Pobieramy ID użytkownika z tokenu
+      const userId = this.authService.getUserIdFromToken();
       if (userId) {
         this.ratingService
           .rateBook(this.bookId, this.userRating, userId)

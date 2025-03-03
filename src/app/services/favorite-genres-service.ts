@@ -6,11 +6,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class FavoriteGenresService {
-  private apiUrl = 'https://localhost:7272/api/UlubioneGatunki'; // URL do API backendu
+  private apiUrl = 'https://localhost:7272/api/UlubioneGatunki';
 
   constructor(private http: HttpClient) {}
 
-  // Pobieranie ulubionych gatunków użytkownika
   getFavoriteGenres(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/GetFavorites/${userId}`);
   }

@@ -1,4 +1,4 @@
-<div *ngIf="isLoading" class="loading">Loading...</div>
+<div *ngIf="isLoading" class="loading">Ładowanie...</div>
 <div *ngIf="!isLoading && errorMessage" class="error">
   {{ errorMessage }}
 </div>
@@ -12,7 +12,7 @@
         class="book-author"
         *ngIf="bookDetails.authors && bookDetails.authors.length > 0"
       >
-        <strong>Authors:</strong>
+        <strong>Autor:</strong>
         <span>
           <span *ngFor="let author of bookDetails.authors; let i = index">
             <a [routerLink]="['/authorProfile', author.id]">
@@ -24,12 +24,14 @@
       </p>
 
       <p class="book-year">
-        <strong>Release Year:</strong> {{ bookDetails.releaseYear }}
+        <strong>Rok wydania:</strong> {{ bookDetails.releaseYear }}
       </p>
       <p class="book-isbn"><strong>ISBN:</strong> {{ bookDetails.isbn }}</p>
-      <p class="book-pages"><strong>Pages:</strong> {{ bookDetails.pages }}</p>
+      <p class="book-pages">
+        <strong>Ilość stron:</strong> {{ bookDetails.pages }}
+      </p>
       <p class="book-publisher" *ngIf="bookDetails.publisher">
-        <strong>Publisher:</strong>
+        <strong>Wydawca:</strong>
         <span>
           <a [routerLink]="['/publisherPage', bookDetails.publisher.id]">
             {{ bookDetails.publisher.name || "Unknown" }}
@@ -40,12 +42,12 @@
   </div>
 
   <div class="book-description">
-    <h2>Description:</h2>
+    <h2>Opis:</h2>
     <p>{{ bookDetails.description }}</p>
   </div>
 
   <div class="book-genres">
-    <strong>Genres:</strong>
+    <strong>Gatunki:</strong>
     <mat-chip-listbox>
       <mat-chip *ngFor="let genre of bookDetails.genres" class="genre-chip">
         {{ genre.name }}
@@ -54,7 +56,7 @@
   </div>
 
   <div class="book-tags">
-    <h3>Tags:</h3>
+    <h3>Tagi:</h3>
     <mat-chip-listbox>
       <mat-chip *ngFor="let tag of bookDetails.tags" class="tag-chip">
         {{ tag.name }}
@@ -63,9 +65,11 @@
   </div>
 
   <div class="book-rating">
-    <strong>Average Rating:</strong> {{ bookDetails.averageRating }}/10
+    <strong>Średnia ocena użytkowników:</strong>
+    {{ bookDetails.averageRating }}/10
     <br />
-    <strong>Total Ratings:</strong> {{ bookDetails.totalRatings }}
+    <strong>Ilość wszystkich ocen książki:</strong>
+    {{ bookDetails.totalRatings }}
   </div>
 
   <div class="book-rating">
@@ -84,7 +88,7 @@
   </div>
 
   <div class="add-review">
-    <h3>Write a Review:</h3>
+    <h3>Napisz recenzje:</h3>
     <form (ngSubmit)="submitReview()" #reviewForm="ngForm">
       <textarea
         name="reviewText"
@@ -99,16 +103,16 @@
         [disabled]="reviewForm.invalid"
         class="btn btn-success"
       >
-        Submit Review
+        Wyślij recenzje
       </button>
     </form>
   </div>
 
   <div class="book-reviews">
-    <h2>Reviews:</h2>
+    <h2>Lista recenzji:</h2>
     <div *ngIf="isReviewsLoading">Loading reviews...</div>
     <div *ngIf="!isReviewsLoading && reviews.length === 0">
-      No reviews found.
+      Recenzji nie znaleziono
     </div>
     <div *ngIf="!isReviewsLoading && reviews.length > 0">
       <div
@@ -126,13 +130,13 @@
             {{ review.uzytkownikImie }} {{ review.uzytkownikNazwisko }}
           </strong>
           <span *ngIf="review.isUserReview" class="highlight"
-            >(Your review)</span
+            >(Twoja opinia)</span
           >
         </div>
 
         <p>{{ review.trescRecenzji }}</p>
         <p>
-          <em>Date: {{ review.dataRecenzji }}</em>
+          <em>Data: {{ review.dataRecenzji }}</em>
         </p>
       </div>
     </div>
