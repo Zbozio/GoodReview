@@ -25,3 +25,5 @@ Technologies Used:
 Angular (Framework)
 TypeScript (Programming Language)
 HTML5 & CSS3 (Markup and Styling)
+
+# (More text soon)
